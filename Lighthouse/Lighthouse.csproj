@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="assets\SplashScreen.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <SplashScreen Include="assets\SplashScreen.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </SplashScreen>
+  </ItemGroup>
+
+</Project>
