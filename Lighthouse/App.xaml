@@ -4,6 +4,19 @@
              xmlns:local="clr-namespace:Lighthouse"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style TargetType="{x:Type ResizeGrip}">
+            <Setter Property="MinWidth" Value="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}"/>
+            <Setter Property="MinHeight" Value="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarHeightKey}}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ResizeGrip}">
+                        <Grid SnapsToDevicePixels="True" Background="{TemplateBinding Background}">
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Visibility" Value="Hidden"/>
+        </Style>
     </Application.Resources>
 </Application>

@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Lighthouse
 {
@@ -25,6 +26,36 @@ namespace Lighthouse
         {
             Thread.Sleep(1500);
             InitializeComponent();
+        }
+
+        private void MoveWindow(object sender, MouseButtonEventArgs e)
+        {
+            try { DragMove(); } catch { }
+        }
+
+        private void OnExitClick(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void OnMaximizedClick(object sender, RoutedEventArgs e)
+        {
+            switch (Application.Current.MainWindow.WindowState)
+            {
+                case WindowState.Normal:
+                    Application.Current.MainWindow.WindowState = WindowState.Maximized;
+                    break;
+                case WindowState.Minimized:
+                    break;
+                case WindowState.Maximized:
+                    Application.Current.MainWindow.WindowState = WindowState.Normal;
+                    break;
+            }
+        }
+
+        private void OnMinimizedClick(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow.WindowState = WindowState.Minimized;
         }
     }
 }
