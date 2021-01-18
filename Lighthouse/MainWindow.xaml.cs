@@ -24,12 +24,14 @@ namespace Lighthouse
     {
         public MainWindow()
         {
-            Thread.Sleep(1500);
+            // Thread.Sleep(1500);
             InitializeComponent();
         }
 
-        private void MoveWindow(object sender, MouseButtonEventArgs e)
+        private void WindowClick(object sender, MouseButtonEventArgs e)
         {
+            // Todo: Maximize or and Minimize Window on Double-click
+
             try { DragMove(); } catch { }
         }
 

@@ -8,72 +8,40 @@
         mc:Ignorable="d"
         WindowState="Normal"
         Title="MainWindow"
-        Height="650" Width="1200" AllowsTransparency="True" WindowStyle="None" ResizeMode="CanResizeWithGrip" Background="{x:Null}" MouseLeftButtonDown="MoveWindow">
-    <Border CornerRadius="10" Background="#0B0B0F" BorderBrush="Gray" BorderThickness="0.3">
+        Height="650" Width="1200" AllowsTransparency="True" WindowStyle="None" ResizeMode="CanResizeWithGrip" Background="{x:Null}" MouseLeftButtonDown="WindowClick">
+    <Border CornerRadius="20" Background="#16161d" BorderBrush="Transparent" BorderThickness="0.3">
         <Grid>
-            <Button Click="OnExitClick" Content="X" HorizontalContentAlignment="Left" BorderBrush="{x:Null}" Foreground="White" HorizontalAlignment="Right" Width="50" Height="30" VerticalAlignment="Top">
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#FFF73C3C"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-            </Button>
-            <Button Content="🗖" Click="OnMaximizedClick" HorizontalContentAlignment="Left" BorderBrush="{x:Null}" Foreground="White" HorizontalAlignment="Right" Width="50" Height="30" VerticalAlignment="Top" Margin="0,0,50,0">
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#FF3C6FF7"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-            </Button>
-            <Button Content="🗕" Click="OnMinimizedClick" HorizontalContentAlignment="Left" BorderBrush="{x:Null}" Foreground="White" HorizontalAlignment="Right" Width="50" Height="30" VerticalAlignment="Top" Margin="0,0,100,0">
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#FF3C6FF7"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-            </Button>
+            <Image Width="20" Height="20" Margin="0,28,30,0" VerticalAlignment="Top" HorizontalAlignment="Right" >
+                <Image.Source>
+                    <BitmapImage UriSource="assets\icons\down-arrow.png"/>
+                </Image.Source>
+            </Image>
+
+            <Image Width="50" Height="50" Margin="0,15,65,0" VerticalAlignment="Top" HorizontalAlignment="Right" >
+                <Image.Source>
+                    <BitmapImage UriSource="assets\ic_launcher.png"/>
+                </Image.Source>
+            </Image>
+
+            <Image Width="50" Height="50" Margin="25,15,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" >
+                <Image.Source>
+                    <BitmapImage UriSource="assets\ic_launcher.png"/>
+                </Image.Source>
+            </Image>
+
+            <Label Content="Welcome to Lighthouse" HorizontalAlignment="Left" Margin="93,22,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" FontFamily="Roboto" FontWeight="Medium"/>
+
+            <Menu HorizontalAlignment="Right" Width="42" Height="40" VerticalAlignment="Top" Opacity="0.00000001" Margin="0,20,23,0">
+                <MenuItem Header="Menu">
+                    <MenuItem Header="Maximize"/>
+                    <MenuItem Header="Maximize"/>
+                    <MenuItem Header="Exit"/>
+                </MenuItem>
+            </Menu>
+
+            <Border Margin="200,80,0,0" CornerRadius="0,0,20,0" Background="#1b1b22"/>
+
+            <Border Margin="0,80,0,0" CornerRadius="0,0,0,20" Background="#27272f" HorizontalAlignment="Left" Width="200"/>
         </Grid>
     </Border>
 </Window>
