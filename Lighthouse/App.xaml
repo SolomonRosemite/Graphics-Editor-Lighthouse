@@ -18,5 +18,11 @@
             </Setter>
             <Setter Property="Visibility" Value="Hidden"/>
         </Style>
+        <Style x:Key="WinAll" TargetType="{x:Type Window}">
+            <Setter Property="FontFamily"
+        Value="Roboto" />
+            <Setter Property="FontSize"
+        Value="14" />
+        </Style>
     </Application.Resources>
 </Application>

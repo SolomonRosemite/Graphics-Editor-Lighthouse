@@ -11,8 +11,10 @@
     <None Remove="assets\icons\color_dots.png" />
     <None Remove="assets\icons\down-arrow.png" />
     <None Remove="assets\icons\edit.png" />
+    <None Remove="assets\icons\export.png" />
     <None Remove="assets\icons\image.png" />
     <None Remove="assets\icons\new.png" />
+    <None Remove="assets\icons\save.png" />
     <None Remove="assets\icons\upload.png" />
     <None Remove="assets\ic_launcher.png" />
     <None Remove="assets\SplashScreen.png" />
@@ -28,10 +30,16 @@
     <Resource Include="assets\icons\edit.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="assets\icons\export.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="assets\icons\image.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="assets\icons\new.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\icons\save.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="assets\icons\upload.png">

@@ -16,6 +16,7 @@
         WindowStyle="None"
         ResizeMode="CanResizeWithGrip"
         Background="{x:Null}"
+        Style="{StaticResource WinAll}"
         >
     <Border CornerRadius="20" Background="#16161d" BorderBrush="Transparent" BorderThickness="0.3">
         <Grid>
