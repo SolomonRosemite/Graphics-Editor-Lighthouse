@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lighthouse.Pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,12 +27,14 @@ namespace Lighthouse
         {
             // Thread.Sleep(1500);
             InitializeComponent();
+            new EditorWindow().Show();
+            this.Hide();
         }
 
         private void WindowClick(object sender, MouseButtonEventArgs e)
         {
             // Todo: Maximize or and Minimize Window on Double-click
-
+            
             try { DragMove(); } catch { }
         }
 
