@@ -8,18 +8,36 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="assets\icons\color_dots.png" />
     <None Remove="assets\icons\down-arrow.png" />
+    <None Remove="assets\icons\image.png" />
+    <None Remove="assets\icons\new.png" />
+    <None Remove="assets\icons\upload.png" />
     <None Remove="assets\ic_launcher.png" />
     <None Remove="assets\SplashScreen.png" />
+    <None Remove="image.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="assets\icons\color_dots.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="assets\icons\down-arrow.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\icons\image.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\icons\new.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\icons\upload.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="assets\ic_launcher.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="image.png" />
   </ItemGroup>
 
   <ItemGroup>

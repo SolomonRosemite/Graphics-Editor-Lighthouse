@@ -8,40 +8,141 @@
         mc:Ignorable="d"
         WindowState="Normal"
         Title="MainWindow"
-        Height="650" Width="1200" AllowsTransparency="True" WindowStyle="None" ResizeMode="CanResizeWithGrip" Background="{x:Null}" MouseLeftButtonDown="WindowClick">
+        MinHeight="400"
+        MinWidth="600"
+        Height="650"
+        Width="1200"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        ResizeMode="CanResizeWithGrip"
+        Background="{x:Null}"
+        >
     <Border CornerRadius="20" Background="#16161d" BorderBrush="Transparent" BorderThickness="0.3">
         <Grid>
-            <Image Width="20" Height="20" Margin="0,28,30,0" VerticalAlignment="Top" HorizontalAlignment="Right" >
-                <Image.Source>
-                    <BitmapImage UriSource="assets\icons\down-arrow.png"/>
-                </Image.Source>
-            </Image>
+            <Grid Height="80" VerticalAlignment="Top" MouseLeftButtonDown="WindowClick" Background="#00000000">
+                <Image Width="20" Height="20" Margin="0,28,30,0" VerticalAlignment="Top" HorizontalAlignment="Right" >
+                    <Image.Source>
+                        <BitmapImage UriSource="assets\icons\down-arrow.png"/>
+                    </Image.Source>
+                </Image>
 
-            <Image Width="50" Height="50" Margin="0,15,65,0" VerticalAlignment="Top" HorizontalAlignment="Right" >
-                <Image.Source>
-                    <BitmapImage UriSource="assets\ic_launcher.png"/>
-                </Image.Source>
-            </Image>
+                <Image Width="50" Height="50" Margin="0,15,65,0" VerticalAlignment="Top" HorizontalAlignment="Right" >
+                    <Image.Source>
+                        <BitmapImage UriSource="assets\ic_launcher.png"/>
+                    </Image.Source>
+                </Image>
 
-            <Image Width="50" Height="50" Margin="25,15,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" >
-                <Image.Source>
-                    <BitmapImage UriSource="assets\ic_launcher.png"/>
-                </Image.Source>
-            </Image>
+                <Image Width="50" Height="50" Margin="25,15,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" >
+                    <Image.Source>
+                        <ImageSource>/assets/icons/color_dots.png</ImageSource>
+                    </Image.Source>
+                </Image>
 
-            <Label Content="Welcome to Lighthouse" HorizontalAlignment="Left" Margin="93,22,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" FontFamily="Roboto" FontWeight="Medium"/>
+                <Label Content="Welcome to Lighthouse" HorizontalAlignment="Left" Margin="93,22,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" FontFamily="Roboto" FontWeight="Medium"/>
 
-            <Menu HorizontalAlignment="Right" Width="42" Height="40" VerticalAlignment="Top" Opacity="0.00000001" Margin="0,20,23,0">
-                <MenuItem Header="Menu">
-                    <MenuItem Header="Maximize"/>
-                    <MenuItem Header="Maximize"/>
-                    <MenuItem Header="Exit"/>
-                </MenuItem>
-            </Menu>
+                <Menu HorizontalAlignment="Right" Width="55" Height="40" VerticalAlignment="Top" Opacity="0.00000001" Margin="0,20,10,0">
+                    <MenuItem Header="Menu" Height="38" Width="62">
+                        <MenuItem Header="Maximize"/>
+                        <MenuItem Header="Maximize"/>
+                        <MenuItem Header="Exit"/>
+                    </MenuItem>
+                </Menu>
+            </Grid>
 
-            <Border Margin="200,80,0,0" CornerRadius="0,0,20,0" Background="#1b1b22"/>
+            <Border Margin="300,80,0,0" CornerRadius="0,0,20,0" Background="#1b1b22">
+                <Grid>
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Image Source="assets\icons\upload.png" Width="50" Height="50" Margin="0,0,0,0" VerticalAlignment="Center" />
+                        <Label Content="Drag and Drop your Image or Project here!" HorizontalAlignment="Center" Foreground="White" FontSize="20" FontFamily="Roboto" FontWeight="Thin" Width="369"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
 
-            <Border Margin="0,80,0,0" CornerRadius="0,0,0,20" Background="#27272f" HorizontalAlignment="Left" Width="200"/>
+            <Border Margin="0,80,0,0" CornerRadius="0,0,0,20" Background="#27272f" HorizontalAlignment="Left" Width="300">
+                <StackPanel>
+                    <Button Height="70" VerticalAlignment="Top" HorizontalAlignment="Left" HorizontalContentAlignment="Left" BorderBrush="{x:Null}" Foreground="{x:Null}">
+                        <Button.Content>
+                            <Grid Width="300">
+                                <Image Source="assets\icons\new.png" Width="50" Height="50" Margin="10,0,238,0" VerticalAlignment="Center" />
+                                <TextBlock FontSize="18" Margin="174,19,0,19" Foreground="#FFC6C6DC" HorizontalAlignment="Left" Width="97">New Project</TextBlock>
+                            </Grid>
+                        </Button.Content>
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="#00008000"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#7F000000"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <Button Height="70" VerticalAlignment="Top" HorizontalAlignment="Left" HorizontalContentAlignment="Left" BorderBrush="{x:Null}" Foreground="{x:Null}">
+                        <Button.Content>
+                            <Grid Width="300">
+                                <Image Source="assets\icons\upload.png" Width="50" Height="50" Margin="10,0,238,0" VerticalAlignment="Center" />
+                                <TextBlock FontSize="18" Margin="174,19,0,19" Foreground="#FFC6C6DC" HorizontalAlignment="Left" Width="116">Import Project</TextBlock>
+                            </Grid>
+                        </Button.Content>
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="#00008000"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#7F000000"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <Button Height="70" VerticalAlignment="Top" HorizontalAlignment="Left" HorizontalContentAlignment="Left" BorderBrush="{x:Null}" Foreground="{x:Null}">
+                        <Button.Content>
+                            <Grid Width="300">
+                                <Image Source="/image.png" Width="50" Height="50" Margin="10,0,238,0" VerticalAlignment="Center" />
+                                <TextBlock FontSize="18" Margin="174,19,0,19" Foreground="#FFC6C6DC" HorizontalAlignment="Left" Width="110"><Run Language="de-de" Text="Import Image"/></TextBlock>
+                            </Grid>
+                        </Button.Content>
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="#00008000"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#7F000000"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </StackPanel>
+            </Border>
         </Grid>
     </Border>
 </Window>
