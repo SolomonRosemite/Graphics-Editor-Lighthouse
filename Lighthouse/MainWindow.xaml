@@ -117,7 +117,7 @@
                     <Button Height="70" VerticalAlignment="Top" HorizontalAlignment="Left" HorizontalContentAlignment="Left" BorderBrush="{x:Null}" Foreground="{x:Null}">
                         <Button.Content>
                             <Grid Width="300">
-                                <Image Source="/image.png" Width="50" Height="50" Margin="10,0,238,0" VerticalAlignment="Center" />
+                                <Image Source="assets\icons\image.png" Width="50" Height="50" Margin="10,0,238,0" VerticalAlignment="Center" />
                                 <TextBlock FontSize="18" Margin="174,19,0,19" Foreground="#FFC6C6DC" HorizontalAlignment="Left" Width="110"><Run Language="de-de" Text="Import Image"/></TextBlock>
                             </Grid>
                         </Button.Content>
