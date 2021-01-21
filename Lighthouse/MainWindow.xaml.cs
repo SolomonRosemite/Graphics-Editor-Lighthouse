@@ -23,23 +23,76 @@ namespace Lighthouse
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly DispatcherTimer dispatcherTimer = new DispatcherTimer();
+        private DropColorState state = DropColorState.increase;
+
+        enum DropColorState
+        {
+            increase, decrease, none
+        }
+
         public MainWindow()
         {
             // Thread.Sleep(1500);
+
             InitializeComponent();
-            new EditorWindow().Show();
-            this.Hide();
+
+            DropArea.BorderBrush = new SolidColorBrush(Color.FromArgb(0, 255, 255, 255));
+            dispatcherTimer.Tick += new EventHandler(DispatcherTimer_Tick);
+            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(10);
+            //new EditorWindow().Show();
+            //this.Hide();
+        }
+
+        private void OnDragEnter(object sender, DragEventArgs e)
+        {
+            state = DropColorState.increase;
+            dispatcherTimer.Start();
+        }
+
+        private void OnDrop(object sender, DragEventArgs e)
+        {
+            Console.WriteLine(e);
+        }
+
+        private void OnDragLeave(object sender, DragEventArgs e)
+        {
+            DropArea.BorderBrush = new SolidColorBrush(Color.FromArgb(0, 255, 255, 255));
+            dispatcherTimer.Stop();
+        }
+
+        private void DispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            var value = (DropArea.BorderBrush as SolidColorBrush).Color.A;
+            const byte increment = 5;
+
+            if (state == DropColorState.decrease)
+            {
+                if (value < 10)
+                    state = DropColorState.increase;
+
+                value -= increment;
+            } 
+            else if (state == DropColorState.increase)
+            {
+                if (value > 245)
+                    state = DropColorState.decrease;
+
+                value += increment;
+            }
+
+            DropArea.BorderBrush = new SolidColorBrush(Color.FromArgb(value, 255, 255, 255));
         }
 
         private void WindowClick(object sender, MouseButtonEventArgs e)
         {
             // Todo: Maximize or and Minimize Window on Double-click
-            
             try { DragMove(); } catch { }
         }
 
         private void OnExitClick(object sender, RoutedEventArgs e)
         {
+            // Todo: Don't exit if there are unsaved changes...
             Application.Current.Shutdown();
         }
 

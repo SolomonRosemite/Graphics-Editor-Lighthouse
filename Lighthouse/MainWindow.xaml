@@ -15,6 +15,7 @@
         AllowsTransparency="True"
         WindowStyle="None"
         ResizeMode="CanResizeWithGrip"
+        AllowDrop="True"
         Background="{x:Null}"
         Style="{StaticResource WinAll}"
         >
@@ -43,14 +44,14 @@
 
                 <Menu HorizontalAlignment="Right" Width="55" Height="40" VerticalAlignment="Top" Opacity="0.00000001" Margin="0,20,10,0">
                     <MenuItem Header="Menu" Height="38" Width="62">
-                        <MenuItem Header="Maximize"/>
-                        <MenuItem Header="Maximize"/>
-                        <MenuItem Header="Exit"/>
+                        <MenuItem Click="OnMaximizedClick" Header="Maximize"/>
+                        <MenuItem Click="OnMinimizedClick" Header="Maximize"/>
+                        <MenuItem Click="OnExitClick" Header="Exit"/>
                     </MenuItem>
                 </Menu>
             </Grid>
 
-            <Border Margin="300,80,0,0" CornerRadius="0,0,20,0" Background="#1b1b22">
+            <Border AllowDrop="True" Name="DropArea" BorderThickness="5" DragDrop.Drop="OnDrop" DragDrop.DragLeave="OnDragLeave" DragDrop.DragEnter="OnDragEnter" Margin="300,80,0,0" CornerRadius="0,0,20,0" BorderBrush="White" Background="#00000000">
                 <Grid>
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Image Source="assets\icons\upload.png" Width="50" Height="50" Margin="0,0,0,0" VerticalAlignment="Center" />
