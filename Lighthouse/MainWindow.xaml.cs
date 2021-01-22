@@ -14,7 +14,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
+using System.Drawing;
+using System.IO;
+using System.Text.Json.Serialization;
 using System.Windows.Threading;
+using Lighthouse.Services;
+using Newtonsoft.Json;
+using Color = System.Windows.Media.Color;
 
 namespace Lighthouse
 {
@@ -24,35 +31,82 @@ namespace Lighthouse
     public partial class MainWindow : Window
     {
         private readonly DispatcherTimer dispatcherTimer = new DispatcherTimer();
-        private DropColorState state = DropColorState.increase;
+        private DropColorState state = DropColorState.Increase;
 
-        enum DropColorState
+        private enum DropColorState
         {
-            increase, decrease, none
+            Increase, Decrease
         }
 
         public MainWindow()
         {
-            // Thread.Sleep(1500);
+            Console.WriteLine("Cool");
+            Console.WriteLine("Cool");
+            Console.WriteLine("Cool");
+            Console.WriteLine("Cool");
+            
+            Thread.Sleep(1500);
 
             InitializeComponent();
 
             DropArea.BorderBrush = new SolidColorBrush(Color.FromArgb(0, 255, 255, 255));
-            dispatcherTimer.Tick += new EventHandler(DispatcherTimer_Tick);
+            dispatcherTimer.Tick += DispatcherTimer_Tick;
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(10);
             //new EditorWindow().Show();
             //this.Hide();
         }
 
+        private void HandleIncomingFile(string filePath)
+        {
+            Console.WriteLine("Path to file: " + filePath);
+            try
+            {
+                Bitmap image = new Bitmap(filePath);
+
+                new EditorWindow(image).Show();
+                this.Hide();
+                // Console.WriteLine(data[0]);
+
+                // Image image1 = System.Drawing..FromFile("c:\\FakePhoto1.jpg");
+                // if (filePath.EndsWith(".lh"))
+                // {
+                //     ImportService.LoadProject(filePath);
+                // }
+                // else
+                // {
+                //     ImportService.LoadGetImportedImage(filePath);
+                // }
+            }
+            catch (Exception e)
+            {
+                // Todo: Handle
+                Console.WriteLine(e);
+            }
+        }
+
         private void OnDragEnter(object sender, DragEventArgs e)
         {
-            state = DropColorState.increase;
+            state = DropColorState.Increase;
             dispatcherTimer.Start();
         }
 
         private void OnDrop(object sender, DragEventArgs e)
         {
-            Console.WriteLine(e);
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                var files = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+                if (files == null || files.Length == 0)
+                {
+                    OnDragLeave(null, null);
+                    return;
+                }
+
+                HandleIncomingFile(files[0]);
+                return;
+            }
+
+            OnDragLeave(null, null);
         }
 
         private void OnDragLeave(object sender, DragEventArgs e)
@@ -61,28 +115,60 @@ namespace Lighthouse
             dispatcherTimer.Stop();
         }
 
+        private void OnClickNewProject(object sender, RoutedEventArgs e)
+        {
+            // Todo...
+            throw new NotImplementedException();
+        }
+
+        private void OnImportProject(object sender, RoutedEventArgs e)
+        {
+            // Todo...
+            throw new NotImplementedException();
+        }
+
+        private void OnImportImage(object sender, RoutedEventArgs e)
+        {
+            // Create OpenFileDialog
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog
+            {
+                Filter = "Image Files(*.BMP;*.JPG;*.GIF)|*.BMP;*.JPG;*.GIF|All files (*.*)|*.*"
+            };
+
+            var result = dlg.ShowDialog();
+
+            if (result == true)
+            {
+                // Open document
+                string filename = dlg.FileName;
+                HandleIncomingFile(filename);
+            }
+        }
+
         private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
             var value = (DropArea.BorderBrush as SolidColorBrush).Color.A;
             const byte increment = 5;
 
-            if (state == DropColorState.decrease)
+            if (state == DropColorState.Decrease)
             {
                 if (value < 10)
-                    state = DropColorState.increase;
+                    state = DropColorState.Increase;
 
                 value -= increment;
-            } 
-            else if (state == DropColorState.increase)
+            }
+            else if (state == DropColorState.Increase)
             {
                 if (value > 245)
-                    state = DropColorState.decrease;
+                    state = DropColorState.Decrease;
 
                 value += increment;
             }
 
             DropArea.BorderBrush = new SolidColorBrush(Color.FromArgb(value, 255, 255, 255));
         }
+
+        #region WindowEvent
 
         private void WindowClick(object sender, MouseButtonEventArgs e)
         {
@@ -115,5 +201,7 @@ namespace Lighthouse
         {
             Application.Current.MainWindow.WindowState = WindowState.Minimized;
         }
+
+        #endregion
     }
 }

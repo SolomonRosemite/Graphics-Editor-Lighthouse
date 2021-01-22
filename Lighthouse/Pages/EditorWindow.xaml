@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         WindowStartupLocation="CenterScreen"
         xmlns:local="clr-namespace:Lighthouse"
+        xmlns:drawing="clr-namespace:System.Drawing;assembly=System.Drawing.Common"
         mc:Ignorable="d"
         WindowState="Normal"
         Title="EditorWindow"
@@ -136,9 +137,9 @@
 
                 <Menu HorizontalAlignment="Right" Width="55" Height="40" VerticalAlignment="Top" Opacity="0.00000001" Margin="0,20,10,0">
                     <MenuItem Header="Menu" Height="38" Width="62">
-                        <MenuItem Header="Maximize"/>
-                        <MenuItem Header="Maximize"/>
-                        <MenuItem Header="Exit"/>
+                        <MenuItem Click="OnMaximizedClick" Header="Maximize"/>
+                        <MenuItem Click="OnMinimizedClick" Header="Maximize"/>
+                        <MenuItem Click="OnExitClick" Header="Exit"/>
                     </MenuItem>
                 </Menu>
             </Grid>
@@ -146,7 +147,7 @@
             <!--Center-->
             <Grid Margin="100,80,320,0" Background="#1b1b22">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Label Content="Image here" HorizontalAlignment="Center" Foreground="White" FontSize="20" FontFamily="Roboto" FontWeight="Thin" Width="108"/>
+                    <Image Name="ImageView" Height="500" Width="500"/>
                 </StackPanel>
             </Grid>
 

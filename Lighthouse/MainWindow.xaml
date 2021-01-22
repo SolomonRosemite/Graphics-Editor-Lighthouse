@@ -62,7 +62,7 @@
 
             <Border Margin="0,80,0,0" CornerRadius="0,0,0,20" Background="#27272f" HorizontalAlignment="Left" Width="300">
                 <StackPanel>
-                    <Button Height="70" VerticalAlignment="Top" HorizontalAlignment="Left" HorizontalContentAlignment="Left" BorderBrush="{x:Null}" Foreground="{x:Null}">
+                    <Button Click="OnClickNewProject" Height="70" VerticalAlignment="Top" HorizontalAlignment="Left" HorizontalContentAlignment="Left" BorderBrush="{x:Null}" Foreground="{x:Null}">
                         <Button.Content>
                             <Grid Width="300">
                                 <Image Source="assets\icons\new.png" Width="50" Height="50" Margin="22,0,228,0" VerticalAlignment="Center" />
@@ -89,7 +89,7 @@
                             </Style>
                         </Button.Style>
                     </Button>
-                    <Button Height="70" VerticalAlignment="Top" HorizontalAlignment="Left" HorizontalContentAlignment="Left" BorderBrush="{x:Null}" Foreground="{x:Null}">
+                    <Button Click="OnImportProject" Height="70" VerticalAlignment="Top" HorizontalAlignment="Left" HorizontalContentAlignment="Left" BorderBrush="{x:Null}" Foreground="{x:Null}">
                         <Button.Content>
                             <Grid Width="300">
                                 <Image Source="assets\icons\upload.png" Width="50" Height="50" Margin="22,0,228,0" VerticalAlignment="Center" />
@@ -116,7 +116,7 @@
                             </Style>
                         </Button.Style>
                     </Button>
-                    <Button Height="70" VerticalAlignment="Top" HorizontalAlignment="Left" HorizontalContentAlignment="Left" BorderBrush="{x:Null}" Foreground="{x:Null}">
+                    <Button Click="OnImportImage" Height="70" VerticalAlignment="Top" HorizontalAlignment="Left" HorizontalContentAlignment="Left" BorderBrush="{x:Null}" Foreground="{x:Null}">
                         <Button.Content>
                             <Grid Width="300">
                                 <Image Source="assets\icons\image.png" Width="50" Height="50" Margin="22,0,228,0" VerticalAlignment="Center" />
