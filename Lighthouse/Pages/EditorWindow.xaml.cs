@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using LanguageExt.UnsafeValueAccess;
+using Lighthouse.DataStructures;
 
 namespace Lighthouse.Pages
 {
@@ -27,15 +30,14 @@ namespace Lighthouse.Pages
             return bitmapimage;
         }
 
-        public EditorWindow(Bitmap image)
+        public EditorWindow(Project project)
         {
             InitializeComponent();
 
-            var x = BitmapToImageSource(image);
-            bitmap = image;
-            ImageView.Source = x;
+            bitmap = project.Layers[0].ToBitmap();
 
-            // Bitmap image2 = new Bitmap(image.Width, image.Height);
+            var bitmapImage = BitmapToImageSource(bitmap);
+            ImageView.Source = bitmapImage;
         }
 
         private void WindowClick(object sender, MouseButtonEventArgs e)

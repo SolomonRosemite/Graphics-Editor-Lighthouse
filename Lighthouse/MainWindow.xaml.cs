@@ -17,8 +17,10 @@ using System.Windows.Shapes;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Net.Mime;
 using System.Text.Json.Serialization;
 using System.Windows.Threading;
+using Lighthouse.DataStructures;
 using Lighthouse.Services;
 using Newtonsoft.Json;
 using Color = System.Windows.Media.Color;
@@ -40,20 +42,13 @@ namespace Lighthouse
 
         public MainWindow()
         {
-            Console.WriteLine("Cool");
-            Console.WriteLine("Cool");
-            Console.WriteLine("Cool");
-            Console.WriteLine("Cool");
-            
-            Thread.Sleep(1500);
+            // Thread.Sleep(1500);
 
             InitializeComponent();
 
             DropArea.BorderBrush = new SolidColorBrush(Color.FromArgb(0, 255, 255, 255));
             dispatcherTimer.Tick += DispatcherTimer_Tick;
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(10);
-            //new EditorWindow().Show();
-            //this.Hide();
         }
 
         private void HandleIncomingFile(string filePath)
@@ -61,24 +56,19 @@ namespace Lighthouse
             Console.WriteLine("Path to file: " + filePath);
             try
             {
-                Bitmap image = new Bitmap(filePath);
+                var sw = new Stopwatch();
+                sw.Start();
+                Project project = filePath.EndsWith(".lh") ? ImportService.LoadImportedProject(filePath) : ImportService.LoadImportedImage(filePath) ;
+                sw.Stop();
+                Console.WriteLine("Time Project: " + sw.Elapsed.Seconds);
 
-                new EditorWindow(image).Show();
+                new EditorWindow(project).Show();
                 this.Hide();
-                // Console.WriteLine(data[0]);
-
-                // Image image1 = System.Drawing..FromFile("c:\\FakePhoto1.jpg");
-                // if (filePath.EndsWith(".lh"))
-                // {
-                //     ImportService.LoadProject(filePath);
-                // }
-                // else
-                // {
-                //     ImportService.LoadGetImportedImage(filePath);
-                // }
             }
             catch (Exception e)
             {
+                OnDragLeave(null, null);
+
                 // Todo: Handle
                 Console.WriteLine(e);
             }
@@ -147,7 +137,7 @@ namespace Lighthouse
 
         private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
-            var value = (DropArea.BorderBrush as SolidColorBrush).Color.A;
+            var value = ((SolidColorBrush) DropArea.BorderBrush).Color.A;
             const byte increment = 5;
 
             if (state == DropColorState.Decrease)
