@@ -60,7 +60,7 @@ namespace Lighthouse
                 sw.Start();
                 Project project = filePath.EndsWith(".lh") ? ImportService.LoadImportedProject(filePath) : ImportService.LoadImportedImage(filePath) ;
                 sw.Stop();
-                Console.WriteLine("Time Project: " + sw.Elapsed.Seconds);
+                Console.WriteLine("Time Project: " + sw.Elapsed.Milliseconds);
 
                 new EditorWindow(project).Show();
                 this.Hide();
@@ -122,7 +122,7 @@ namespace Lighthouse
             // Create OpenFileDialog
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog
             {
-                Filter = "Image Files(*.BMP;*.JPG;*.GIF)|*.BMP;*.JPG;*.GIF|All files (*.*)|*.*"
+                Filter = "Image Files(*.BMP;*.JPG;*.GIF;*.PNG)|*.BMP;*.JPG;*.GIF;*.PNG|All files (*.*)|*.*"
             };
 
             var result = dlg.ShowDialog();

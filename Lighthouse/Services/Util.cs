@@ -10,7 +10,20 @@ namespace Lighthouse.Services
 {
     public static class Util
     {
+        private static readonly List<int> Ids = new List<int>();
+        private static readonly Random Random = new Random();
 
+        public static int GenerateNewId()
+        {
+            int value = Random.Next(int.MaxValue);
+
+            if (Ids.Contains(value))
+                return GenerateNewId();
+
+            Ids.Add(value);
+
+            return value;
+        }
     }
 
     public class ImportService
@@ -18,12 +31,9 @@ namespace Lighthouse.Services
         public static Project LoadImportedImage(string filePath)
         {
             Bitmap image = new Bitmap(filePath);
+            Layer layer = new Layer(image, Util.GenerateNewId(), "Layer1");
 
-
-            Layer layer = new Layer(image, 21, "test", LayerType.Normal);
-
-            Project project = new Project("unnamed", null, new List<Layer> { layer });
-            return project;
+            return new Project("unnamed", null, new List<Layer> { layer });
         }
 
         public static Project LoadImportedProject(string filePath)

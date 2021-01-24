@@ -1,11 +1,9 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Windows.Media.Imaging;
+using System;
 using System.Drawing;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
-using LanguageExt.UnsafeValueAccess;
 using Lighthouse.DataStructures;
 
 namespace Lighthouse.Pages
@@ -21,20 +19,20 @@ namespace Lighthouse.Pages
             using MemoryStream memory = new MemoryStream();
             bitmap.Save(memory, System.Drawing.Imaging.ImageFormat.Bmp);
             memory.Position = 0;
-            BitmapImage bitmapimage = new BitmapImage();
-            bitmapimage.BeginInit();
-            bitmapimage.StreamSource = memory;
-            bitmapimage.CacheOption = BitmapCacheOption.OnLoad;
-            bitmapimage.EndInit();
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.StreamSource = memory;
+            image.CacheOption = BitmapCacheOption.OnLoad;
+            image.EndInit();
 
-            return bitmapimage;
+            return image;
         }
 
         public EditorWindow(Project project)
         {
             InitializeComponent();
 
-            bitmap = project.Layers[0].ToBitmap();
+            bitmap = project.Layers[0].RenderLayer();
 
             var bitmapImage = BitmapToImageSource(bitmap);
             ImageView.Source = bitmapImage;
