@@ -44,8 +44,8 @@
 
                 <Menu HorizontalAlignment="Right" Width="55" Height="40" VerticalAlignment="Top" Opacity="0.00000001" Margin="0,20,10,0">
                     <MenuItem Header="Menu" Height="38" Width="62">
+                        <MenuItem Click="OnMinimizedClick" Header="Minimize"/>
                         <MenuItem Click="OnMaximizedClick" Header="Maximize"/>
-                        <MenuItem Click="OnMinimizedClick" Header="Maximize"/>
                         <MenuItem Click="OnExitClick" Header="Exit"/>
                     </MenuItem>
                 </Menu>

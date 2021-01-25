@@ -5,6 +5,13 @@ using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using Lighthouse.DataStructures;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Text;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Media;
 
 namespace Lighthouse.Pages
 {
@@ -13,7 +20,11 @@ namespace Lighthouse.Pages
     /// </summary>
     public partial class EditorWindow : Window
     {
+        private readonly IList<Item> items = new ObservableCollection<Item>();
+
+        private System.Windows.Point dragStartPoint;
         private readonly Bitmap bitmap;
+
         private static BitmapImage BitmapToImageSource(Bitmap bitmap)
         {
             using MemoryStream memory = new MemoryStream();
@@ -31,6 +42,9 @@ namespace Lighthouse.Pages
         public EditorWindow(Project project)
         {
             InitializeComponent();
+            RegisterEvents();
+
+            InitLayers(project.Layers);
 
             bitmap = project.Layers[0].RenderLayer();
 
@@ -40,17 +54,6 @@ namespace Lighthouse.Pages
 
         private void WindowClick(object sender, MouseButtonEventArgs e)
         {
-            for (int i = 0; i < bitmap.Width; i++)
-            {
-                for (int j = 0; j < bitmap.Height; j++)
-                {
-                    bitmap.SetPixel(i, j, Color.Red);
-                }
-            }
-
-            Console.WriteLine(bitmap.GetPixel(0, 0));
-            ImageView.Source = BitmapToImageSource(bitmap);
-
             // Todo: Maximize or and Minimize Window on Double-click
             try { DragMove(); } catch { }
         }
@@ -82,5 +85,126 @@ namespace Lighthouse.Pages
         {
             Application.Current.MainWindow.WindowState = WindowState.Minimized;
         }
+
+        private void InitLayers(List<Layer> layers)
+        {
+            if (layers.Count == 0) return;
+
+            layers.ForEach(layer => items.Add(new Item(layer.LayerName)));
+
+            LayerNameLabel.Content = layers[0].LayerName;
+
+            listBox.DisplayMemberPath = "Name";
+            listBox.ItemsSource = items;
+
+            listBox.PreviewMouseMove += ListBox_PreviewMouseMove;
+
+            var style = new Style(typeof(ListBoxItem));
+            style.Setters.Add(new Setter(AllowDropProperty, true));
+            style.Setters.Add(new EventSetter(
+                PreviewMouseLeftButtonDownEvent,
+                new MouseButtonEventHandler(ListBoxItem_PreviewMouseLeftButtonDown)
+            ));
+            style.Setters.Add(new EventSetter(DropEvent, new DragEventHandler(ListBoxItem_Drop)));
+            listBox.ItemContainerStyle = style;
+        }
+
+        private void RegisterEvents()
+        {
+            listBox.SelectionChanged += ListBox_SelectionChanged;
+        }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                Console.WriteLine(listBox.SelectedItem);
+
+                if (listBox.SelectedItem == null || listBox.SelectedItem is not Item item) return;
+
+                LayerNameLabel.Content = item.Name;
+            }
+            catch { }
+        }
+
+        #region
+
+        public class Item
+        {
+            public string Name { get; set; }
+            public Item(string name)
+            {
+                Name = name;
+            }
+        }
+
+        private T FindVisualParent<T>(DependencyObject child)
+            where T : DependencyObject
+        {
+            var parentObject = VisualTreeHelper.GetParent(child);
+            
+            if (parentObject == null)
+                return null;
+            
+            if (parentObject is T parent)
+                return parent;
+            return FindVisualParent<T>(parentObject);
+        }
+
+        private void ListBox_PreviewMouseMove(object sender, MouseEventArgs e)
+        {
+            System.Windows.Point point = e.GetPosition(null);
+            Vector diff = dragStartPoint - point;
+            if (e.LeftButton == MouseButtonState.Pressed &&
+                (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance ||
+                    Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance))
+            {
+                var lb = sender as ListBox;
+                var lbi = FindVisualParent<ListBoxItem>(((DependencyObject)e.OriginalSource));
+                if (lbi != null)
+                {
+                    DragDrop.DoDragDrop(lbi, lbi.DataContext, DragDropEffects.Move);
+                }
+            }
+        }
+
+        private void ListBoxItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            dragStartPoint = e.GetPosition(null);
+        }
+
+        private void ListBoxItem_Drop(object sender, DragEventArgs e)
+        {
+            if (sender is ListBoxItem)
+            {
+                var source = e.Data.GetData(typeof(Item)) as Item;
+                var target = ((ListBoxItem)(sender)).DataContext as Item;
+
+                int sourceIndex = listBox.Items.IndexOf(source);
+                int targetIndex = listBox.Items.IndexOf(target);
+
+                Move(source, sourceIndex, targetIndex);
+            }
+        }
+
+        private void Move(Item source, int sourceIndex, int targetIndex)
+        {
+            if (sourceIndex < targetIndex)
+            {
+                items.Insert(targetIndex + 1, source);
+                items.RemoveAt(sourceIndex);
+            }
+            else
+            {
+                int removeIndex = sourceIndex + 1;
+                if (items.Count + 1 > removeIndex)
+                {
+                    items.Insert(targetIndex, source);
+                    items.RemoveAt(removeIndex);
+                }
+            }
+        }
+
+        #endregion
     }
 }

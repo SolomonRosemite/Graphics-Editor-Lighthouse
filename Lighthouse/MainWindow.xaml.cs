@@ -42,7 +42,7 @@ namespace Lighthouse
 
         public MainWindow()
         {
-            // Thread.Sleep(1500);
+            Thread.Sleep(1500);
 
             InitializeComponent();
 
@@ -166,13 +166,13 @@ namespace Lighthouse
             try { DragMove(); } catch { }
         }
 
-        private void OnExitClick(object sender, RoutedEventArgs e)
+        public void OnExitClick(object sender, RoutedEventArgs e)
         {
             // Todo: Don't exit if there are unsaved changes...
             Application.Current.Shutdown();
         }
 
-        private void OnMaximizedClick(object sender, RoutedEventArgs e)
+        public void OnMaximizedClick(object sender, RoutedEventArgs e)
         {
             switch (Application.Current.MainWindow.WindowState)
             {
@@ -187,7 +187,7 @@ namespace Lighthouse
             }
         }
 
-        private void OnMinimizedClick(object sender, RoutedEventArgs e)
+        public void OnMinimizedClick(object sender, RoutedEventArgs e)
         {
             Application.Current.MainWindow.WindowState = WindowState.Minimized;
         }
