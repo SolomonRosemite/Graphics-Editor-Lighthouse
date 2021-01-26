@@ -12,6 +12,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Media;
+using Lighthouse.Services;
 
 namespace Lighthouse.Pages
 {
@@ -20,10 +21,12 @@ namespace Lighthouse.Pages
     /// </summary>
     public partial class EditorWindow : Window
     {
-        private readonly IList<Item> items = new ObservableCollection<Item>();
+        private readonly ObservableCollection<Item> items = new ObservableCollection<Item>();
 
         private System.Windows.Point dragStartPoint;
         private readonly Bitmap bitmap;
+
+        private Project Project;
 
         private static BitmapImage BitmapToImageSource(Bitmap bitmap)
         {
@@ -41,12 +44,14 @@ namespace Lighthouse.Pages
 
         public EditorWindow(Project project)
         {
+            Project = project;
+
             InitializeComponent();
             RegisterEvents();
 
-            InitLayers(project.Layers);
+            InitLayers(Project.Layers);
 
-            bitmap = project.Layers[0].RenderLayer();
+            bitmap = Project.Layers[0].RenderLayer();
 
             var bitmapImage = BitmapToImageSource(bitmap);
             ImageView.Source = bitmapImage;
@@ -54,6 +59,9 @@ namespace Lighthouse.Pages
 
         private void WindowClick(object sender, MouseButtonEventArgs e)
         {
+            Project.Layers.Add(new Layer(Project.Layers[0].RenderLayer(), Util.GenerateNewId(), Project.Layers[0].LayerName + Util.GenerateNewId()));
+            
+            InitLayers(Project.Layers);
             // Todo: Maximize or and Minimize Window on Double-click
             try { DragMove(); } catch { }
         }
@@ -90,8 +98,7 @@ namespace Lighthouse.Pages
         {
             if (layers.Count == 0) return;
 
-            layers.ForEach(layer => items.Add(new Item(layer.LayerName)));
-
+            layers.ForEach(layer => items.Add(new Item(layer.LayerName, layer.Id)));
             LayerNameLabel.Content = layers[0].LayerName;
 
             listBox.DisplayMemberPath = "Name";
@@ -112,6 +119,25 @@ namespace Lighthouse.Pages
         private void RegisterEvents()
         {
             listBox.SelectionChanged += ListBox_SelectionChanged;
+            items.CollectionChanged += Items_CollectionChanged;
+        }
+
+        private void Items_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            // Todo...
+            //switch (e.Action)
+            //{
+            //    case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
+            //        break;
+            //    case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
+            //        break;
+            //    case System.Collections.Specialized.NotifyCollectionChangedAction.Replace:
+            //        break;
+            //    case System.Collections.Specialized.NotifyCollectionChangedAction.Move:
+            //        break;
+            //    case System.Collections.Specialized.NotifyCollectionChangedAction.Reset:
+            //        break;
+            //}
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -132,9 +158,11 @@ namespace Lighthouse.Pages
         public class Item
         {
             public string Name { get; set; }
-            public Item(string name)
+            public int Id { get; }
+            public Item(string name, int id)
             {
                 Name = name;
+                Id = id;
             }
         }
 
