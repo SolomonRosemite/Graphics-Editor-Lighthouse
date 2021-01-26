@@ -1,0 +1,84 @@
+﻿<Window x:Class="Lighthouse.Windows.ExportWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:Lighthouse.Windows"
+        mc:Ignorable="d"
+        Title="Export Image" ResizeMode="NoResize" Width="700" Height="700" >
+    <Grid>
+        <Label Content="Export Image" FontSize="30" VerticalAlignment="Top" HorizontalAlignment="Center" />
+
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label Content="Preview" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Bottom"  />
+            <Image Name="ImageView" Height="450" Width="450"/>
+        </StackPanel>
+
+        <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+                <Border CornerRadius="5" Background="#1be4c9" Height="35" BorderThickness="0.3" BorderBrush="#00B62F2F" >
+                    <Button Click="OnExportAsPNG" VerticalAlignment="Center" Height="35" HorizontalAlignment="Center" HorizontalContentAlignment="Left" BorderBrush="{x:Null}" Foreground="{x:Null}" Width="170">
+                        <Button.Content>
+                            <Grid Width="170" Height="35">
+                                <!-- <Image Source="\assets\icons\export.png" Width="20" Margin="20,7,130,8" /> -->
+                                <TextBlock FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#1b262b" Width="92" Text="Export as png" />
+                            </Grid>
+                        </Button.Content>
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="#0122B022"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#7F000000"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </Border>
+
+                <Rectangle Opacity="0" Width="60" />
+
+                <Border CornerRadius="5" Background="#1be4c9" Height="35" BorderThickness="0.3" BorderBrush="#00B62F2F" Margin="0,0,0,0" >
+                    <Button Click="OnExportAsJPEG" VerticalAlignment="Center" Height="35" HorizontalAlignment="Center" HorizontalContentAlignment="Left" BorderBrush="{x:Null}" Foreground="{x:Null}" Width="170">
+                        <Button.Content>
+                            <Grid Width="170" Height="35">
+                                <!-- <Image Source="\assets\icons\export.png" Width="20" Margin="20,7,130,8" /> -->
+                                <TextBlock FontSize="15" Foreground="#1b262b" HorizontalAlignment="Center" VerticalAlignment="Center" Width="92" Text="Export as jpeg" />
+                            </Grid>
+                        </Button.Content>
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="#0122B022"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#7F000000"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </Border>
+            </StackPanel>
+            <Rectangle VerticalAlignment="Bottom" Height="50"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -13,24 +13,22 @@ namespace LighthouseLibrary.Models
         public List<Filter> Filters { get; }
 
         private Bitmap bitmap;
-        // private readonly Bitmap originalImage;
 
         public Layer(Bitmap bitmap, int id, string layerName)
         {
             Id = id;
             this.bitmap = bitmap;
-            // originalImage = bitmap;
             LayerName = layerName;
             LayerState = LayerState.Unchanged;
 
             Filters = new List<Filter>();
         }
 
-
         public Bitmap RenderLayer()
         {
-            Filters.ForEach(filter => filter.ApplyFilter(ref bitmap));
-            return bitmap;
+            var image = (Bitmap)bitmap.Clone();
+            Filters.ForEach(filter => filter.ApplyFilter(ref image));
+            return image;
         }
     }
 }

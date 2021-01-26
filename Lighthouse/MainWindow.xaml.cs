@@ -53,13 +53,10 @@ namespace Lighthouse
         private void HandleIncomingFile(string filePath)
         {
             Console.WriteLine("Path to file: " + filePath);
+
             try
             {
-                var sw = new Stopwatch();
-                sw.Start();
                 Project project = filePath.EndsWith(".lh") ? ImportService.LoadImportedProject(filePath) : ImportService.LoadImportedImage(filePath) ;
-                sw.Stop();
-                Console.WriteLine("Time Project: " + sw.Elapsed.Milliseconds);
 
                 new EditorWindow(project).Show();
                 this.Hide();
@@ -118,10 +115,9 @@ namespace Lighthouse
 
         private void OnImportImage(object sender, RoutedEventArgs e)
         {
-            // Create OpenFileDialog
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog
             {
-                Filter = "Image Files(*.BMP;*.JPG;*.GIF;*.PNG)|*.BMP;*.JPG;*.GIF;*.PNG|All files (*.*)|*.*"
+                Filter = "Image Files(*.BMP;*.JPG;*.PNG)|*.BMP;*.JPG;*.PNG|All files (*.*)|*.*"
             };
 
             var result = dlg.ShowDialog();
@@ -157,7 +153,7 @@ namespace Lighthouse
             DropArea.BorderBrush = new SolidColorBrush(Color.FromArgb(value, 255, 255, 255));
         }
 
-        #region WindowEvent
+        #region WindowEvents
 
         private void WindowClick(object sender, MouseButtonEventArgs e)
         {

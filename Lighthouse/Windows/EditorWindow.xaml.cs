@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Media;
+using Lighthouse.Windows;
 using LighthouseLibrary.Models;
 using LighthouseLibrary.Services;
 
@@ -28,20 +29,6 @@ namespace Lighthouse.Pages
 
         private Project Project;
 
-        private static BitmapImage BitmapToImageSource(Bitmap bitmap)
-        {
-            using MemoryStream memory = new MemoryStream();
-            bitmap.Save(memory, System.Drawing.Imaging.ImageFormat.Bmp);
-            memory.Position = 0;
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.StreamSource = memory;
-            image.CacheOption = BitmapCacheOption.OnLoad;
-            image.EndInit();
-
-            return image;
-        }
-
         public EditorWindow(Project project)
         {
             Project = project;
@@ -53,7 +40,7 @@ namespace Lighthouse.Pages
 
             bitmap = Project.Layers[0].RenderLayer();
 
-            var bitmapImage = BitmapToImageSource(bitmap);
+            var bitmapImage = Helper.BitmapToImageSource(bitmap);
             ImageView.Source = bitmapImage;
         }
 
@@ -150,6 +137,8 @@ namespace Lighthouse.Pages
             catch { }
         }
 
+        private void OnExportImage(object sender, RoutedEventArgs e) => new ExportWindow(Project).Show();
+
         #region
 
         public class Item
@@ -167,10 +156,10 @@ namespace Lighthouse.Pages
             where T : DependencyObject
         {
             var parentObject = VisualTreeHelper.GetParent(child);
-            
+
             if (parentObject == null)
                 return null;
-            
+
             if (parentObject is T parent)
                 return parent;
             return FindVisualParent<T>(parentObject);
