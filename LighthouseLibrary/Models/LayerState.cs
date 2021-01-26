@@ -1,4 +1,4 @@
-﻿namespace Lighthouse.DataStructures
+﻿namespace LighthouseLibrary.Models
 {
     public enum LayerState
     {

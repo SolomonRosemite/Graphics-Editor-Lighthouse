@@ -4,7 +4,6 @@ using System.Drawing;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
-using Lighthouse.DataStructures;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
@@ -12,7 +11,8 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Media;
-using Lighthouse.Services;
+using LighthouseLibrary.Models;
+using LighthouseLibrary.Services;
 
 namespace Lighthouse.Pages
 {
@@ -59,9 +59,6 @@ namespace Lighthouse.Pages
 
         private void WindowClick(object sender, MouseButtonEventArgs e)
         {
-            Project.Layers.Add(new Layer(Project.Layers[0].RenderLayer(), Util.GenerateNewId(), Project.Layers[0].LayerName + Util.GenerateNewId()));
-            
-            InitLayers(Project.Layers);
             // Todo: Maximize or and Minimize Window on Double-click
             try { DragMove(); } catch { }
         }
@@ -146,7 +143,7 @@ namespace Lighthouse.Pages
             {
                 Console.WriteLine(listBox.SelectedItem);
 
-                if (listBox.SelectedItem == null || listBox.SelectedItem is not Item item) return;
+                if (listBox.SelectedItem == null || !(listBox.SelectedItem is Item item)) return;
 
                 LayerNameLabel.Content = item.Name;
             }

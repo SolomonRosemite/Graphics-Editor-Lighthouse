@@ -20,9 +20,8 @@ using System.IO;
 using System.Net.Mime;
 using System.Text.Json.Serialization;
 using System.Windows.Threading;
-using Lighthouse.DataStructures;
-using Lighthouse.Services;
-using Newtonsoft.Json;
+using LighthouseLibrary.Models;
+using LighthouseLibrary.Services;
 using Color = System.Windows.Media.Color;
 
 namespace Lighthouse
@@ -42,7 +41,7 @@ namespace Lighthouse
 
         public MainWindow()
         {
-            Thread.Sleep(1500);
+            // Thread.Sleep(1500);
 
             InitializeComponent();
 

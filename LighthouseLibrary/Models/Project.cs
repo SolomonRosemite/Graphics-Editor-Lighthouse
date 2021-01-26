@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Lighthouse.DataStructures
+namespace LighthouseLibrary.Models
 {
     public class Project
     {

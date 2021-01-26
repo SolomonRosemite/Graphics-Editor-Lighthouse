@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace Lighthouse.DataStructures
+namespace LighthouseLibrary.Models
 {
     // Todo: Implement
     public class Filter
