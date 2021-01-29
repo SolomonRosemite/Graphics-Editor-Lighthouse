@@ -17,6 +17,17 @@ namespace LighthouseLibrary.Services
             return new Project("unnamed", null, new List<Layer> { layer }, true);
         }
 
+        public static Layer LoadImportedImageToLayer(string filePath, string layername)
+        {
+            Bitmap image;
+            using (var bmpTemp = new Bitmap(filePath))
+                image = new Bitmap(bmpTemp);
+
+            Layer layer = new Layer(image, UtilService.GenerateNewId(), layername);
+
+            return layer;
+        }
+
         public static Project LoadImportedProject(string filePath)
         {
             return null;

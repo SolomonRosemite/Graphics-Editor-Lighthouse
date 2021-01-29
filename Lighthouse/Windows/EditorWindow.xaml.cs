@@ -44,46 +44,12 @@ namespace Lighthouse.Pages
             ImageView.Source = bitmapImage;
         }
 
-        private void WindowClick(object sender, MouseButtonEventArgs e)
-        {
-            // Todo: Maximize or and Minimize Window on Double-click
-            try { DragMove(); } catch { }
-        }
-
-        private void OnExitClick(object sender, RoutedEventArgs e)
-        {
-            // Todo: Don't exit if there are unsaved changes...
-            Application.Current.Shutdown();
-        }
-
-        private void OnMaximizedClick(object sender, RoutedEventArgs e)
-        {
-            switch (Application.Current.MainWindow.WindowState)
-            {
-                case WindowState.Normal:
-                    Application.Current.MainWindow.WindowState = WindowState.Maximized;
-                    break;
-                case WindowState.Minimized:
-                    break;
-                case WindowState.Maximized:
-                    Application.Current.MainWindow.WindowState = WindowState.Normal;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-
-        private void OnMinimizedClick(object sender, RoutedEventArgs e)
-        {
-            Application.Current.MainWindow.WindowState = WindowState.Minimized;
-        }
-
         private void InitLayers(List<Layer> layers)
         {
             if (layers.Count == 0) return;
 
             layers.ForEach(layer => items.Add(new Item(layer.LayerName, layer.Id)));
-            LayerNameLabel.Content = layers[0].LayerName;
+            LayerNameLabel.Content = items[0].Name;
 
             listBox.DisplayMemberPath = "Name";
             listBox.ItemsSource = items;
@@ -106,9 +72,35 @@ namespace Lighthouse.Pages
             items.CollectionChanged += Items_CollectionChanged;
         }
 
+        private void OnImportImage(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog
+            {
+                Filter = "Image Files (*.BMP;*.JPG;*.PNG)|*.BMP;*.JPG;*.PNG|All files (*.*)|*.*"
+            };
+
+            var result = dlg.ShowDialog();
+
+            if (result == true)
+            {
+                // Open document
+                string filename = dlg.FileName;
+                Layer layer = ImportService.LoadImportedImageToLayer(filename, $"Layer {items.Count + 1}");
+                
+                // Todo: Add Layer to editor & to project.
+                items.Clear();
+
+                Project.Layers.Add(layer);
+
+                InitLayers(Project.Layers);
+            }
+        }
+
         private void Items_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             // Todo...
+            //Console.WriteLine("YAA");
+            //Console.WriteLine(e.Action.ToString());
             //switch (e.Action)
             //{
             //    case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
@@ -128,8 +120,6 @@ namespace Lighthouse.Pages
         {
             try
             {
-                Console.WriteLine(listBox.SelectedItem);
-
                 if (listBox.SelectedItem == null || !(listBox.SelectedItem is Item item)) return;
 
                 LayerNameLabel.Content = item.Name;
@@ -217,6 +207,44 @@ namespace Lighthouse.Pages
                     items.RemoveAt(removeIndex);
                 }
             }
+        }
+
+        #endregion
+
+        #region
+
+        private void WindowClick(object sender, MouseButtonEventArgs e)
+        {
+            // Todo: Maximize or and Minimize Window on Double-click
+            try { DragMove(); } catch { }
+        }
+
+        private void OnExitClick(object sender, RoutedEventArgs e)
+        {
+            // Todo: Don't exit if there are unsaved changes...
+            Application.Current.Shutdown();
+        }
+
+        private void OnMaximizedClick(object sender, RoutedEventArgs e)
+        {
+            switch (Application.Current.MainWindow.WindowState)
+            {
+                case WindowState.Normal:
+                    Application.Current.MainWindow.WindowState = WindowState.Maximized;
+                    break;
+                case WindowState.Minimized:
+                    break;
+                case WindowState.Maximized:
+                    Application.Current.MainWindow.WindowState = WindowState.Normal;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        private void OnMinimizedClick(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow.WindowState = WindowState.Minimized;
         }
 
         #endregion

@@ -5,8 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         WindowStartupLocation="CenterScreen"
         xmlns:local="clr-namespace:Lighthouse"
-        xmlns:drawing="clr-namespace:System.Drawing;assembly=System.Drawing.Common"
-        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
         mc:Ignorable="d"
         WindowState="Normal"
         Title="EditorWindow"
@@ -154,7 +152,37 @@
 
             <!--Left Side-->
             <Border Margin="0,80,0,0" CornerRadius="0,0,0,20" Background="#27272f" HorizontalAlignment="Left" Width="100">
-                <StackPanel>
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Width="100" Height="100">
+                    <Button Click="OnImportImage" Height="100" Width="100" HorizontalAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="{x:Null}" Foreground="{x:Null}">
+                        <Button.Content>
+                            <Grid HorizontalAlignment="Center" Width="100" Height="100">
+                                <StackPanel>
+                                    <Rectangle Margin="20,0,0,0" Height="10" />
+                                    <Image Source="\assets\icons\new.png" Width="50" Height="50" Margin="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" />
+                                    <Label FontSize="14" Margin="0,7.5,0,0" HorizontalContentAlignment="Center" Foreground="#FFC6C6DC" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" Content="Import Image" />
+                                </StackPanel>
+                            </Grid>
+                        </Button.Content>
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="#00008000"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#7F000000"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
                 </StackPanel>
             </Border>
 
