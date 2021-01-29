@@ -1,19 +1,11 @@
-﻿using System.Windows.Media.Imaging;
-using System;
-using System.Drawing;
-using System.IO;
-using System.Windows;
-using System.Windows.Input;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
+﻿using LighthouseLibrary.Services;
+using LighthouseLibrary.Models;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
+using System.Windows.Input;
 using System.Windows.Media;
 using Lighthouse.Windows;
-using LighthouseLibrary.Models;
-using LighthouseLibrary.Services;
+using System.Windows;
+using System;
 
 namespace Lighthouse.Pages
 {
@@ -22,12 +14,11 @@ namespace Lighthouse.Pages
     /// </summary>
     public partial class EditorWindow : Window
     {
-        private readonly ObservableCollection<Item> items = new ObservableCollection<Item>();
-
         private System.Windows.Point dragStartPoint;
-        private readonly Bitmap bitmap;
 
-        private Project Project;
+        private readonly Project Project;
+
+        private bool isMoveAction = false;
 
         public EditorWindow(Project project)
         {
@@ -36,23 +27,19 @@ namespace Lighthouse.Pages
             InitializeComponent();
             RegisterEvents();
 
-            InitLayers(Project.Layers);
+            InitLayers();
 
-            bitmap = Project.Layers[0].RenderLayer();
-
-            var bitmapImage = Helper.BitmapToImageSource(bitmap);
-            ImageView.Source = bitmapImage;
+            Render();
         }
 
-        private void InitLayers(List<Layer> layers)
+        private void InitLayers()
         {
-            if (layers.Count == 0) return;
+            if (Project.Layers.Count == 0) return;
 
-            layers.ForEach(layer => items.Add(new Item(layer.LayerName, layer.Id)));
-            LayerNameLabel.Content = items[0].Name;
+            LayerNameLabel.Content = Project.Layers[0].LayerName;
 
-            listBox.DisplayMemberPath = "Name";
-            listBox.ItemsSource = items;
+            listBox.DisplayMemberPath = "LayerName";
+            listBox.ItemsSource = Project.Layers;
 
             listBox.PreviewMouseMove += ListBox_PreviewMouseMove;
 
@@ -69,7 +56,15 @@ namespace Lighthouse.Pages
         private void RegisterEvents()
         {
             listBox.SelectionChanged += ListBox_SelectionChanged;
-            items.CollectionChanged += Items_CollectionChanged;
+            Project.Layers.CollectionChanged += OnLayerCollectionChanged;
+        }
+
+        private void Render()
+        {
+            var res = Project.RenderProject();
+
+            var bitmapImage = Helper.BitmapToImageSource(res);
+            ImageView.Source = bitmapImage;
         }
 
         private void OnImportImage(object sender, RoutedEventArgs e)
@@ -85,44 +80,35 @@ namespace Lighthouse.Pages
             {
                 // Open document
                 string filename = dlg.FileName;
-                Layer layer = ImportService.LoadImportedImageToLayer(filename, $"Layer {items.Count + 1}");
+                Layer layer = ImportService.LoadImportedImageToLayer(filename, $"Layer {Project.Layers.Count + 1}");
                 
                 // Todo: Add Layer to editor & to project.
-                items.Clear();
+                //items.Clear();
 
                 Project.Layers.Add(layer);
 
-                InitLayers(Project.Layers);
+                //InitLayers(Project.Layers);
             }
         }
 
-        private void Items_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void OnLayerCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            // Todo...
-            //Console.WriteLine("YAA");
-            //Console.WriteLine(e.Action.ToString());
-            //switch (e.Action)
-            //{
-            //    case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
-            //        break;
-            //    case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
-            //        break;
-            //    case System.Collections.Specialized.NotifyCollectionChangedAction.Replace:
-            //        break;
-            //    case System.Collections.Specialized.NotifyCollectionChangedAction.Move:
-            //        break;
-            //    case System.Collections.Specialized.NotifyCollectionChangedAction.Reset:
-            //        break;
-            //}
+            if (isMoveAction)
+            {
+                isMoveAction = false;
+                return;
+            }
+
+            Render();
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
             {
-                if (listBox.SelectedItem == null || !(listBox.SelectedItem is Item item)) return;
+                if (listBox.SelectedItem == null || !(listBox.SelectedItem is Layer item)) return;
 
-                LayerNameLabel.Content = item.Name;
+                LayerNameLabel.Content = item.LayerName;
             }
             catch { }
         }
@@ -130,17 +116,6 @@ namespace Lighthouse.Pages
         private void OnExportImage(object sender, RoutedEventArgs e) => new ExportWindow(Project).Show();
 
         #region
-
-        public class Item
-        {
-            public string Name { get; set; }
-            public int Id { get; }
-            public Item(string name, int id)
-            {
-                Name = name;
-                Id = id;
-            }
-        }
 
         private T FindVisualParent<T>(DependencyObject child)
             where T : DependencyObject
@@ -163,7 +138,7 @@ namespace Lighthouse.Pages
                 (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance ||
                     Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance))
             {
-                var lb = sender as ListBox;
+
                 var lbi = FindVisualParent<ListBoxItem>(((DependencyObject)e.OriginalSource));
                 if (lbi != null)
                 {
@@ -179,10 +154,10 @@ namespace Lighthouse.Pages
 
         private void ListBoxItem_Drop(object sender, DragEventArgs e)
         {
-            if (sender is ListBoxItem)
+            if (sender is ListBoxItem item)
             {
-                var source = e.Data.GetData(typeof(Item)) as Item;
-                var target = ((ListBoxItem)(sender)).DataContext as Item;
+                var source = e.Data.GetData(typeof(Layer)) as Layer;
+                var target = item.DataContext as Layer;
 
                 int sourceIndex = listBox.Items.IndexOf(source);
                 int targetIndex = listBox.Items.IndexOf(target);
@@ -191,20 +166,22 @@ namespace Lighthouse.Pages
             }
         }
 
-        private void Move(Item source, int sourceIndex, int targetIndex)
+        private void Move(Layer source, int sourceIndex, int targetIndex)
         {
+            isMoveAction = true;
+            
             if (sourceIndex < targetIndex)
             {
-                items.Insert(targetIndex + 1, source);
-                items.RemoveAt(sourceIndex);
+                Project.Layers.Insert(targetIndex + 1, source);
+                Project.Layers.RemoveAt(sourceIndex);
             }
             else
             {
                 int removeIndex = sourceIndex + 1;
-                if (items.Count + 1 > removeIndex)
+                if (Project.Layers.Count + 1 > removeIndex)
                 {
-                    items.Insert(targetIndex, source);
-                    items.RemoveAt(removeIndex);
+                    Project.Layers.Insert(targetIndex, source);
+                    Project.Layers.RemoveAt(removeIndex);
                 }
             }
         }

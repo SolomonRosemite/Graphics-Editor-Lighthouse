@@ -8,8 +8,7 @@
         mc:Ignorable="d"
         WindowState="Normal"
         Title="EditorWindow"
-        MinHeight="400"
-        MinWidth="600"
+
         Height="650"
         Width="1200"
         AllowsTransparency="True"
@@ -189,7 +188,7 @@
             <!--Right Side-->
             <Border Margin="0,80,0,0" CornerRadius="0,0,20,0" Background="#27272f" HorizontalAlignment="Right" Width="320">
                 <Grid>
-                    <ListBox BorderThickness="0" Background="#27272f" x:Name="listBox" Foreground="White"/>
+                    <ListBox BorderThickness="0" Background="#0027272F" x:Name="listBox" Foreground="White"/>
                 </Grid>
             </Border>
         </Grid>
