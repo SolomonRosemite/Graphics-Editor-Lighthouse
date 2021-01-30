@@ -82,12 +82,7 @@ namespace Lighthouse.Pages
                 string filename = dlg.FileName;
                 Layer layer = ImportService.LoadImportedImageToLayer(filename, $"Layer {Project.Layers.Count + 1}");
                 
-                // Todo: Add Layer to editor & to project.
-                //items.Clear();
-
-                Project.Layers.Add(layer);
-
-                //InitLayers(Project.Layers);
+                Project.Layers.Insert(0, layer);
             }
         }
 

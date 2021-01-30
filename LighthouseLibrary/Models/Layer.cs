@@ -17,6 +17,7 @@ namespace LighthouseLibrary.Models
         public Layer(Bitmap bitmap, int id, string layerName)
         {
             Id = id;
+
             this.bitmap = bitmap;
             LayerName = layerName;
             LayerState = LayerState.Unchanged;
@@ -26,9 +27,11 @@ namespace LighthouseLibrary.Models
 
         public Bitmap RenderLayer()
         {
-            var image = (Bitmap)bitmap.Clone();
+            var image = CloneBitmap();
             Filters.ForEach(filter => filter.ApplyFilter(ref image));
             return image;
         }
+
+        private Bitmap CloneBitmap() => (Bitmap) bitmap.Clone();
     }
 }
