@@ -1,5 +1,4 @@
-﻿using Lighthouse.Pages;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +19,7 @@ using System.IO;
 using System.Net.Mime;
 using System.Text.Json.Serialization;
 using System.Windows.Threading;
+using Lighthouse.Windows;
 using LighthouseLibrary.Models;
 using LighthouseLibrary.Services;
 using Color = System.Windows.Media.Color;

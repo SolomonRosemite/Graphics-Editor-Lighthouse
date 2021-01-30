@@ -1,28 +1,29 @@
-﻿using LighthouseLibrary.Services;
-using LighthouseLibrary.Models;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using Lighthouse.Windows;
-using System.Windows;
-using System;
+using System.Windows.Media.Imaging;
+using LighthouseLibrary.Models;
+using LighthouseLibrary.Services;
+using Point = System.Windows.Point;
 
-namespace Lighthouse.Pages
+namespace Lighthouse.Windows
 {
     /// <summary>
     /// Interaction logic for EditorWindow.xaml
     /// </summary>
     public partial class EditorWindow : Window
     {
-        private System.Windows.Point dragStartPoint;
+        private readonly Project project;
+        private BitmapImage currentRender;
 
-        private readonly Project Project;
-
-        private bool isMoveAction = false;
+        private Point dragStartPoint;
+        private bool isMoveAction;
 
         public EditorWindow(Project project)
         {
-            Project = project;
+            this.project = project;
 
             InitializeComponent();
             RegisterEvents();
@@ -34,12 +35,12 @@ namespace Lighthouse.Pages
 
         private void InitLayers()
         {
-            if (Project.Layers.Count == 0) return;
+            if (project.Layers.Count == 0) return;
 
-            LayerNameLabel.Content = Project.Layers[0].LayerName;
+            LayerNameLabel.Content = project.Layers[0].LayerName;
 
             listBox.DisplayMemberPath = "LayerName";
-            listBox.ItemsSource = Project.Layers;
+            listBox.ItemsSource = project.Layers;
 
             listBox.PreviewMouseMove += ListBox_PreviewMouseMove;
 
@@ -56,14 +57,16 @@ namespace Lighthouse.Pages
         private void RegisterEvents()
         {
             listBox.SelectionChanged += ListBox_SelectionChanged;
-            Project.Layers.CollectionChanged += OnLayerCollectionChanged;
+            project.Layers.CollectionChanged += OnLayerCollectionChanged;
         }
 
         private void Render()
         {
-            var res = Project.RenderProject();
+            var res = project.RenderProject();
 
             var bitmapImage = Helper.BitmapToImageSource(res);
+            currentRender = bitmapImage;
+
             ImageView.Source = bitmapImage;
         }
 
@@ -80,9 +83,9 @@ namespace Lighthouse.Pages
             {
                 // Open document
                 string filename = dlg.FileName;
-                Layer layer = ImportService.LoadImportedImageToLayer(filename, $"Layer {Project.Layers.Count + 1}");
+                Layer layer = ImportService.LoadImportedImageToLayer(filename, $"Layer {project.Layers.Count + 1}");
                 
-                Project.Layers.Insert(0, layer);
+                project.Layers.Insert(0, layer);
             }
         }
 
@@ -108,7 +111,7 @@ namespace Lighthouse.Pages
             catch { }
         }
 
-        private void OnExportImage(object sender, RoutedEventArgs e) => new ExportWindow(Project).Show();
+        private void OnExportImage(object sender, RoutedEventArgs e) => new ExportWindow(project, currentRender).Show();
 
         #region
 
@@ -167,16 +170,16 @@ namespace Lighthouse.Pages
             
             if (sourceIndex < targetIndex)
             {
-                Project.Layers.Insert(targetIndex + 1, source);
-                Project.Layers.RemoveAt(sourceIndex);
+                project.Layers.Insert(targetIndex + 1, source);
+                project.Layers.RemoveAt(sourceIndex);
             }
             else
             {
                 int removeIndex = sourceIndex + 1;
-                if (Project.Layers.Count + 1 > removeIndex)
+                if (project.Layers.Count + 1 > removeIndex)
                 {
-                    Project.Layers.Insert(targetIndex, source);
-                    Project.Layers.RemoveAt(removeIndex);
+                    project.Layers.Insert(targetIndex, source);
+                    project.Layers.RemoveAt(removeIndex);
                 }
             }
         }

@@ -8,7 +8,7 @@ namespace LighthouseLibrary.Models
     {
         public string ProjectName { get; private set; }
         public string Author { get; set; }
-        public ObservableCollection<Layer> Layers { get; private set; }
+        public ObservableCollection<Layer> Layers { get; }
         public bool IsNewlyCreatedProject { get; }
 
         public int Width { get; }
@@ -28,11 +28,6 @@ namespace LighthouseLibrary.Models
 
         public Bitmap RenderProject()
         {
-            // small note...
-            // Instead of Rerendering each Layer, only rerender the layers that have been changed.
-            // We can to this by checking the LayerState prop
-            // return Layers[0].RenderLayer();
-
             if (Layers.Count == 1) return Layers[0].RenderLayer();
 
             // Merge Layers into One Bitmap

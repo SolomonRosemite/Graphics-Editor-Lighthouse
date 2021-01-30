@@ -5,6 +5,7 @@ using LighthouseLibrary.Models;
 using LighthouseLibrary.Services;
 using System.Windows.Media.Imaging;
 using System.Drawing;
+using System.Windows.Media;
 
 namespace Lighthouse.Windows
 {
@@ -12,12 +13,12 @@ namespace Lighthouse.Windows
     {
         private readonly Project project;
 
-        public ExportWindow(Project project)
+        public ExportWindow(Project project, ImageSource currentRender)
         {
             InitializeComponent();
             this.project = project;
 
-            ImageView.Source = Helper.BitmapToImageSource(this.project.RenderProject());
+            ImageView.Source = currentRender;
         }
 
         private void OnExportAsPNG(object sender, RoutedEventArgs e)
