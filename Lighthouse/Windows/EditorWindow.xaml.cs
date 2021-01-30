@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Specialized;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -16,7 +18,6 @@ namespace Lighthouse.Windows
     public partial class EditorWindow : Window
     {
         private readonly Project project;
-        private BitmapImage currentRender;
 
         private Point dragStartPoint;
         private bool isMoveAction;
@@ -65,7 +66,6 @@ namespace Lighthouse.Windows
             var res = project.RenderProject();
 
             var bitmapImage = Helper.BitmapToImageSource(res);
-            currentRender = bitmapImage;
 
             ImageView.Source = bitmapImage;
         }
@@ -89,7 +89,7 @@ namespace Lighthouse.Windows
             }
         }
 
-        private void OnLayerCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void OnLayerCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (isMoveAction)
             {
@@ -111,7 +111,7 @@ namespace Lighthouse.Windows
             catch { }
         }
 
-        private void OnExportImage(object sender, RoutedEventArgs e) => new ExportWindow(project, currentRender).Show();
+        private void OnExportImage(object sender, RoutedEventArgs e) => new ExportWindow(project).Show();
 
         #region
 

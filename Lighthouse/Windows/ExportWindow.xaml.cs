@@ -13,12 +13,12 @@ namespace Lighthouse.Windows
     {
         private readonly Project project;
 
-        public ExportWindow(Project project, ImageSource currentRender)
+        public ExportWindow(Project project)
         {
             InitializeComponent();
             this.project = project;
 
-            ImageView.Source = currentRender;
+            ImageView.Source = Helper.BitmapToImageSource(project.RenderProject());
         }
 
         private void OnExportAsPNG(object sender, RoutedEventArgs e)

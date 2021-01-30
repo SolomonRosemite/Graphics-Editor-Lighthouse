@@ -1,24 +1,49 @@
-﻿using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
+﻿using System;
+using System.ComponentModel;
+using System.Drawing;
+using System.Runtime.InteropServices;
+using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace Lighthouse
 {
-    public class Helper
+    public static class Helper
     {
-        public static BitmapImage BitmapToImageSource(Bitmap bitmap)
+        private static class NativeMethods
         {
-            using MemoryStream memory = new MemoryStream();
-            bitmap.Save(memory, ImageFormat.Png);
-            memory.Position = 0;
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.StreamSource = memory;
-            image.CacheOption = BitmapCacheOption.OnLoad;
-            image.EndInit();
+            [DllImport("gdi32.dll")]
+            [return: MarshalAs(UnmanagedType.Bool)]
+            internal static extern bool DeleteObject(IntPtr hObject);
+        }
 
-            return image;
+        public static BitmapSource BitmapToImageSource(Bitmap bitmap)
+        {
+            return ToBitmapSource(bitmap);
+        }
+
+        private static BitmapSource ToBitmapSource(Bitmap source)
+        {
+            BitmapSource bitSrc = null;
+            var hBitmap = source.GetHbitmap();
+
+            try
+            {
+                bitSrc = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
+                    hBitmap,
+                    IntPtr.Zero,
+                    Int32Rect.Empty,
+                    BitmapSizeOptions.FromEmptyOptions());
+            }
+            catch (Win32Exception)
+            {
+                bitSrc = null;
+            }
+            finally
+            {
+                NativeMethods.DeleteObject(hBitmap);
+            }
+
+            return bitSrc;
         }
     }
 }
