@@ -1,8 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using LighthouseLibrary.Models;
 using System.Drawing;
-using System.Reflection.Metadata.Ecma335;
-using LighthouseLibrary.Models;
 
 namespace LighthouseLibrary.Services
 {
@@ -19,13 +16,13 @@ namespace LighthouseLibrary.Services
             return new Project("unnamed", null, layer, image.Width, image.Height, true);
         }
 
-        public static Layer LoadImportedImageToLayer(string filePath, string layername)
+        public static Layer LoadImportedImageToLayer(string filePath, string layerName)
         {
             Bitmap image;
             using (var bmpTemp = new Bitmap(filePath))
                 image = new Bitmap(bmpTemp);
 
-            Layer layer = new Layer(image, UtilService.GenerateNewId(), layername);
+            Layer layer = new Layer(image, UtilService.GenerateNewId(), layerName);
 
             return layer;
         }

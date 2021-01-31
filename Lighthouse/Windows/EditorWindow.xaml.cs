@@ -17,6 +17,7 @@ namespace Lighthouse.Windows
     /// </summary>
     public partial class EditorWindow : Window
     {
+        private readonly EditorState state;
         private readonly Project project;
 
         private Point dragStartPoint;
@@ -24,6 +25,7 @@ namespace Lighthouse.Windows
 
         public EditorWindow(Project project)
         {
+            state = new EditorState(project);
             this.project = project;
 
             InitializeComponent();
@@ -63,6 +65,7 @@ namespace Lighthouse.Windows
 
         private void Render()
         {
+            state.UpdateState(project);
             var res = project.RenderProject();
 
             var bitmapImage = Helper.BitmapToImageSource(res);

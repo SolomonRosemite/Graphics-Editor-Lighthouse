@@ -17,6 +17,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Net.Mime;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.Json.Serialization;
 using System.Windows.Threading;
 using Lighthouse.Windows;

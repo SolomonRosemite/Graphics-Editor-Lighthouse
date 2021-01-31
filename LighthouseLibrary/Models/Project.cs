@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Drawing;
 
 namespace LighthouseLibrary.Models
@@ -13,6 +12,7 @@ namespace LighthouseLibrary.Models
 
         public int Width { get; }
         public int Height { get; }
+
 
         public Project(string projectName, string author, Layer layer, int width, int height, bool isNewlyCreatedProject)
         {
