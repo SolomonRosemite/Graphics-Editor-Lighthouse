@@ -18,14 +18,14 @@ namespace Lighthouse.Windows
     public partial class EditorWindow : Window
     {
         private readonly EditorState state;
-        private readonly Project project;
+        private Project project;
 
         private Point dragStartPoint;
         private bool isMoveAction;
 
         public EditorWindow(Project project)
         {
-            state = new EditorState(project);
+            state = new EditorState();
             this.project = project;
 
             InitializeComponent();
@@ -63,9 +63,49 @@ namespace Lighthouse.Windows
             project.Layers.CollectionChanged += OnLayerCollectionChanged;
         }
 
-        private void Render()
+        private void OnRedoClick(object sender, RoutedEventArgs e)
         {
-            state.UpdateState(project);
+            var res = state.Redo();
+            Console.WriteLine(res.Successful);
+            if (res.Successful)
+            {
+                project = res.ProjectState;
+                Render(false);
+            }
+            else
+            {
+                // Todo: Handle...
+            }
+        }
+
+        private void OnUndoClick(object sender, RoutedEventArgs e)
+        {
+            var res = state.Undo();
+            Console.WriteLine(res.Successful);
+            if (res.Successful)
+            {
+                Console.WriteLine("Ohhhhh: " + ReferenceEquals(project, res.ProjectState));
+                project = res.ProjectState;
+                Render(false);
+            }
+            else
+            {
+                // Todo: Handle...
+            }
+        }
+
+        private void TestRotateImage(object sender, RoutedEventArgs e)
+        {
+            project.Layers[0].RotateImageTest();
+            Console.WriteLine(project.Layers[0].LayerName);
+            Render();
+        }
+
+        private void Render(bool updateState = true)
+        {
+            if (updateState)
+                state.UpdateState(project);
+
             var res = project.RenderProject();
 
             var bitmapImage = Helper.BitmapToImageSource(res);

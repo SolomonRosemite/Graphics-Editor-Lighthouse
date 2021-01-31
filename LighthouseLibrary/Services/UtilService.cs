@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace LighthouseLibrary.Services
 {
@@ -20,6 +22,15 @@ namespace LighthouseLibrary.Services
             Ids.Add(value);
 
             return value;
+        }
+
+        public static T DeepClone<T>(this T input) where T : ISerializable
+        {
+            using var stream = new MemoryStream();
+            var formatter = new BinaryFormatter();
+            formatter.Serialize(stream, input);
+            stream.Position = 0;
+            return (T)formatter.Deserialize(stream);
         }
     }
 }

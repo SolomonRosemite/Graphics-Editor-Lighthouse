@@ -1,9 +1,12 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Drawing;
+using System.Runtime.Serialization;
 
 namespace LighthouseLibrary.Models
 {
-    public class Project
+    [Serializable]
+    public class Project : ISerializable
     {
         public string ProjectName { get; private set; }
         public string Author { get; set; }
@@ -26,6 +29,35 @@ namespace LighthouseLibrary.Models
             Layers = new ObservableCollection<Layer> { layer };
         }
 
+        public Project(SerializationInfo info, StreamingContext _)
+        {
+            IsNewlyCreatedProject = GetValue<bool>("IsNewlyCreatedProject");
+            ProjectName = GetValue<string>("ProjectName");
+            Author = GetValue<string>("Author");
+
+            Width = GetValue<int>("Width");
+            Height = GetValue<int>("Height");
+            Layers = GetValue<ObservableCollection<Layer>>("Layers");
+
+            T GetValue<T>(string name)
+            {
+                return (T)info.GetValue(name, typeof(T));
+            }
+        }
+
+
+        private Project(string projectName, string author, ObservableCollection<Layer> layers, int width, int height, bool isNewlyCreatedProject)
+        {
+            IsNewlyCreatedProject = isNewlyCreatedProject;
+            ProjectName = projectName;
+            Author = author;
+
+            Width = width;
+            Height = height;
+
+            Layers = layers;
+        }
+
         public Bitmap RenderProject()
         {
             if (Layers.Count == 1) return Layers[0].RenderLayer();
@@ -39,6 +71,18 @@ namespace LighthouseLibrary.Models
             return res;
         }
 
+        public Project DeepCopy()
+        {
+            var l = new ObservableCollection<Layer>();
+
+            foreach (var layer in Layers)
+                l.Add(new Layer(layer.Bitmap, layer.Id, layer.LayerName));
+
+            var author = this.Author ?? null;
+            Project project = new Project(author, string.Copy(this.ProjectName), l, Width, Height, IsNewlyCreatedProject);
+            return project;
+        }
+
         private Bitmap MergedBitmaps(Bitmap bmp1, Bitmap bmp2)
         {
             if (bmp2 == null) return bmp1;
@@ -49,6 +93,16 @@ namespace LighthouseLibrary.Models
                 g.DrawImage(bmp1, Point.Empty);
             }
             return result;
+        }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext _)
+        {
+            info.AddValue("ProjectName", ProjectName);
+            info.AddValue("Author", Author);
+            info.AddValue("IsNewlyCreatedProject", IsNewlyCreatedProject);
+            info.AddValue("Width", Width);
+            info.AddValue("Height", Height);
+            info.AddValue("Layers", Layers);
         }
     }
 }
