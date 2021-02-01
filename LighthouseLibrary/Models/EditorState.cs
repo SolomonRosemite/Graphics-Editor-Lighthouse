@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Net;
 using System.Windows.Input;
 using LighthouseLibrary.Services;
@@ -18,6 +19,7 @@ namespace LighthouseLibrary.Models
 
         public void UpdateState(Project project)
         {
+            Console.WriteLine(States.Count);
             var p = project.DeepClone();
 
             if (States.Count == 0)
@@ -31,61 +33,50 @@ namespace LighthouseLibrary.Models
             // comparer.AddComparerOverride("Id", DoNotCompareValueComparer.Instance);
             comparer.Compare(project, States[^1].ReconstructProject(), out var differences);
 
-            string prev = "";
-            int count = 1;
-            foreach (var val in differences)
+            var res = Verify();
+
+            switch (res)
             {
-                var statePath = CorrectPathName(val.MemberPath);
-
-                // There should only be one change at a time. If we got more then one we throw an Exception.
-                // Unless they are the same.
-                if (count++ > 1)
-                {
-                    if (prev == statePath)
-                        return;
-
-                    LogDiff(val);
-                    throw new Exception("Unexpected amount of Differences.");
-                }
-
-                ProjectStateDifference stateDifference;
-                try
-                {
-                    Type type = typeof(ProjectStateDifference);
-                    prev = statePath;
-                    stateDifference = (ProjectStateDifference) Enum.Parse(type, statePath, true);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    throw;
-                }
-
-                // If we have multiple differences of the same ProjectStateDifference this gets executed
-                // multiple times which is very expensive...
-
-                // Todo: Optimize at sometime <3
-                switch (stateDifference)
-                {
-                    case ProjectStateDifference.Layers:
-                        States.Add(new ProjectState(p, UtilService.GenerateNewId(), ProjectStateDifference.Layers));
-                        break;
-                    default:
-                        LogDiff(val);
-                        throw new ArgumentOutOfRangeException(nameof(val), val.ToString());
-                }
-
-                LogDiff(val);
+                case ProjectStateDifference.Layers:
+                    States.Add(new ProjectState(p, UtilService.GenerateNewId(), ProjectStateDifference.Layers));
+                    break;
+                case ProjectStateDifference.InitialState:
+                    throw new Exception("ProjectStateDifference should not be assigned to InitialState");
+                case ProjectStateDifference.None:
+                    throw new Exception();
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(res), differences.ToString());
             }
-
-            void LogDiff(Difference val)
+            // Verifies if all the differences are from the same type of ProjectStateDifference
+            // If so we save the State, else we throw an exception...
+            ProjectStateDifference Verify()
             {
-                Console.WriteLine($"{count}: ");
-                Console.WriteLine("New Val: " + val.Value1);
-                Console.WriteLine("Old Val: " + val.Value2);
-                Console.WriteLine("Diff: " + val.DifferenceType);
-                Console.WriteLine("MemberPath: " + val.MemberPath);
-                Console.WriteLine("------------------------------------------------------");
+                if (!differences.Any())
+                    throw new Exception("No Differences");
+
+                ProjectStateDifference diff = ProjectStateDifference.None;
+
+                foreach (var value in differences)
+                {
+                    try
+                    {
+                        var psd = (ProjectStateDifference) Enum.Parse(
+                            typeof(ProjectStateDifference),
+                            CorrectPathName(value.MemberPath),
+                            true);
+
+                        if (diff != psd && diff != ProjectStateDifference.None)
+                            throw new Exception("Got Differences between different types");
+
+                        diff = psd;
+                    }
+                    catch (Exception e)
+                    {
+                        throw new Exception("Couldn't Parse Enum", e);
+                    }
+                }
+
+                return diff;
             }
 
             string CorrectPathName(string s)
@@ -99,6 +90,13 @@ namespace LighthouseLibrary.Models
 
         public ActionResponse Redo()
         {
+            // int value = StepsBackwards + 1;
+            //
+            // if (States.Count == 1 || States.Count + value == 0)
+            //     return new ActionResponse(false, null);
+            //
+            // value = ++StepsBackwards + 1;
+            // return new ActionResponse(true, States[States.Count + value].ReconstructProject());
             // Todo: Fix this later
             if (States.Count == 1)
                 return new ActionResponse(false, null);
@@ -111,18 +109,12 @@ namespace LighthouseLibrary.Models
 
         public ActionResponse Undo()
         {
-            // Todo: Fix this later
-            if (States.Count == 1)
-            // if (States.Count == 1 || StepsBackwards == 0)
-                return new ActionResponse(false, null);
-
-            StepsBackwards--;
             int value = StepsBackwards - 1;
 
-            Console.WriteLine("value: " + value);
-            Console.WriteLine("States.Count: " + States.Count);
-            Console.WriteLine("StepsBackwards: " + StepsBackwards);
+            if (States.Count == 1 || States.Count + value == 0)
+                return new ActionResponse(false, null);
 
+            value = --StepsBackwards - 1;
             return new ActionResponse(true, States[States.Count + value].ReconstructProject());
         }
 

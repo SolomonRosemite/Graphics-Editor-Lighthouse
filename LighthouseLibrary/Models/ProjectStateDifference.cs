@@ -2,6 +2,6 @@
 {
     public enum ProjectStateDifference
     {
-        Layers, InitialState
+        Layers, InitialState, None
     }
 }
