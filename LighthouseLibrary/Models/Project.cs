@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Runtime.Serialization;
 
@@ -60,6 +61,7 @@ namespace LighthouseLibrary.Models
 
         public Bitmap RenderProject()
         {
+            if (Layers.Count == 0) return new Bitmap(0, 0);
             if (Layers.Count == 1) return Layers[0].RenderLayer();
 
             // Merge Layers into One Bitmap

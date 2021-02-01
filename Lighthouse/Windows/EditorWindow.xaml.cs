@@ -22,6 +22,7 @@ namespace Lighthouse.Windows
 
         private Point dragStartPoint;
         private bool isMoveAction;
+        private bool isUndoAction;
 
         public EditorWindow(Project project)
         {
@@ -70,6 +71,7 @@ namespace Lighthouse.Windows
             if (res.Successful)
             {
                 project = res.ProjectState;
+                listBox.ItemsSource = project.Layers;
                 Render(false);
             }
             else
@@ -84,8 +86,12 @@ namespace Lighthouse.Windows
             Console.WriteLine(res.Successful);
             if (res.Successful)
             {
-                Console.WriteLine("Ohhhhh: " + ReferenceEquals(project, res.ProjectState));
+                isUndoAction = true;
+                project.Layers.Clear();
+
                 project = res.ProjectState;
+                listBox.ItemsSource = project.Layers;
+
                 Render(false);
             }
             else
@@ -139,6 +145,11 @@ namespace Lighthouse.Windows
                 isMoveAction = false;
                 return;
             }
+            if (isUndoAction)
+            {
+                isUndoAction = false;
+                return;
+            }
 
             Render();
         }
@@ -173,14 +184,14 @@ namespace Lighthouse.Windows
 
         private void ListBox_PreviewMouseMove(object sender, MouseEventArgs e)
         {
-            System.Windows.Point point = e.GetPosition(null);
+            Point point = e.GetPosition(null);
             Vector diff = dragStartPoint - point;
             if (e.LeftButton == MouseButtonState.Pressed &&
                 (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance ||
                     Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance))
             {
 
-                var lbi = FindVisualParent<ListBoxItem>(((DependencyObject)e.OriginalSource));
+                var lbi = FindVisualParent<ListBoxItem>((DependencyObject)e.OriginalSource);
                 if (lbi != null)
                 {
                     DragDrop.DoDragDrop(lbi, lbi.DataContext, DragDropEffects.Move);
