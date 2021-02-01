@@ -61,8 +61,13 @@ namespace LighthouseLibrary.Models
 
         public Bitmap RenderProject()
         {
-            if (Layers.Count == 0) return new Bitmap(0, 0);
-            if (Layers.Count == 1) return Layers[0].RenderLayer();
+            switch (Layers.Count)
+            {
+                case 0:
+                    return new Bitmap(1, 1);
+                case 1:
+                    return Layers[0].RenderLayer();
+            }
 
             // Merge Layers into One Bitmap
             Bitmap res = Layers[0].RenderLayer();

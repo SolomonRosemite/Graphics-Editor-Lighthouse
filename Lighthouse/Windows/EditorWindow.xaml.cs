@@ -20,9 +20,9 @@ namespace Lighthouse.Windows
         private readonly EditorState state;
         private Project project;
 
+        private int currentProjectStateId;
+        private bool ignoreNextRender;
         private Point dragStartPoint;
-        private bool isMoveAction;
-        private bool isUndoAction;
 
         public EditorWindow(Project project)
         {
@@ -64,32 +64,19 @@ namespace Lighthouse.Windows
             project.Layers.CollectionChanged += OnLayerCollectionChanged;
         }
 
-        private void OnRedoClick(object sender, RoutedEventArgs e)
+        private void OnRedoClick(object sender, RoutedEventArgs e) => Action(state.Redo(currentProjectStateId));
+
+        private void OnUndoClick(object sender, RoutedEventArgs e) => Action(state.Undo(currentProjectStateId));
+
+        private void Action(ActionResponse res)
         {
-            var res = state.Redo();
             Console.WriteLine(res.Successful);
             if (res.Successful)
             {
-                project = res.ProjectState;
-                listBox.ItemsSource = project.Layers;
-                Render(false);
-            }
-            else
-            {
-                // Todo: Handle...
-            }
-        }
-
-        private void OnUndoClick(object sender, RoutedEventArgs e)
-        {
-            var res = state.Undo();
-            Console.WriteLine(res.Successful);
-            if (res.Successful)
-            {
-                isUndoAction = true;
-                project.Layers.Clear();
+                ignoreNextRender = true;
 
                 project = res.ProjectState;
+                currentProjectStateId = res.StateId;
                 listBox.ItemsSource = project.Layers;
 
                 Render(false);
@@ -97,20 +84,21 @@ namespace Lighthouse.Windows
             else
             {
                 // Todo: Handle...
+                // User cant go further back or forth.
+                // Depending if the Action was Undo or Redo.
             }
         }
 
         private void TestRotateImage(object sender, RoutedEventArgs e)
         {
             project.Layers[0].RotateImageTest();
-            Console.WriteLine(project.Layers[0].LayerName);
             Render();
         }
 
         private void Render(bool updateState = true)
         {
             if (updateState)
-                state.UpdateState(project);
+                currentProjectStateId = state.UpdateState(project);
 
             var res = project.RenderProject();
 
@@ -140,14 +128,9 @@ namespace Lighthouse.Windows
 
         private void OnLayerCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            if (isMoveAction)
+            if (ignoreNextRender)
             {
-                isMoveAction = false;
-                return;
-            }
-            if (isUndoAction)
-            {
-                isUndoAction = false;
+                ignoreNextRender = false;
                 return;
             }
 
@@ -220,7 +203,7 @@ namespace Lighthouse.Windows
 
         private void Move(Layer source, int sourceIndex, int targetIndex)
         {
-            isMoveAction = true;
+            ignoreNextRender = true;
             
             if (sourceIndex < targetIndex)
             {

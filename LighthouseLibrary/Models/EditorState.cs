@@ -1,11 +1,7 @@
-﻿using System;
+﻿using LighthouseLibrary.Services;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Net;
-using System.Windows.Input;
-using LighthouseLibrary.Services;
-using ObjectsComparer;
+using System;
 
 namespace LighthouseLibrary.Models
 {
@@ -13,19 +9,17 @@ namespace LighthouseLibrary.Models
     {
         public List<ProjectState> States { get; }
 
-        private int StepsBackwards { get; set; }
-
         public EditorState() { States = new List<ProjectState>(); }
 
-        public void UpdateState(Project project)
+        public int UpdateState(Project project)
         {
-            Console.WriteLine(States.Count);
             var p = project.DeepClone();
+            var id = UtilService.GenerateNewId();
 
             if (States.Count == 0)
             {
-                States.Add(new ProjectState(p, UtilService.GenerateNewId(), ProjectStateDifference.InitialState));
-                return;
+                States.Add(new ProjectState(p, id, ProjectStateDifference.InitialState));
+                return id;
             }
 
             var comparer = new ObjectsComparer.Comparer<Project>();
@@ -38,7 +32,7 @@ namespace LighthouseLibrary.Models
             switch (res)
             {
                 case ProjectStateDifference.Layers:
-                    States.Add(new ProjectState(p, UtilService.GenerateNewId(), ProjectStateDifference.Layers));
+                    States.Add(new ProjectState(p, id, ProjectStateDifference.Layers));
                     break;
                 case ProjectStateDifference.InitialState:
                     throw new Exception("ProjectStateDifference should not be assigned to InitialState");
@@ -86,36 +80,29 @@ namespace LighthouseLibrary.Models
 
                 return s;
             }
+
+            return id;
         }
 
-        public ActionResponse Redo()
+        public ActionResponse Redo(int stateId)
         {
-            // int value = StepsBackwards + 1;
-            //
-            // if (States.Count == 1 || States.Count + value == 0)
-            //     return new ActionResponse(false, null);
-            //
-            // value = ++StepsBackwards + 1;
-            // return new ActionResponse(true, States[States.Count + value].ReconstructProject());
-            // Todo: Fix this later
-            if (States.Count == 1)
-                return new ActionResponse(false, null);
+            var index = States.FindIndex(s => s.Id == stateId);
 
-            StepsBackwards++;
-            int value = StepsBackwards - 1;
+            if (index == States.Count - 1)
+                return new ActionResponse(false, null, int.MaxValue);
 
-            return new ActionResponse(true, States[^value].ReconstructProject());
+            return new ActionResponse(true, States[index + 1].ReconstructProject(), States[index + 1].Id);
         }
 
-        public ActionResponse Undo()
+        public ActionResponse Undo(int stateId)
         {
-            int value = StepsBackwards - 1;
+            var index = States.FindIndex(s => s.Id == stateId);
 
-            if (States.Count == 1 || States.Count + value == 0)
-                return new ActionResponse(false, null);
 
-            value = --StepsBackwards - 1;
-            return new ActionResponse(true, States[States.Count + value].ReconstructProject());
+            if (index == 0)
+                return new ActionResponse(false, null, int.MaxValue);
+
+            return new ActionResponse(true, States[index - 1].ReconstructProject(), States[index - 1].Id);
         }
 
         public class ProjectState
