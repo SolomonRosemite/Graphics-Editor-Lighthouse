@@ -137,7 +137,7 @@
                     <MenuItem Header="Menu" Height="38" Width="62">
                         <MenuItem Click="OnUndoClick" Header="Undo"/>
                         <MenuItem Click="OnRedoClick" Header="Redo"/>
-                        <MenuItem Click="TestRotateImage" Header="Test"/>
+                        <MenuItem Click="TestRotateImage" Header="(Test) Rotate Image 90°"/>
                         <MenuItem Click="OnMinimizedClick" Header="Minimize"/>
                         <MenuItem Click="OnMaximizedClick" Header="Maximize"/>
                         <MenuItem Click="OnExitClick" Header="Exit"/>

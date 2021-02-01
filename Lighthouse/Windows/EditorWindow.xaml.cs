@@ -239,15 +239,15 @@ namespace Lighthouse.Windows
 
         private void OnMaximizedClick(object sender, RoutedEventArgs e)
         {
-            switch (Application.Current.MainWindow.WindowState)
+            switch (this.WindowState)
             {
                 case WindowState.Normal:
-                    Application.Current.MainWindow.WindowState = WindowState.Maximized;
+                    this.WindowState = WindowState.Maximized;
                     break;
                 case WindowState.Minimized:
                     break;
                 case WindowState.Maximized:
-                    Application.Current.MainWindow.WindowState = WindowState.Normal;
+                    this.WindowState = WindowState.Normal;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -256,7 +256,7 @@ namespace Lighthouse.Windows
 
         private void OnMinimizedClick(object sender, RoutedEventArgs e)
         {
-            Application.Current.MainWindow.WindowState = WindowState.Minimized;
+            this.WindowState = WindowState.Minimized;
         }
 
         #endregion

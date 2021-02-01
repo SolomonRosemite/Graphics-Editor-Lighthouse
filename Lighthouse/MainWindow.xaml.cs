@@ -42,7 +42,7 @@ namespace Lighthouse
 
         public MainWindow()
         {
-            // Thread.Sleep(1500);
+            // Thread.Sleep(1000);
 
             InitializeComponent();
 
@@ -57,7 +57,9 @@ namespace Lighthouse
 
             try
             {
-                Project project = filePath.EndsWith(".lh") ? ImportService.LoadImportedProject(filePath) : ImportService.LoadImportedImage(filePath) ;
+                Project project = filePath.EndsWith(".lh")
+                    ? ImportService.LoadImportedProject(filePath)
+                    : ImportService.LoadImportedImage(filePath);
 
                 new EditorWindow(project).Show();
                 this.Hide();
@@ -136,19 +138,26 @@ namespace Lighthouse
             var value = ((SolidColorBrush) DropArea.BorderBrush).Color.A;
             const byte increment = 5;
 
-            if (state == DropColorState.Decrease)
+            switch (state)
             {
-                if (value < 10)
-                    state = DropColorState.Increase;
+                case DropColorState.Decrease:
+                {
+                    if (value < 10)
+                        state = DropColorState.Increase;
 
-                value -= increment;
-            }
-            else if (state == DropColorState.Increase)
-            {
-                if (value > 245)
-                    state = DropColorState.Decrease;
+                    value -= increment;
+                    break;
+                }
+                case DropColorState.Increase:
+                {
+                    if (value > 245)
+                        state = DropColorState.Decrease;
 
-                value += increment;
+                    value += increment;
+                    break;
+                }
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
             DropArea.BorderBrush = new SolidColorBrush(Color.FromArgb(value, 255, 255, 255));
