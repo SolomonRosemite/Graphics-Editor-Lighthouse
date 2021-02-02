@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace LighthouseLibrary.Models
 {
@@ -58,13 +60,12 @@ namespace LighthouseLibrary.Models
 
         public Layer(SerializationInfo info, StreamingContext _)
         {
-            Id = GetValue<int>("Id");
-            LayerName = GetValue<string>("LayerName");
             Filters = GetValue<ObservableCollection<Filter>>("Filters");
-
-            PreviousRenderedBitmap = GetValue<Bitmap>("PreviousRenderedBitmap");
-            LayerState = GetValue<LayerState>("LayerState");
+            LayerName = GetValue<string>("LayerName");
             Bitmap = GetValue<Bitmap>("Bitmap");
+            Id = GetValue<int>("Id");
+
+            LayerState = LayerState.Updated;
 
             T GetValue<T>(string name)
             {
@@ -77,8 +78,6 @@ namespace LighthouseLibrary.Models
             info.AddValue("Id", Id);
             info.AddValue("LayerName", LayerName);
             info.AddValue("Filters", Filters);
-            info.AddValue("PreviousRenderedBitmap", PreviousRenderedBitmap);
-            info.AddValue("LayerState", LayerState);
             info.AddValue("Bitmap", Bitmap);
         }
     }

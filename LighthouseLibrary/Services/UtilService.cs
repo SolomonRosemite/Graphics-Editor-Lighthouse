@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading.Tasks;
 
 namespace LighthouseLibrary.Services
 {
@@ -31,6 +33,17 @@ namespace LighthouseLibrary.Services
             formatter.Serialize(stream, input);
             stream.Position = 0;
             return (T)formatter.Deserialize(stream);
+        }
+
+        public static T SpeedCheck<T>(this Func<T> func)
+        {
+            Stopwatch sw = Stopwatch.StartNew();
+            var result = func();
+            sw.Stop();
+
+            Console.WriteLine("ElapsedMilliseconds: " + sw.ElapsedMilliseconds);
+
+            return result;
         }
     }
 }

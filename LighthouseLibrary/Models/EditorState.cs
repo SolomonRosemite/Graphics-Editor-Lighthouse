@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using System.Threading.Tasks;
 
 namespace LighthouseLibrary.Models
 {
@@ -11,77 +12,98 @@ namespace LighthouseLibrary.Models
 
         public EditorState() { States = new List<ProjectState>(); }
 
-        public int UpdateState(Project project)
+        public async Task<int> UpdateState(Project project)
         {
-            var p = project.DeepClone();
-            var id = UtilService.GenerateNewId();
+            int result = 0;
 
-            if (States.Count == 0)
+            try
             {
-                States.Add(new ProjectState(p, id, ProjectStateDifference.InitialState));
-                return id;
+                await Task.Run(() => UpdateState(ref result));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
             }
 
-            var comparer = new ObjectsComparer.Comparer<Project>();
+            return result;
 
-            // comparer.AddComparerOverride("Id", DoNotCompareValueComparer.Instance);
-            comparer.Compare(project, States[^1].ReconstructProject(), out var differences);
-
-            var res = Verify();
-
-            switch (res)
+            void UpdateState(ref int output)
             {
-                case ProjectStateDifference.Layers:
-                    States.Add(new ProjectState(p, id, ProjectStateDifference.Layers));
-                    break;
-                case ProjectStateDifference.InitialState:
-                    throw new Exception("ProjectStateDifference should not be assigned to InitialState");
-                case ProjectStateDifference.None:
-                    throw new Exception();
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(res), differences.ToString());
-            }
-            // Verifies if all the differences are from the same type of ProjectStateDifference
-            // If so we save the State, else we throw an exception...
-            ProjectStateDifference Verify()
-            {
-                if (!differences.Any())
-                    throw new Exception("No Differences");
+                // var p = project.DeepClone();
+                var p = UtilService.SpeedCheck(project.DeepClone);
 
-                ProjectStateDifference diff = ProjectStateDifference.None;
+                var id = UtilService.GenerateNewId();
 
-                foreach (var value in differences)
+                // If Initial State
+                if (States.Count == 0)
                 {
-                    try
-                    {
-                        var psd = (ProjectStateDifference) Enum.Parse(
-                            typeof(ProjectStateDifference),
-                            CorrectPathName(value.MemberPath),
-                            true);
-
-                        if (diff != psd && diff != ProjectStateDifference.None)
-                            throw new Exception("Got Differences between different types");
-
-                        diff = psd;
-                    }
-                    catch (Exception e)
-                    {
-                        throw new Exception("Couldn't Parse Enum", e);
-                    }
+                    States.Add(new ProjectState(p, id, ProjectStateDifference.InitialState));
+                    output = id;
                 }
 
-                return diff;
+                var comparer = new ObjectsComparer.Comparer<Project>();
+
+                // comparer.AddComparerOverride("Id", DoNotCompareValueComparer.Instance);
+                comparer.Compare(project, States[^1].ReconstructProject(), out var differences);
+
+                var res = Verify();
+
+                switch (res)
+                {
+                    case ProjectStateDifference.Layers:
+                        States.Add(new ProjectState(p, id, ProjectStateDifference.Layers));
+                        break;
+                    case ProjectStateDifference.InitialState:
+                        throw new Exception("ProjectStateDifference should not be assigned to InitialState");
+                    case ProjectStateDifference.None:
+                        throw new Exception();
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(res), differences.ToString());
+                }
+
+                output = id;
+
+                // Verifies if all the differences are from the same type of ProjectStateDifference
+                // If so we save the State, else we throw an exception...
+                ProjectStateDifference Verify()
+                {
+                    if (!differences.Any())
+                        throw new Exception("No Differences");
+
+                    ProjectStateDifference diff = ProjectStateDifference.None;
+
+                    foreach (var value in differences)
+                    {
+                        try
+                        {
+                            var psd = (ProjectStateDifference) Enum.Parse(
+                                typeof(ProjectStateDifference),
+                                CorrectPathName(value.MemberPath),
+                                true);
+
+                            if (diff != psd && diff != ProjectStateDifference.None)
+                                throw new Exception("Got Differences between different types");
+
+                            diff = psd;
+                        }
+                        catch (Exception e)
+                        {
+                            throw new Exception("Couldn't Parse Enum", e);
+                        }
+                    }
+
+                    return diff;
+                }
+
+                string CorrectPathName(string s)
+                {
+                    if (s.StartsWith("Layers["))
+                        return "Layers";
+
+                    return s;
+                }
             }
-
-            string CorrectPathName(string s)
-            {
-                if (s.StartsWith("Layers["))
-                    return "Layers";
-
-                return s;
-            }
-
-            return id;
         }
 
         public ActionResponse Redo(int stateId)

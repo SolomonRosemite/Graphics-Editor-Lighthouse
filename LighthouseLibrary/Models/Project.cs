@@ -78,18 +78,6 @@ namespace LighthouseLibrary.Models
             return res;
         }
 
-        public Project DeepCopy()
-        {
-            var l = new ObservableCollection<Layer>();
-
-            foreach (var layer in Layers)
-                l.Add(new Layer(layer.Bitmap, layer.Id, layer.LayerName));
-
-            var author = this.Author ?? null;
-            Project project = new Project(author, string.Copy(this.ProjectName), l, Width, Height, IsNewlyCreatedProject);
-            return project;
-        }
-
         private Bitmap MergedBitmaps(Bitmap bmp1, Bitmap bmp2)
         {
             if (bmp2 == null) return bmp1;

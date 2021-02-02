@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Specialized;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -91,20 +92,25 @@ namespace Lighthouse.Windows
 
         private void TestRotateImage(object sender, RoutedEventArgs e)
         {
-            project.Layers[0].RotateImageTest();
+            // project.Layers[0].RotateImageTest();
+            // Task.Run(project.Layers[0].RotateImageTest);
             Render();
         }
 
-        private void Render(bool updateState = true)
+        private async Task Render(bool updateState = true)
         {
+            Task<int> task = null;
             if (updateState)
-                currentProjectStateId = state.UpdateState(project);
+                task = state.UpdateState(project);
 
             var res = project.RenderProject();
 
             var bitmapImage = Helper.BitmapToImageSource(res);
 
             ImageView.Source = bitmapImage;
+
+            if (task != null)
+                this.currentProjectStateId = await task;
         }
 
         private void OnImportImage(object sender, RoutedEventArgs e)
@@ -133,6 +139,7 @@ namespace Lighthouse.Windows
                 ignoreNextRender = false;
                 return;
             }
+
 
             Render();
         }
