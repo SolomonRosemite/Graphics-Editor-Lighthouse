@@ -18,7 +18,7 @@ namespace Lighthouse.Windows
     /// </summary>
     public partial class EditorWindow : Window
     {
-        private readonly EditorState state;
+        private readonly EditorState editorState;
         private Project project;
 
         private int currentProjectStateId;
@@ -27,7 +27,7 @@ namespace Lighthouse.Windows
 
         public EditorWindow(Project project)
         {
-            state = new EditorState();
+            editorState = new EditorState();
             this.project = project;
 
             InitializeComponent();
@@ -65,9 +65,9 @@ namespace Lighthouse.Windows
             project.Layers.CollectionChanged += OnLayerCollectionChanged;
         }
 
-        private void OnRedoClick(object sender, RoutedEventArgs e) => Action(state.Redo(currentProjectStateId));
+        private void OnRedoClick(object sender, RoutedEventArgs e) => Action(editorState.Redo(currentProjectStateId));
 
-        private void OnUndoClick(object sender, RoutedEventArgs e) => Action(state.Undo(currentProjectStateId));
+        private void OnUndoClick(object sender, RoutedEventArgs e) => Action(editorState.Undo(currentProjectStateId));
 
         private void Action(ActionResponse res)
         {
@@ -92,25 +92,19 @@ namespace Lighthouse.Windows
 
         private void TestRotateImage(object sender, RoutedEventArgs e)
         {
-            // project.Layers[0].RotateImageTest();
-            // Task.Run(project.Layers[0].RotateImageTest);
+            project.Layers[0].RotateImageTest();
             Render();
         }
 
-        private async Task Render(bool updateState = true)
+        private void Render(bool updateSnapshot = true)
         {
-            Task<int> task = null;
-            if (updateState)
-                task = state.UpdateState(project);
+            if (updateSnapshot)
+                this.currentProjectStateId = editorState.AddNewSnapshot(project);
 
             var res = project.RenderProject();
 
             var bitmapImage = Helper.BitmapToImageSource(res);
-
             ImageView.Source = bitmapImage;
-
-            if (task != null)
-                this.currentProjectStateId = await task;
         }
 
         private void OnImportImage(object sender, RoutedEventArgs e)

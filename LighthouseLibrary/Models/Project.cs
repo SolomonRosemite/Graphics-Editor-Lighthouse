@@ -17,7 +17,6 @@ namespace LighthouseLibrary.Models
         public int Width { get; }
         public int Height { get; }
 
-
         public Project(string projectName, string author, Layer layer, int width, int height, bool isNewlyCreatedProject)
         {
             IsNewlyCreatedProject = isNewlyCreatedProject;
@@ -45,7 +44,6 @@ namespace LighthouseLibrary.Models
                 return (T)info.GetValue(name, typeof(T));
             }
         }
-
 
         private Project(string projectName, string author, ObservableCollection<Layer> layers, int width, int height, bool isNewlyCreatedProject)
         {
@@ -92,9 +90,9 @@ namespace LighthouseLibrary.Models
 
         public void GetObjectData(SerializationInfo info, StreamingContext _)
         {
+            info.AddValue("IsNewlyCreatedProject", IsNewlyCreatedProject);
             info.AddValue("ProjectName", ProjectName);
             info.AddValue("Author", Author);
-            info.AddValue("IsNewlyCreatedProject", IsNewlyCreatedProject);
             info.AddValue("Width", Width);
             info.AddValue("Height", Height);
             info.AddValue("Layers", Layers);

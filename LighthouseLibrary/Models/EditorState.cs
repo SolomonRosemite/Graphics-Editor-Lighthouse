@@ -1,160 +1,43 @@
 ﻿using LighthouseLibrary.Services;
 using System.Collections.Generic;
-using System.Linq;
-using System;
-using System.Threading.Tasks;
 
 namespace LighthouseLibrary.Models
 {
     public class EditorState
     {
-        public List<ProjectState> States { get; }
+        private List<ProjectSnapshot> Snapshots { get; }
 
-        public EditorState() { States = new List<ProjectState>(); }
+        public EditorState() { Snapshots = new List<ProjectSnapshot>(); }
 
-        public async Task<int> UpdateState(Project project)
+        public int AddNewSnapshot(Project project)
         {
-            int result = 0;
+            var p = UtilService.SpeedCheck(project.DeepClone);
 
-            try
-            {
-                await Task.Run(() => UpdateState(ref result));
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+            var id = UtilService.GenerateNewId();
 
-            return result;
+            Snapshots.Add(new ProjectSnapshot(p, id));
 
-            void UpdateState(ref int output)
-            {
-                // var p = project.DeepClone();
-                var p = UtilService.SpeedCheck(project.DeepClone);
-
-                var id = UtilService.GenerateNewId();
-
-                // If Initial State
-                if (States.Count == 0)
-                {
-                    States.Add(new ProjectState(p, id, ProjectStateDifference.InitialState));
-                    output = id;
-                }
-
-                var comparer = new ObjectsComparer.Comparer<Project>();
-
-                // comparer.AddComparerOverride("Id", DoNotCompareValueComparer.Instance);
-                comparer.Compare(project, States[^1].ReconstructProject(), out var differences);
-
-                var res = Verify();
-
-                switch (res)
-                {
-                    case ProjectStateDifference.Layers:
-                        States.Add(new ProjectState(p, id, ProjectStateDifference.Layers));
-                        break;
-                    case ProjectStateDifference.InitialState:
-                        throw new Exception("ProjectStateDifference should not be assigned to InitialState");
-                    case ProjectStateDifference.None:
-                        throw new Exception();
-                    default:
-                        throw new ArgumentOutOfRangeException(nameof(res), differences.ToString());
-                }
-
-                output = id;
-
-                // Verifies if all the differences are from the same type of ProjectStateDifference
-                // If so we save the State, else we throw an exception...
-                ProjectStateDifference Verify()
-                {
-                    if (!differences.Any())
-                        throw new Exception("No Differences");
-
-                    ProjectStateDifference diff = ProjectStateDifference.None;
-
-                    foreach (var value in differences)
-                    {
-                        try
-                        {
-                            var psd = (ProjectStateDifference) Enum.Parse(
-                                typeof(ProjectStateDifference),
-                                CorrectPathName(value.MemberPath),
-                                true);
-
-                            if (diff != psd && diff != ProjectStateDifference.None)
-                                throw new Exception("Got Differences between different types");
-
-                            diff = psd;
-                        }
-                        catch (Exception e)
-                        {
-                            throw new Exception("Couldn't Parse Enum", e);
-                        }
-                    }
-
-                    return diff;
-                }
-
-                string CorrectPathName(string s)
-                {
-                    if (s.StartsWith("Layers["))
-                        return "Layers";
-
-                    return s;
-                }
-            }
+            return id;
         }
 
-        public ActionResponse Redo(int stateId)
+        public ActionResponse Redo(int snapshotId)
         {
-            var index = States.FindIndex(s => s.Id == stateId);
+            var index = Snapshots.FindIndex(s => s.Id == snapshotId);
 
-            if (index == States.Count - 1)
+            if (index == Snapshots.Count - 1)
                 return new ActionResponse(false, null, int.MaxValue);
 
-            return new ActionResponse(true, States[index + 1].ReconstructProject(), States[index + 1].Id);
+            return new ActionResponse(true, Snapshots[index + 1].ReconstructProject(), Snapshots[index + 1].Id);
         }
 
-        public ActionResponse Undo(int stateId)
+        public ActionResponse Undo(int snapshotId)
         {
-            var index = States.FindIndex(s => s.Id == stateId);
-
+            var index = Snapshots.FindIndex(s => s.Id == snapshotId);
 
             if (index == 0)
                 return new ActionResponse(false, null, int.MaxValue);
 
-            return new ActionResponse(true, States[index - 1].ReconstructProject(), States[index - 1].Id);
-        }
-
-        public class ProjectState
-        {
-            public int Id { get; }
-            private Project Project { get; }
-
-            public ProjectState(Project project, int id , ProjectStateDifference difference)
-            {
-                // Foreach ProjectStateDifference we should only make a copy of the that thing that has changed
-                // For example: If we change the Project name there is no need to copy the Layers...
-
-                // Todo: Implement...
-                switch (difference)
-                {
-                    case ProjectStateDifference.Layers:
-                        break;
-                    case ProjectStateDifference.InitialState:
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException(nameof(difference), difference, null);
-                }
-                Project = project;
-                Id = id;
-            }
-
-            public Project ReconstructProject()
-            {
-                return Project;
-            }
+            return new ActionResponse(true, Snapshots[index - 1].ReconstructProject(), Snapshots[index - 1].Id);
         }
     }
 }

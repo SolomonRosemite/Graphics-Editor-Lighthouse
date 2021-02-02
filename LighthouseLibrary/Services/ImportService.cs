@@ -11,7 +11,10 @@ namespace LighthouseLibrary.Services
             using (var bmpTemp = new Bitmap(filePath))
                 image = new Bitmap(bmpTemp);
 
-            Layer layer = new Layer(image, UtilService.GenerateNewId(), "Layer1");
+            // Todo: Save the loaded file somewhere else in a project Directory
+
+            string tempProjectDirectory = filePath;
+            Layer layer = new Layer(image, UtilService.GenerateNewId(), "Layer1", tempProjectDirectory);
 
             return new Project("unnamed", null, layer, image.Width, image.Height, true);
         }
@@ -22,7 +25,10 @@ namespace LighthouseLibrary.Services
             using (var bmpTemp = new Bitmap(filePath))
                 image = new Bitmap(bmpTemp);
 
-            Layer layer = new Layer(image, UtilService.GenerateNewId(), layerName);
+            // Todo: Save the loaded file somewhere else in a project Directory
+
+            string tempProjectDirectory = filePath;
+            Layer layer = new Layer(image, UtilService.GenerateNewId(), layerName, tempProjectDirectory);
 
             return layer;
         }

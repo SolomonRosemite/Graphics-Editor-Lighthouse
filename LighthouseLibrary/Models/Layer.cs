@@ -20,12 +20,14 @@ namespace LighthouseLibrary.Models
         private Bitmap PreviousRenderedBitmap { get; set; }
         private LayerState LayerState { get; set; }
         public Bitmap Bitmap { get; }
+        public string FileName { get; }
 
-        public Layer(Bitmap bitmap, int id, string layerName)
+        public Layer(Bitmap bitmap, int id, string layerName, string fileName)
         {
             Id = id;
 
             Bitmap = bitmap;
+            FileName = fileName;
             LayerName = layerName;
             LayerState = LayerState.Updated;
 
@@ -62,23 +64,20 @@ namespace LighthouseLibrary.Models
         {
             Filters = GetValue<ObservableCollection<Filter>>("Filters");
             LayerName = GetValue<string>("LayerName");
-            Bitmap = GetValue<Bitmap>("Bitmap");
+            FileName = GetValue<string>("FileName");
             Id = GetValue<int>("Id");
 
             LayerState = LayerState.Updated;
 
-            T GetValue<T>(string name)
-            {
-                return (T)info.GetValue(name, typeof(T));
-            }
+            T GetValue<T>(string name) => (T)info.GetValue(name, typeof(T));
         }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            info.AddValue("Id", Id);
             info.AddValue("LayerName", LayerName);
+            info.AddValue("FileName", FileName);
             info.AddValue("Filters", Filters);
-            info.AddValue("Bitmap", Bitmap);
+            info.AddValue("Id", Id);
         }
     }
 }
