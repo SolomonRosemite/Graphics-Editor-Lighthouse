@@ -6,7 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
+using Lighthouse.Helpers;
 using LighthouseLibrary.Models;
 using LighthouseLibrary.Services;
 using Point = System.Windows.Point;
@@ -18,6 +18,8 @@ namespace Lighthouse.Windows
     /// </summary>
     public partial class EditorWindow : Window
     {
+        private readonly WindowDoubleClick doubleClick;
+
         private readonly EditorState editorState;
         private Project project;
 
@@ -27,6 +29,8 @@ namespace Lighthouse.Windows
 
         public EditorWindow(Project project)
         {
+            doubleClick = new WindowDoubleClick();
+
             editorState = new EditorState();
             this.project = project;
 
@@ -84,7 +88,7 @@ namespace Lighthouse.Windows
             }
             else
             {
-                // Todo: Handle...
+                // Todo: Maybe show a popup or some...
                 // User cant go further back or forth.
                 // Depending if the Action was Undo or Redo.
             }
@@ -228,6 +232,11 @@ namespace Lighthouse.Windows
 
         private void WindowClick(object sender, MouseButtonEventArgs e)
         {
+            var wasDoubleClick = doubleClick.OnClickClick();
+
+            if (wasDoubleClick)
+                OnMaximizedClick(null, null);
+
             // Todo: Maximize or and Minimize Window on Double-click
             try { DragMove(); } catch { }
         }

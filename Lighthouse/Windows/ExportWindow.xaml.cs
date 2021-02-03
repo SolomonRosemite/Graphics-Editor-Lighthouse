@@ -6,6 +6,7 @@ using LighthouseLibrary.Services;
 using System.Windows.Media.Imaging;
 using System.Drawing;
 using System.Windows.Media;
+using Lighthouse.Helpers;
 
 namespace Lighthouse.Windows
 {

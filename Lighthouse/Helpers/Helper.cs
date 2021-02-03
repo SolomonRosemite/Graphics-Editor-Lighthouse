@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Media.Imaging;
 
-namespace Lighthouse
+namespace Lighthouse.Helpers
 {
     public static class Helper
     {

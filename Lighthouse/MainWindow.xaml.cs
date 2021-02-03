@@ -20,6 +20,7 @@ using System.Net.Mime;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.Json.Serialization;
 using System.Windows.Threading;
+using Lighthouse.Helpers;
 using Lighthouse.Windows;
 using LighthouseLibrary.Models;
 using LighthouseLibrary.Services;
@@ -34,6 +35,7 @@ namespace Lighthouse
     {
         private readonly DispatcherTimer dispatcherTimer = new DispatcherTimer();
         private DropColorState state = DropColorState.Increase;
+        private readonly WindowDoubleClick doubleClick;
 
         private enum DropColorState
         {
@@ -44,6 +46,7 @@ namespace Lighthouse
         {
             // Thread.Sleep(1000);
 
+            doubleClick = new WindowDoubleClick();
             InitializeComponent();
 
             DropArea.BorderBrush = new SolidColorBrush(Color.FromArgb(0, 255, 255, 255));
@@ -106,13 +109,11 @@ namespace Lighthouse
 
         private void OnClickNewProject(object sender, RoutedEventArgs e)
         {
-            // Todo...
             throw new NotImplementedException();
         }
 
         private void OnImportProject(object sender, RoutedEventArgs e)
         {
-            // Todo...
             throw new NotImplementedException();
         }
 
@@ -167,7 +168,11 @@ namespace Lighthouse
 
         private void WindowClick(object sender, MouseButtonEventArgs e)
         {
-            // Todo: Maximize or and Minimize Window on Double-click
+            var wasDoubleClick = doubleClick.OnClickClick();
+
+            if (wasDoubleClick)
+                OnMaximizedClick(null, null);
+
             try { DragMove(); } catch { }
         }
 
