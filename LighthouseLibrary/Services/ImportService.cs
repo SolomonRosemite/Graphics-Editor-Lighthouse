@@ -1,7 +1,8 @@
-﻿using System;
-using LighthouseLibrary.Models;
+﻿using LighthouseLibrary.Models;
 using System.Drawing;
 using System.IO;
+using System;
+using LighthouseLibrary.Models.Metadata;
 
 namespace LighthouseLibrary.Services
 {
@@ -19,7 +20,7 @@ namespace LighthouseLibrary.Services
 
             File.Copy(filePath, target);
 
-            Layer layer = new Layer(image, UtilService.GenerateNewId(), "Layer1", target);
+            Layer layer = new Layer(image, UtilService.GenerateNewId(), "Layer1", target, new LayerMetadata());
 
             return new Project("unnamed", null, layer, image.Width, image.Height, true, projectFolder);
         }
@@ -33,7 +34,7 @@ namespace LighthouseLibrary.Services
             var target = project.ProjectFolder + filePath.Split('\\')[^1];
             File.Copy(filePath, target);
 
-            Layer layer = new Layer(image, UtilService.GenerateNewId(), layerName, target);
+            Layer layer = new Layer(image, UtilService.GenerateNewId(), layerName, target, new LayerMetadata());
 
             return layer;
         }

@@ -23,6 +23,7 @@ using System.Windows.Threading;
 using Lighthouse.Helpers;
 using Lighthouse.Windows;
 using LighthouseLibrary.Models;
+using LighthouseLibrary.Models.Metadata;
 using LighthouseLibrary.Services;
 using Color = System.Windows.Media.Color;
 
@@ -44,7 +45,7 @@ namespace Lighthouse
 
         public MainWindow()
         {
-            // Thread.Sleep(1000);
+            // Thread.Sleep(1500);
 
             doubleClick = new WindowDoubleClick();
             InitializeComponent();
@@ -71,8 +72,8 @@ namespace Lighthouse
             {
                 OnDragLeave(null, null);
 
-                // Todo: Handle
                 Console.WriteLine(e);
+                throw;
             }
         }
 
@@ -176,13 +177,12 @@ namespace Lighthouse
             try { DragMove(); } catch { }
         }
 
-        public void OnExitClick(object sender, RoutedEventArgs e)
+        private void OnExitClick(object sender, RoutedEventArgs e)
         {
-            // Todo: Don't exit if there are unsaved changes...
             Application.Current.Shutdown();
         }
 
-        public void OnMaximizedClick(object sender, RoutedEventArgs e)
+        private void OnMaximizedClick(object sender, RoutedEventArgs e)
         {
             switch (Application.Current.MainWindow.WindowState)
             {
@@ -197,7 +197,7 @@ namespace Lighthouse
             }
         }
 
-        public void OnMinimizedClick(object sender, RoutedEventArgs e)
+        private void OnMinimizedClick(object sender, RoutedEventArgs e)
         {
             Application.Current.MainWindow.WindowState = WindowState.Minimized;
         }

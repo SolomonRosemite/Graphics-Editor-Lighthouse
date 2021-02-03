@@ -21,7 +21,7 @@ namespace LighthouseLibrary.Models
 
             Project.Layers.Clear();
             foreach (var layer in layers)
-                Project.Layers.Add(new Layer(new Bitmap(layer.FileName), layer.Id, layer.LayerName, layer.FileName));
+                Project.Layers.Add(new Layer(new Bitmap(layer.FileName), layer.Id, layer.LayerName, layer.FileName, layer.Metadata));
 
             return Project;
         }

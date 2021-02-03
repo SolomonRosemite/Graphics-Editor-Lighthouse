@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Specialized;
 using System.Diagnostics;
+using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -94,9 +95,27 @@ namespace Lighthouse.Windows
             }
         }
 
+        private int i = 1;
         private void TestRotateImage(object sender, RoutedEventArgs e)
         {
-            project.Layers[0].RotateImageTest();
+            RotateFlipType type = RotateFlipType.RotateNoneFlipNone;
+            switch (i++)
+            {
+                case 0:
+                    type = RotateFlipType.RotateNoneFlipNone;
+                    break;
+                case 1:
+                    type = RotateFlipType.Rotate90FlipNone;
+                    break;
+                case 2:
+                    type = RotateFlipType.Rotate180FlipNone;
+                    break;
+                case 3:
+                    type = RotateFlipType.Rotate270FlipNone;
+                    i = 0;
+                    break;
+            }
+            project.Layers[0].RotateImageTest(type);
             Render();
         }
 
@@ -237,7 +256,6 @@ namespace Lighthouse.Windows
             if (wasDoubleClick)
                 OnMaximizedClick(null, null);
 
-            // Todo: Maximize or and Minimize Window on Double-click
             try { DragMove(); } catch { }
         }
 

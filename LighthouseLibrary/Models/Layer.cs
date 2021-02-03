@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.Drawing;
 using System.Runtime.Serialization;
+using LighthouseLibrary.Models.Metadata;
 
 namespace LighthouseLibrary.Models
 {
@@ -11,27 +10,25 @@ namespace LighthouseLibrary.Models
     {
         public int Id { get; }
         public string LayerName { get; set; }
-
-        private ObservableCollection<Filter> Filters { get; }
-        private Bitmap PreviousRenderedBitmap { get; set; }
-        private LayerState LayerState { get; set; }
-        public Bitmap Bitmap { get; }
         public string FileName { get; }
 
-        public void RotateImageTest()
-        {
-            Bitmap.RotateFlip(RotateFlipType.Rotate90FlipNone);
-            LayerState = LayerState.Updated;
-        }
+        public Bitmap Bitmap { get; }
+        private Bitmap PreviousRenderedBitmap { get; set; }
+
+        public LayerMetadata Metadata { get; }
+        private LayerState LayerState { get; set; }
+
+
+        public void RotateImageTest(RotateFlipType type) => Metadata.RotationType = type;
 
         public Bitmap RenderLayer()
         {
-            if (LayerState == LayerState.Unchanged)
+            if (LayerState == LayerState.Unchanged && Metadata.LayerState == LayerState.Unchanged)
                 return PreviousRenderedBitmap;
 
             var image = CloneBitmap();
 
-            foreach (var filter in Filters) filter.ApplyFilter(ref image);
+            Metadata.ApplyMetadata(ref image);
 
             PreviousRenderedBitmap = image;
             LayerState = LayerState.Unchanged;
@@ -40,20 +37,17 @@ namespace LighthouseLibrary.Models
 
         private Bitmap CloneBitmap() => (Bitmap) Bitmap.Clone();
 
-        private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) =>
-            LayerState = LayerState.Updated;
-
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddValue("LayerName", LayerName);
             info.AddValue("FileName", FileName);
-            info.AddValue("Filters", Filters);
+            info.AddValue("Metadata", Metadata);
             info.AddValue("Id", Id);
         }
 
         public Layer(SerializationInfo info, StreamingContext _)
         {
-            Filters = GetValue<ObservableCollection<Filter>>("Filters");
+            Metadata = GetValue<LayerMetadata>("Metadata");
             LayerName = GetValue<string>("LayerName");
             FileName = GetValue<string>("FileName");
             Id = GetValue<int>("Id");
@@ -63,7 +57,7 @@ namespace LighthouseLibrary.Models
             T GetValue<T>(string name) => (T)info.GetValue(name, typeof(T));
         }
 
-        public Layer(Bitmap bitmap, int id, string layerName, string fileName)
+        public Layer(Bitmap bitmap, int id, string layerName, string fileName, LayerMetadata metadata)
         {
             Id = id;
 
@@ -72,8 +66,7 @@ namespace LighthouseLibrary.Models
             LayerName = layerName;
             LayerState = LayerState.Updated;
 
-            Filters = new ObservableCollection<Filter>();
-            Filters.CollectionChanged += OnCollectionChanged;
+            Metadata = metadata;
         }
     }
 }
