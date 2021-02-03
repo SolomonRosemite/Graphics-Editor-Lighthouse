@@ -120,7 +120,7 @@ namespace Lighthouse.Windows
             {
                 // Open document
                 string filename = dlg.FileName;
-                Layer layer = ImportService.LoadImportedImageToLayer(filename, $"Layer {project.Layers.Count + 1}");
+                Layer layer = ImportService.LoadImportedImageToLayer(filename, $"Layer {project.Layers.Count + 1}", project);
                 
                 project.Layers.Insert(0, layer);
             }

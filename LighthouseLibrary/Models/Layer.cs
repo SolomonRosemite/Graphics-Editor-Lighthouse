@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Drawing;
-using System.IO;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 
 namespace LighthouseLibrary.Models
 {
@@ -21,19 +17,6 @@ namespace LighthouseLibrary.Models
         private LayerState LayerState { get; set; }
         public Bitmap Bitmap { get; }
         public string FileName { get; }
-
-        public Layer(Bitmap bitmap, int id, string layerName, string fileName)
-        {
-            Id = id;
-
-            Bitmap = bitmap;
-            FileName = fileName;
-            LayerName = layerName;
-            LayerState = LayerState.Updated;
-
-            Filters = new ObservableCollection<Filter>();
-            Filters.CollectionChanged += OnCollectionChanged;
-        }
 
         public void RotateImageTest()
         {
@@ -60,6 +43,14 @@ namespace LighthouseLibrary.Models
         private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) =>
             LayerState = LayerState.Updated;
 
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("LayerName", LayerName);
+            info.AddValue("FileName", FileName);
+            info.AddValue("Filters", Filters);
+            info.AddValue("Id", Id);
+        }
+
         public Layer(SerializationInfo info, StreamingContext _)
         {
             Filters = GetValue<ObservableCollection<Filter>>("Filters");
@@ -72,12 +63,17 @@ namespace LighthouseLibrary.Models
             T GetValue<T>(string name) => (T)info.GetValue(name, typeof(T));
         }
 
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        public Layer(Bitmap bitmap, int id, string layerName, string fileName)
         {
-            info.AddValue("LayerName", LayerName);
-            info.AddValue("FileName", FileName);
-            info.AddValue("Filters", Filters);
-            info.AddValue("Id", Id);
+            Id = id;
+
+            Bitmap = bitmap;
+            FileName = fileName;
+            LayerName = layerName;
+            LayerState = LayerState.Updated;
+
+            Filters = new ObservableCollection<Filter>();
+            Filters.CollectionChanged += OnCollectionChanged;
         }
     }
 }

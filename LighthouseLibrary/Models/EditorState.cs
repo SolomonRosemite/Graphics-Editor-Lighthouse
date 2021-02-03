@@ -11,7 +11,7 @@ namespace LighthouseLibrary.Models
 
         public int AddNewSnapshot(Project project)
         {
-            var p = UtilService.SpeedCheck(project.DeepClone);
+            var p = project.DeepClone();
 
             var id = UtilService.GenerateNewId();
 

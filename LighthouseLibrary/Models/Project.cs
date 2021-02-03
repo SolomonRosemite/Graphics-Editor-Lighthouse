@@ -13,13 +13,15 @@ namespace LighthouseLibrary.Models
         public string Author { get; set; }
         public ObservableCollection<Layer> Layers { get; }
         public bool IsNewlyCreatedProject { get; }
+        public string ProjectFolder { get; set; }
 
         public int Width { get; }
         public int Height { get; }
 
-        public Project(string projectName, string author, Layer layer, int width, int height, bool isNewlyCreatedProject)
+        public Project(string projectName, string author, Layer layer, int width, int height, bool isNewlyCreatedProject, string projectFolder)
         {
             IsNewlyCreatedProject = isNewlyCreatedProject;
+            ProjectFolder = projectFolder;
             ProjectName = projectName;
             Author = author;
 
@@ -29,26 +31,11 @@ namespace LighthouseLibrary.Models
             Layers = new ObservableCollection<Layer> { layer };
         }
 
-        public Project(SerializationInfo info, StreamingContext _)
-        {
-            IsNewlyCreatedProject = GetValue<bool>("IsNewlyCreatedProject");
-            ProjectName = GetValue<string>("ProjectName");
-            Author = GetValue<string>("Author");
-
-            Width = GetValue<int>("Width");
-            Height = GetValue<int>("Height");
-            Layers = GetValue<ObservableCollection<Layer>>("Layers");
-
-            T GetValue<T>(string name)
-            {
-                return (T)info.GetValue(name, typeof(T));
-            }
-        }
-
-        private Project(string projectName, string author, ObservableCollection<Layer> layers, int width, int height, bool isNewlyCreatedProject)
+        private Project(string projectName, string author, ObservableCollection<Layer> layers, int width, int height, bool isNewlyCreatedProject, string projectFolder)
         {
             IsNewlyCreatedProject = isNewlyCreatedProject;
             ProjectName = projectName;
+            ProjectFolder = projectFolder;
             Author = author;
 
             Width = width;
@@ -85,17 +72,33 @@ namespace LighthouseLibrary.Models
                 g.DrawImage(bmp2, Point.Empty);
                 g.DrawImage(bmp1, Point.Empty);
             }
+
             return result;
+        }
+
+        public Project(SerializationInfo info, StreamingContext _)
+        {
+            IsNewlyCreatedProject = GetValue<bool>("IsNewlyCreatedProject");
+            ProjectFolder = GetValue<string>("ProjectFolder");
+            ProjectName = GetValue<string>("ProjectName");
+            Author = GetValue<string>("Author");
+
+            Layers = GetValue<ObservableCollection<Layer>>("Layers");
+            Height = GetValue<int>("Height");
+            Width = GetValue<int>("Width");
+
+            T GetValue<T>(string name) => (T)info.GetValue(name, typeof(T));
         }
 
         public void GetObjectData(SerializationInfo info, StreamingContext _)
         {
             info.AddValue("IsNewlyCreatedProject", IsNewlyCreatedProject);
+            info.AddValue("ProjectFolder", ProjectFolder);
             info.AddValue("ProjectName", ProjectName);
             info.AddValue("Author", Author);
-            info.AddValue("Width", Width);
-            info.AddValue("Height", Height);
             info.AddValue("Layers", Layers);
+            info.AddValue("Height", Height);
+            info.AddValue("Width", Width);
         }
     }
 }
