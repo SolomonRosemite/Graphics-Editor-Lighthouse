@@ -16,12 +16,7 @@ namespace Lighthouse.Helpers
             internal static extern bool DeleteObject(IntPtr hObject);
         }
 
-        public static BitmapSource BitmapToImageSource(Bitmap bitmap)
-        {
-            return ToBitmapSource(bitmap);
-        }
-
-        private static BitmapSource ToBitmapSource(Bitmap source)
+        public static BitmapSource ToBitmapSource(Bitmap source)
         {
             BitmapSource bitSrc = null;
             var hBitmap = source.GetHbitmap();

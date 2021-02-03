@@ -30,7 +30,7 @@ namespace LighthouseLibrary.Services
             using (var bmpTemp = new Bitmap(filePath))
                 image = new Bitmap(bmpTemp);
 
-            var target = project.ProjectFolder + filePath.Split('/')[^1];
+            var target = project.ProjectFolder + filePath.Split('\\')[^1];
             File.Copy(filePath, target);
 
             Layer layer = new Layer(image, UtilService.GenerateNewId(), layerName, target);

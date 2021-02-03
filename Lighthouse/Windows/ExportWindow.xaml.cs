@@ -19,7 +19,7 @@ namespace Lighthouse.Windows
             InitializeComponent();
             this.project = project;
 
-            ImageView.Source = Helper.BitmapToImageSource(project.RenderProject());
+            ImageView.Source = Helper.ToBitmapSource(project.RenderProject());
         }
 
         private void OnExportAsPNG(object sender, RoutedEventArgs e)

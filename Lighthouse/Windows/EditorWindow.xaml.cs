@@ -107,7 +107,7 @@ namespace Lighthouse.Windows
 
             var res = project.RenderProject();
 
-            var bitmapImage = Helper.BitmapToImageSource(res);
+            var bitmapImage = Helper.ToBitmapSource(res);
             ImageView.Source = bitmapImage;
         }
 
