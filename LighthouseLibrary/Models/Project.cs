@@ -69,8 +69,8 @@ namespace LighthouseLibrary.Models
 
             Bitmap result = new Bitmap(Width, Height);
             using (Graphics g = Graphics.FromImage(result)) {
-                g.DrawImage(bmp2, Point.Empty);
-                g.DrawImage(bmp1, Point.Empty);
+                g.DrawImage(bmp2, 0, 0, bmp2.Width, bmp2.Height);
+                g.DrawImage(bmp1, 0, 0, bmp1.Width, bmp1.Height);
             }
 
             return result;
