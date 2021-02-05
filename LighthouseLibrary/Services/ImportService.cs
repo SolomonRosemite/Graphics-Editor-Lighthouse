@@ -14,13 +14,11 @@ namespace LighthouseLibrary.Services
             using (var bmpTemp = new Bitmap(filePath))
                 image = new Bitmap(bmpTemp);
 
+            var id = UtilService.GenerateNewId();
             var projectFolder = SetupProjectFolder();
+            var target = CopyImageToProject(id, projectFolder, filePath);
 
-            var target = projectFolder + filePath.Split('\\')[^1];
-
-            File.Copy(filePath, target);
-
-            Layer layer = new Layer(image, UtilService.GenerateNewId(), "Layer1", target, new LayerMetadata());
+            Layer layer = new Layer(image, id, "Layer1", target, new LayerMetadata());
 
             return new Project("unnamed", null, layer, image.Width, image.Height, true, projectFolder);
         }
@@ -31,8 +29,9 @@ namespace LighthouseLibrary.Services
             using (var bmpTemp = new Bitmap(filePath))
                 image = new Bitmap(bmpTemp);
 
-            var target = project.ProjectFolder + filePath.Split('\\')[^1];
-            File.Copy(filePath, target);
+            var id = UtilService.GenerateNewId();
+
+            var target = CopyImageToProject(id ,project.ProjectFolder, filePath);
 
             Layer layer = new Layer(image, UtilService.GenerateNewId(), layerName, target, new LayerMetadata());
 
@@ -57,6 +56,15 @@ namespace LighthouseLibrary.Services
             Directory.CreateDirectory(projectFolder);
 
             return projectFolder;
+        }
+
+        private static string CopyImageToProject(int id, string projectFolder, string filePath)
+        {
+            var target = $"{projectFolder}{id}.{filePath.Split('.')[^1]}";
+
+            File.Copy(filePath, target);
+
+            return target;
         }
     }
 }

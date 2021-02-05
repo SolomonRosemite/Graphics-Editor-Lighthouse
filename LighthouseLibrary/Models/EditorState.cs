@@ -1,4 +1,5 @@
-﻿using LighthouseLibrary.Services;
+﻿using System;
+using LighthouseLibrary.Services;
 using System.Collections.Generic;
 
 namespace LighthouseLibrary.Models

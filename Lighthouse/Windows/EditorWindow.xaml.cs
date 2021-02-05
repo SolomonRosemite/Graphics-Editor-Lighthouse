@@ -64,8 +64,14 @@ namespace Lighthouse.Windows
             listBox.ItemContainerStyle = style;
         }
 
-        private void RegisterEvents()
+        private void RegisterEvents(bool renewSubscription = false)
         {
+            if (renewSubscription)
+            {
+                listBox.SelectionChanged -= ListBox_SelectionChanged;
+                project.Layers.CollectionChanged -= OnLayerCollectionChanged;
+            }
+
             listBox.SelectionChanged += ListBox_SelectionChanged;
             project.Layers.CollectionChanged += OnLayerCollectionChanged;
         }
@@ -84,6 +90,8 @@ namespace Lighthouse.Windows
                 project = res.ProjectState;
                 currentProjectStateId = res.StateId;
                 listBox.ItemsSource = project.Layers;
+
+                RegisterEvents(true);
 
                 Render(false);
             }
@@ -121,6 +129,7 @@ namespace Lighthouse.Windows
 
         private void Render(bool updateSnapshot = true)
         {
+            Console.WriteLine("Rendered");
             if (updateSnapshot)
                 this.currentProjectStateId = editorState.AddNewSnapshot(project);
 
@@ -144,13 +153,14 @@ namespace Lighthouse.Windows
                 // Open document
                 string filename = dlg.FileName;
                 Layer layer = ImportService.LoadImportedImageToLayer(filename, $"Layer {project.Layers.Count + 1}", project);
-                
+
                 project.Layers.Insert(0, layer);
             }
         }
 
         private void OnLayerCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
+            Console.WriteLine("OnLayerCollectionChanged");
             if (ignoreNextRender)
             {
                 ignoreNextRender = false;

@@ -16,7 +16,7 @@ namespace LighthouseLibrary.Services
 
         public static int GenerateNewId()
         {
-            int value = Random.Next(int.MaxValue);
+            int value = Random.Next(1, int.MaxValue);
 
             if (Ids.Contains(value))
                 return GenerateNewId();
