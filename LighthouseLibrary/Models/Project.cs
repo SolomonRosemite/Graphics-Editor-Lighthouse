@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
+using System.Reflection;
 using System.Runtime.Serialization;
 
 namespace LighthouseLibrary.Models
@@ -99,6 +101,11 @@ namespace LighthouseLibrary.Models
             info.AddValue("Layers", Layers);
             info.AddValue("Height", Height);
             info.AddValue("Width", Width);
+        }
+
+        public Project Clone()
+        {
+            return new Project(ProjectName, Author, new ObservableCollection<Layer>(Layers), Width, Height, IsNewlyCreatedProject, ProjectFolder);
         }
     }
 }

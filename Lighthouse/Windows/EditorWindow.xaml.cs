@@ -2,6 +2,10 @@
 using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -64,14 +68,8 @@ namespace Lighthouse.Windows
             listBox.ItemContainerStyle = style;
         }
 
-        private void RegisterEvents(bool renewSubscription = false)
+        private void RegisterEvents()
         {
-            if (renewSubscription)
-            {
-                listBox.SelectionChanged -= ListBox_SelectionChanged;
-                project.Layers.CollectionChanged -= OnLayerCollectionChanged;
-            }
-
             listBox.SelectionChanged += ListBox_SelectionChanged;
             project.Layers.CollectionChanged += OnLayerCollectionChanged;
         }
@@ -82,21 +80,26 @@ namespace Lighthouse.Windows
 
         private void Action(ActionResponse res)
         {
-            Console.WriteLine(res.Successful);
             if (res.Successful)
             {
-                ignoreNextRender = true;
+                // ignoreNextRender = true;
 
                 project = res.ProjectState;
                 currentProjectStateId = res.StateId;
+
+                var fi = project.Layers.GetType().GetEventField("CollectionChanged");
+                if (fi == null) return;
+                fi.SetValue(project.Layers, null);
+
                 listBox.ItemsSource = project.Layers;
 
-                RegisterEvents(true);
+                project.Layers.CollectionChanged += OnLayerCollectionChanged;
 
                 Render(false);
             }
             else
             {
+                Console.WriteLine("Can't go further...");
                 // Todo: Maybe show a popup or some...
                 // User cant go further back or forth.
                 // Depending if the Action was Undo or Redo.
@@ -129,7 +132,6 @@ namespace Lighthouse.Windows
 
         private void Render(bool updateSnapshot = true)
         {
-            Console.WriteLine("Rendered");
             if (updateSnapshot)
                 this.currentProjectStateId = editorState.AddNewSnapshot(project);
 
@@ -160,13 +162,12 @@ namespace Lighthouse.Windows
 
         private void OnLayerCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            Console.WriteLine("OnLayerCollectionChanged");
+
             if (ignoreNextRender)
             {
                 ignoreNextRender = false;
                 return;
             }
-
 
             Render();
         }

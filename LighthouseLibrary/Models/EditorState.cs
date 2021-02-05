@@ -12,6 +12,7 @@ namespace LighthouseLibrary.Models
 
         public int AddNewSnapshot(Project project)
         {
+            Console.WriteLine("snap");
             var p = project.DeepClone();
 
             var id = UtilService.GenerateNewId();

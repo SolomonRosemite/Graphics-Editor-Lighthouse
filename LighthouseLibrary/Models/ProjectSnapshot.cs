@@ -17,13 +17,14 @@ namespace LighthouseLibrary.Models
 
         public Project ReconstructProject()
         {
-            var layers = Project.Layers.ToList();
+            var p = Project.Clone();
+            var layers = Project.Layers;
 
-            Project.Layers.Clear();
+            p.Layers.Clear();
             foreach (var layer in layers)
-                Project.Layers.Add(new Layer(new Bitmap(layer.FileName), layer.Id, layer.LayerName, layer.FileName, layer.Metadata));
+                p.Layers.Add(new Layer(new Bitmap(layer.FileName), layer.Id, layer.LayerName, layer.FileName, layer.Metadata));
 
-            return Project;
+            return p;
         }
     }
 }
