@@ -29,7 +29,7 @@
 
                 <StackPanel HorizontalAlignment="Left" Margin="110,15,0,0" VerticalAlignment="Top" Orientation="Horizontal" Height="50">
                     <Label Name="LayerNameLabel" Content="layer name" Margin="0,0,0,0"  Foreground="White" FontSize="20" FontFamily="Roboto" FontWeight="Medium" Height="34"/>
-                    <Button Margin="10,0,0,0" BorderBrush="{x:Null}" Foreground="{x:Null}" Width="50">
+                    <Button Click="OnEditLayerName" Margin="10,0,0,0" BorderBrush="{x:Null}" Foreground="{x:Null}" Width="50">
                         <Button.Content>
                             <Image Width="25" Height="25">
                                 <Image.Source>

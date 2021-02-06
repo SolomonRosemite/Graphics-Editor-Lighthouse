@@ -11,6 +11,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using Lighthouse.Dialogs;
 using Lighthouse.Helpers;
 using LighthouseLibrary.Models;
 using LighthouseLibrary.Services;
@@ -32,6 +33,8 @@ namespace Lighthouse.Windows
         private bool ignoreNextRender;
         private Point dragStartPoint;
 
+        private Layer lastSelectedLayer;
+
         public EditorWindow(Project project)
         {
             doubleClick = new WindowDoubleClick();
@@ -43,6 +46,7 @@ namespace Lighthouse.Windows
             RegisterEvents();
 
             InitLayers();
+            lastSelectedLayer = project.Layers[0];
 
             Render();
         }
@@ -82,8 +86,6 @@ namespace Lighthouse.Windows
         {
             if (res.Successful)
             {
-                // ignoreNextRender = true;
-
                 project = res.ProjectState;
                 currentProjectStateId = res.StateId;
 
@@ -179,11 +181,39 @@ namespace Lighthouse.Windows
                 if (listBox.SelectedItem == null || !(listBox.SelectedItem is Layer item)) return;
 
                 LayerNameLabel.Content = item.LayerName;
+                lastSelectedLayer = item;
             }
             catch { }
         }
 
         private void OnExportImage(object sender, RoutedEventArgs e) => new ExportWindow(project).Show();
+
+        private async void OnEditLayerName(object sender, RoutedEventArgs e)
+        {
+            Layer layer = lastSelectedLayer;
+            var result = await LayerDialog.Open(layer);
+
+            if (!result.Save) return;
+
+            ignoreNextRender = true;
+
+            int index = project.Layers.IndexOf(layer);
+
+            // Remove Item from list
+            project.Layers.RemoveAt(index);
+
+            // Update that layer's name
+            layer.LayerName = result.LayerName;
+
+            ignoreNextRender = true;
+
+            // Put back the same layer at the same index...
+            project.Layers.Insert(index, layer);
+
+            LayerNameLabel.Content = layer.LayerName;
+
+            currentProjectStateId = editorState.AddNewSnapshot(project);
+        }
 
         #region
 
