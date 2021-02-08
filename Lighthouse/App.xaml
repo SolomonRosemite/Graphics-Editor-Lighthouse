@@ -23,6 +23,16 @@
             <Setter Property="FontSize" Value="14" />
         </Style>
 
+        <Style x:Key="Top" TargetType="{x:Type MenuItem}">
+            <Setter Property="Background" Value="#16161d" />
+        </Style>
+
+        <Style TargetType="MenuItem">
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Foreground" Value="#16161d" />
+            <Setter Property="Background" Value="White" />
+        </Style>
+
         <Style x:Key="Modern" TargetType="{x:Type Button}">
             <Setter Property="Background" Value="#00008000"/>
             <Setter Property="Template">

@@ -6,19 +6,51 @@
         xmlns:local="clr-namespace:Lighthouse.Windows.Editor"
         mc:Ignorable="d"
         
-        Title="EditorWindow"
+        Title="Lighthouse"
         Height="800"
         Width="1400"
         MinHeight="650"
         MinWidth="1200"
-        AllowsTransparency="True"
-        WindowStyle="None"
-        ResizeMode="CanResizeWithGrip"
+        WindowStyle="SingleBorderWindow"
+        ResizeMode="CanResize"
         Background="{x:Null}"
-        Style="{StaticResource WinAll}"
         >
-    <Border CornerRadius="20" Background="#16161d" BorderThickness="0.3" BorderBrush="#00B62F2F">
-        <Grid>
+    <Border CornerRadius="0" Background="#16161d" BorderThickness="0.3" BorderBrush="#00B62F2F">
+        <DockPanel>
+            <Menu Background="#16161d" DockPanel.Dock="Top" Foreground="White">
+                <MenuItem Style="{StaticResource Top}" Header="_File">
+                    <MenuItem Header="_New">
+                        <MenuItem Header="_New Project"/>
+                        <MenuItem Header="_New Project from Image"/>
+                    </MenuItem>
+                    <MenuItem Header="_Open">
+                        <MenuItem Header="_Open Project"/>
+                        <MenuItem Header="_Open Image"/>
+                    </MenuItem>
+                    <MenuItem Header="Save"/>
+                    <MenuItem Header="Save as..."/>
+                    <MenuItem Header="_Exit"/>
+                </MenuItem>
+                <MenuItem Style="{StaticResource Top}" Header="_Edit">
+                    <MenuItem Header="_Undo"/>
+                    <MenuItem Header="_Redo"/>
+                </MenuItem>
+                <MenuItem Style="{StaticResource Top}" Header="_Layer">
+                    <MenuItem Header="_Rotate 90° Left"/>
+                    <MenuItem Header="_Rotate 90° Right"/>
+                </MenuItem>
+                <MenuItem Style="{StaticResource Top}" Header="_Export">
+                    <MenuItem Header="_Export..."/>
+                    <MenuItem Header="_Export as Png"/>
+                    <MenuItem Header="_Export as Jpeg"/>
+                </MenuItem>
+                <MenuItem Style="{StaticResource Top}" Header="_Help">
+                </MenuItem>
+                <MenuItem Style="{StaticResource Top}" Header="_About">
+                </MenuItem>
+            </Menu>
+
+            <Grid>
             <!--Top-->
             <Grid Height="80" VerticalAlignment="Top" MouseLeftButtonDown="WindowClick" Background="#00000000">
                 <Image Width="50" Height="50" Margin="30,15,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" >
@@ -96,7 +128,7 @@
             </Grid>
 
             <!--Left Side-->
-            <Border Margin="0,80,0,0" CornerRadius="0,0,0,20" Background="#27272f" HorizontalAlignment="Left" Width="100">
+            <Border Margin="0,80,0,0" CornerRadius="0,0,0,0" Background="#27272f" HorizontalAlignment="Left" Width="100">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Width="100" Height="100">
                     <Button Style="{StaticResource Modern}" Click="OnImportImage" Height="100" Width="100" HorizontalAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="{x:Null}" Foreground="{x:Null}">
                         <Button.Content>
@@ -113,7 +145,7 @@
             </Border>
 
             <!--Right Side-->
-            <Border Margin="0,80,0,0" CornerRadius="0,0,20,0" Background="#27272f" HorizontalAlignment="Right" Width="320">
+            <Border Margin="0,80,0,0" CornerRadius="0,0,0,0" Background="#27272f" HorizontalAlignment="Right" Width="320">
                 <Grid>
                     <Frame x:Name="CurrentPage" Margin="0,0,0,0" NavigationUIVisibility="Hidden" />
                 </Grid>
@@ -144,5 +176,6 @@
                 </StackPanel>
             </Grid>
         </Grid>
+        </DockPanel>
     </Border>
 </Window>

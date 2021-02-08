@@ -62,6 +62,7 @@ namespace Lighthouse
             }
             catch (Exception e)
             {
+				// Todo: Handle if file is not a type image.
                 OnDragLeave(null, null);
 
                 Console.WriteLine(e);

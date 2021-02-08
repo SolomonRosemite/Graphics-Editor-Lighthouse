@@ -47,6 +47,8 @@ namespace Lighthouse.Windows.Editor
             this.project = project;
 
             InitializeComponent();
+            InitializeApp();
+
             RegisterEvents();
 
             InitializeLayersListViewPage();
@@ -56,12 +58,15 @@ namespace Lighthouse.Windows.Editor
             Render();
         }
 
+        private void InitializeApp()
+        {
+            LayerNameLabel.Content = project.Layers[0].LayerName;
+            this.Title = $"Lighthouse - {project.ProjectName}";
+        }
+
         private void InitializeLayersListViewPage()
         {
             pages.ListViewPage = new LayersListViewPage(this, project, OnLayerListViewSelectionChanged);
-
-            LayerNameLabel.Content = project.Layers[0].LayerName;
-
             CurrentPage.Content = pages.ListViewPage;
         }
 
