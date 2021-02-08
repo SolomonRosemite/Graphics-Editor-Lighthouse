@@ -82,11 +82,11 @@ namespace Lighthouse.Windows.Editor
             project.Layers.CollectionChanged += OnLayerCollectionChanged;
         }
 
-        private void OnRedoClick(object sender, RoutedEventArgs e) => Action(editorState.Redo(currentProjectStateId));
+        private void OnRedoClick(object sender, RoutedEventArgs e) => HandleRedoUndoAction(editorState.Redo(currentProjectStateId));
 
-        private void OnUndoClick(object sender, RoutedEventArgs e) => Action(editorState.Undo(currentProjectStateId));
+        private void OnUndoClick(object sender, RoutedEventArgs e) => HandleRedoUndoAction(editorState.Undo(currentProjectStateId));
 
-        private void Action(ActionResponse res)
+        private void HandleRedoUndoAction(ActionResponse res)
         {
             if (res.Successful)
             {
@@ -130,6 +130,7 @@ namespace Lighthouse.Windows.Editor
                     type = RotateFlipType.RotateNoneFlipNone;
                     break;
             }
+
             project.Layers[0].RotateImageTest(type);
             Render();
         }
@@ -187,7 +188,19 @@ namespace Lighthouse.Windows.Editor
 
             ignoreNextRender = true;
 
-            int index = project.Layers.IndexOf(layer);
+            int index = -1;
+            for (int i = 0; i < project.Layers.Count; i++)
+            {
+                if (project.Layers[i].Id == layer.Id)
+                {
+                    index = i;
+                    break;
+                }
+            }
+
+            if (index == -1)
+                throw new Exception("Index was -1");
+
 
             // Remove Item from list
             project.Layers.RemoveAt(index);

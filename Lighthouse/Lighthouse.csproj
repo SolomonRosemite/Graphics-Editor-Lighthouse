@@ -15,7 +15,9 @@
     <None Remove="assets\icons\export.png" />
     <None Remove="assets\icons\image.png" />
     <None Remove="assets\icons\new.png" />
+    <None Remove="assets\icons\redo.png" />
     <None Remove="assets\icons\save.png" />
+    <None Remove="assets\icons\undo.png" />
     <None Remove="assets\icons\upload.png" />
     <None Remove="assets\ic_launcher.png" />
     <None Remove="assets\SplashScreen.png" />
@@ -40,7 +42,13 @@
     <Resource Include="assets\icons\new.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="assets\icons\redo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="assets\icons\save.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\icons\undo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="assets\icons\upload.png">

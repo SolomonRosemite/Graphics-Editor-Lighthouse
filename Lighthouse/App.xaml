@@ -19,10 +19,26 @@
             <Setter Property="Visibility" Value="Hidden"/>
         </Style>
         <Style x:Key="WinAll" TargetType="{x:Type Window}">
-            <Setter Property="FontFamily"
-        Value="Roboto" />
-            <Setter Property="FontSize"
-        Value="14" />
+            <Setter Property="FontFamily" Value="Roboto" />
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+
+        <Style x:Key="Modern" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#00008000"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#7F000000"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
     </Application.Resources>
 </Application>

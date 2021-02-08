@@ -1,5 +1,5 @@
-﻿using System;
-using System.Windows.Threading;
+﻿using System.Windows.Threading;
+using System;
 
 namespace Lighthouse.Helpers
 {
@@ -14,14 +14,14 @@ namespace Lighthouse.Helpers
             dispatcherTimer.Start();
         }
 
-        private void DispatcherTimer_Tick(object? sender, EventArgs e) => clicked = false;
+        private void DispatcherTimer_Tick(object _, EventArgs e) => clicked = false;
 
         public bool OnClickClick()
-         {
+        {
              if (clicked) return true;
 
              clicked = true;
              return false;
-         }
+        }
     }
 }

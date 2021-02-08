@@ -6,6 +6,7 @@
         WindowStartupLocation="CenterScreen"
         xmlns:local="clr-namespace:Lighthouse"
         mc:Ignorable="d"
+        
         WindowState="Normal"
         Title="MainWindow"
         MinHeight="400"
