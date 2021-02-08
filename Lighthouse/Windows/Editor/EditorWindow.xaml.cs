@@ -112,24 +112,22 @@ namespace Lighthouse.Windows.Editor
             }
         }
 
-        private int i = 1;
         private void TestRotateImage(object sender, RoutedEventArgs e)
         {
-            RotateFlipType type = RotateFlipType.RotateNoneFlipNone;
-            switch (i++)
+            RotateFlipType type = project.Layers[0].Metadata.RotationType;
+            switch (type)
             {
-                case 0:
-                    type = RotateFlipType.RotateNoneFlipNone;
-                    break;
-                case 1:
+                case RotateFlipType.RotateNoneFlipNone:
                     type = RotateFlipType.Rotate90FlipNone;
                     break;
-                case 2:
+                case RotateFlipType.Rotate90FlipNone:
                     type = RotateFlipType.Rotate180FlipNone;
                     break;
-                case 3:
+                case RotateFlipType.Rotate180FlipNone:
                     type = RotateFlipType.Rotate270FlipNone;
-                    i = 0;
+                    break;
+                case RotateFlipType.Rotate270FlipNone:
+                    type = RotateFlipType.RotateNoneFlipNone;
                     break;
             }
             project.Layers[0].RotateImageTest(type);
