@@ -13,11 +13,14 @@ using System.Windows.Input;
 using System.Windows.Media;
 using Lighthouse.Dialogs;
 using Lighthouse.Helpers;
+using Lighthouse.Windows;
+using Lighthouse.Windows.Editor.Pages.LayersListViewPage;
+using Lighthouse.Windows.Editor.Structs;
 using LighthouseLibrary.Models;
 using LighthouseLibrary.Services;
 using Point = System.Windows.Point;
 
-namespace Lighthouse.Windows
+namespace Lighthouse.Windows.Editor
 {
     /// <summary>
     /// Interaction logic for EditorWindow.xaml
@@ -31,9 +34,10 @@ namespace Lighthouse.Windows
 
         private int currentProjectStateId;
         private bool ignoreNextRender;
-        private Point dragStartPoint;
 
         private Layer lastSelectedLayer;
+
+        private EditorPages pages;
 
         public EditorWindow(Project project)
         {
@@ -45,36 +49,36 @@ namespace Lighthouse.Windows
             InitializeComponent();
             RegisterEvents();
 
-            InitLayers();
+            InitializeLayersListViewPage();
+
             lastSelectedLayer = project.Layers[0];
 
             Render();
         }
 
-        private void InitLayers()
+        private void InitializeLayersListViewPage()
         {
-            if (project.Layers.Count == 0) return;
+            pages.ListViewPage = new LayersListViewPage(this, project, OnLayerListViewSelectionChanged);
 
             LayerNameLabel.Content = project.Layers[0].LayerName;
 
-            listBox.DisplayMemberPath = "LayerName";
-            listBox.ItemsSource = project.Layers;
+            CurrentPage.Content = pages.ListViewPage;
+        }
 
-            listBox.PreviewMouseMove += ListBox_PreviewMouseMove;
+        private void OnLayerListViewSelectionChanged(object _, ListBox listBox)
+        {
+            try
+            {
+                if (listBox.SelectedItem == null || !(listBox.SelectedItem is Layer item)) return;
 
-            var style = new Style(typeof(ListBoxItem));
-            style.Setters.Add(new Setter(AllowDropProperty, true));
-            style.Setters.Add(new EventSetter(
-                PreviewMouseLeftButtonDownEvent,
-                new MouseButtonEventHandler(ListBoxItem_PreviewMouseLeftButtonDown)
-            ));
-            style.Setters.Add(new EventSetter(DropEvent, new DragEventHandler(ListBoxItem_Drop)));
-            listBox.ItemContainerStyle = style;
+                LayerNameLabel.Content = item.LayerName;
+                lastSelectedLayer = item;
+            }
+            catch { }
         }
 
         private void RegisterEvents()
         {
-            listBox.SelectionChanged += ListBox_SelectionChanged;
             project.Layers.CollectionChanged += OnLayerCollectionChanged;
         }
 
@@ -93,7 +97,7 @@ namespace Lighthouse.Windows
                 if (fi == null) return;
                 fi.SetValue(project.Layers, null);
 
-                listBox.ItemsSource = project.Layers;
+                pages.ListViewPage.listBox.ItemsSource = project.Layers;
 
                 project.Layers.CollectionChanged += OnLayerCollectionChanged;
 
@@ -174,18 +178,6 @@ namespace Lighthouse.Windows
             Render();
         }
 
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            try
-            {
-                if (listBox.SelectedItem == null || !(listBox.SelectedItem is Layer item)) return;
-
-                LayerNameLabel.Content = item.LayerName;
-                lastSelectedLayer = item;
-            }
-            catch { }
-        }
-
         private void OnExportImage(object sender, RoutedEventArgs e) => new ExportWindow(project).Show();
 
         private async void OnEditLayerName(object sender, RoutedEventArgs e)
@@ -215,61 +207,12 @@ namespace Lighthouse.Windows
             currentProjectStateId = editorState.AddNewSnapshot(project);
         }
 
-        #region
+        #region ListViewPage
 
-        private T FindVisualParent<T>(DependencyObject child)
-            where T : DependencyObject
-        {
-            var parentObject = VisualTreeHelper.GetParent(child);
-
-            if (parentObject == null)
-                return null;
-
-            if (parentObject is T parent)
-                return parent;
-            return FindVisualParent<T>(parentObject);
-        }
-
-        private void ListBox_PreviewMouseMove(object sender, MouseEventArgs e)
-        {
-            Point point = e.GetPosition(null);
-            Vector diff = dragStartPoint - point;
-            if (e.LeftButton == MouseButtonState.Pressed &&
-                (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance ||
-                    Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance))
-            {
-
-                var lbi = FindVisualParent<ListBoxItem>((DependencyObject)e.OriginalSource);
-                if (lbi != null)
-                {
-                    DragDrop.DoDragDrop(lbi, lbi.DataContext, DragDropEffects.Move);
-                }
-            }
-        }
-
-        private void ListBoxItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            dragStartPoint = e.GetPosition(null);
-        }
-
-        private void ListBoxItem_Drop(object sender, DragEventArgs e)
-        {
-            if (sender is ListBoxItem item)
-            {
-                var source = e.Data.GetData(typeof(Layer)) as Layer;
-                var target = item.DataContext as Layer;
-
-                int sourceIndex = listBox.Items.IndexOf(source);
-                int targetIndex = listBox.Items.IndexOf(target);
-
-                Move(source, sourceIndex, targetIndex);
-            }
-        }
-
-        private void Move(Layer source, int sourceIndex, int targetIndex)
+        public void Move(Layer source, int sourceIndex, int targetIndex)
         {
             ignoreNextRender = true;
-            
+
             if (sourceIndex < targetIndex)
             {
                 project.Layers.Insert(targetIndex + 1, source);
@@ -288,7 +231,7 @@ namespace Lighthouse.Windows
 
         #endregion
 
-        #region
+        #region WindowClick Events
 
         private void WindowClick(object sender, MouseButtonEventArgs e)
         {

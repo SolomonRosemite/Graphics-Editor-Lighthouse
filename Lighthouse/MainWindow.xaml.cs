@@ -5,6 +5,7 @@ using System.Windows.Media;
 using System.Windows.Threading;
 using Lighthouse.Helpers;
 using Lighthouse.Windows;
+using Lighthouse.Windows.Editor;
 using LighthouseLibrary.Models;
 using LighthouseLibrary.Services;
 using Color = System.Windows.Media.Color;
