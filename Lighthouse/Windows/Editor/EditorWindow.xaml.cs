@@ -18,7 +18,6 @@ using Lighthouse.Windows.Editor.Pages.LayersListViewPage;
 using Lighthouse.Windows.Editor.Structs;
 using LighthouseLibrary.Models;
 using LighthouseLibrary.Services;
-using Point = System.Windows.Point;
 
 namespace Lighthouse.Windows.Editor
 {
@@ -27,8 +26,6 @@ namespace Lighthouse.Windows.Editor
     /// </summary>
     public partial class EditorWindow : Window
     {
-        private readonly WindowDoubleClick doubleClick;
-
         private readonly EditorState editorState;
         private Project project;
 
@@ -41,8 +38,6 @@ namespace Lighthouse.Windows.Editor
 
         public EditorWindow(Project project)
         {
-            doubleClick = new WindowDoubleClick();
-
             editorState = new EditorState();
             this.project = project;
 
@@ -247,46 +242,35 @@ namespace Lighthouse.Windows.Editor
 
         #endregion
 
-        #region WindowClick Events
-
-        private void WindowClick(object sender, MouseButtonEventArgs e)
-        {
-            var wasDoubleClick = doubleClick.OnClickClick();
-
-            if (wasDoubleClick)
-                OnMaximizedClick(null, null);
-
-            try { DragMove(); } catch { }
-        }
-
         private void OnExitClick(object sender, RoutedEventArgs e)
         {
             // Todo: Don't exit if there are unsaved changes...
             Application.Current.Shutdown();
         }
 
-        private void OnMaximizedClick(object sender, RoutedEventArgs e)
+        private void OnColorGradingClick(object sender, RoutedEventArgs e)
         {
-            switch (this.WindowState)
-            {
-                case WindowState.Normal:
-                    this.WindowState = WindowState.Maximized;
-                    break;
-                case WindowState.Minimized:
-                    break;
-                case WindowState.Maximized:
-                    this.WindowState = WindowState.Normal;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            throw new NotImplementedException();
         }
 
-        private void OnMinimizedClick(object sender, RoutedEventArgs e)
+        private void OnFiltersClick(object sender, RoutedEventArgs e)
         {
-            this.WindowState = WindowState.Minimized;
+            throw new NotImplementedException();
         }
 
-        #endregion
+        private void OnLayersClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void OnTransformClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void OnSettingsClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

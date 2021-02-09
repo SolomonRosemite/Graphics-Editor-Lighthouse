@@ -3,13 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Lighthouse.Windows.Editor"
+        xmlns:local="clr-namespace:Lighthouse.Windows.Editor" xmlns:st="http://schemas.spicytaco.io/"
         mc:Ignorable="d"
         
         Title="Lighthouse"
         Height="800"
         Width="1400"
-        MinHeight="650"
+        MinHeight="800"
         MinWidth="1200"
         WindowStyle="SingleBorderWindow"
         ResizeMode="CanResize"
@@ -52,7 +52,7 @@
 
             <Grid>
             <!--Top-->
-            <Grid Height="80" VerticalAlignment="Top" MouseLeftButtonDown="WindowClick" Background="#00000000">
+            <Grid Height="80" VerticalAlignment="Top" Background="#00000000">
                 <Image Width="50" Height="50" Margin="30,15,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" >
                     <Image.Source>
                         <ImageSource>\assets\icons\color_dots.png</ImageSource>
@@ -89,7 +89,7 @@
                             <Button.Content>
                                 <Grid Width="170" Height="35">
                                     <Image Source="\assets\icons\export.png" Width="20" Margin="20,7,130,8" />
-                                    <TextBlock FontSize="15" Margin="60,10,0,5" Foreground="#1b262b" HorizontalAlignment="Left" Width="92" Text="Export Image" />
+                                    <TextBlock FontSize="15" Margin="60,7.5,0,5" Foreground="#1b262b" HorizontalAlignment="Left" Width="92" Text="Export Image" />
                                 </Grid>
                             </Button.Content>
                         </Button>
@@ -113,9 +113,6 @@
                         <MenuItem Click="OnUndoClick" Header="Undo"/>
                         <MenuItem Click="OnRedoClick" Header="Redo"/>
                         <MenuItem Click="TestRotateImage" Header="(Test) Rotate Image 90°"/>
-                        <MenuItem Click="OnMinimizedClick" Header="Minimize"/>
-                        <MenuItem Click="OnMaximizedClick" Header="Maximize"/>
-                        <MenuItem Click="OnExitClick" Header="Exit"/>
                     </MenuItem>
                 </Menu>
             </Grid>
@@ -129,20 +126,69 @@
 
             <!--Left Side-->
             <Border Margin="0,80,0,0" CornerRadius="0,0,0,0" Background="#27272f" HorizontalAlignment="Left" Width="100">
-                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Width="100" Height="100">
-                    <Button Style="{StaticResource Modern}" Click="OnImportImage" Height="100" Width="100" HorizontalAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="{x:Null}" Foreground="{x:Null}">
-                        <Button.Content>
-                            <Grid HorizontalAlignment="Center" Width="100" Height="100">
-                                <StackPanel>
-                                    <Rectangle Margin="20,0,0,0" Height="10" />
-                                    <Image Source="\assets\icons\new.png" Width="50" Height="50" Margin="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" />
-                                    <Label FontSize="14" Margin="0,7.5,0,0" HorizontalContentAlignment="Center" Foreground="#FFC6C6DC" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" Content="Import Image" />
-                                </StackPanel>
-                            </Grid>
-                        </Button.Content>
-                    </Button>
-                </StackPanel>
-            </Border>
+                <Grid>
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Width="100">
+                            <Button Style="{StaticResource Modern}" Click="OnImportImage" Height="100" Width="100" HorizontalAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="{x:Null}" Foreground="{x:Null}">
+                                <Button.Content>
+                                    <Grid HorizontalAlignment="Center" Width="100" Height="100">
+                                        <StackPanel>
+                                            <Rectangle Margin="20,0,0,0" Height="10" />
+                                            <Image Source="\assets\icons\new.png" Width="50" Height="50" Margin="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" />
+                                            <Label FontSize="14" Margin="0,7.5,0,0" HorizontalContentAlignment="Center" Foreground="#FFC6C6DC" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" Content="Import Image" />
+                                        </StackPanel>
+                                    </Grid>
+                                </Button.Content>
+                            </Button>
+                            <Button Style="{StaticResource Modern}" Click="OnColorGradingClick" Height="100" Width="100" HorizontalAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="{x:Null}" Foreground="{x:Null}">
+                                <Grid HorizontalAlignment="Center" Width="100" Height="100">
+                                    <StackPanel>
+                                        <Rectangle Margin="20,0,0,0" Height="10" />
+                                        <Image Source="\assets\icons\pantone.png" Width="50" Height="50" Margin="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" />
+                                        <Label Content="Color Grading" FontSize="14" Margin="0,7.5,0,0" HorizontalContentAlignment="Center" Foreground="#FFC6C6DC" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" />
+                                    </StackPanel>
+                                </Grid>
+                            </Button>
+                            <Button Style="{StaticResource Modern}" Click="OnFiltersClick" Height="100" Width="100" HorizontalAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="{x:Null}" Foreground="{x:Null}">
+                                <Grid HorizontalAlignment="Center" Width="100" Height="100">
+                                    <StackPanel>
+                                        <Rectangle Margin="20,0,0,0" Height="10" />
+                                        <Image Source="\assets\icons\color-filters.png" Width="50" Height="50" Margin="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" />
+                                        <Label Content="Filters" FontSize="14" Margin="0,7.5,0,0" HorizontalContentAlignment="Center" Foreground="#FFC6C6DC" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" />
+                                    </StackPanel>
+                                </Grid>
+                            </Button>
+                            <Button Style="{StaticResource Modern}" Click="OnTransformClick" Height="100" Width="100" HorizontalAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="{x:Null}" Foreground="{x:Null}">
+                                <Grid HorizontalAlignment="Center" Width="100" Height="100">
+                                    <StackPanel>
+                                        <Rectangle Margin="20,0,0,0" Height="10" />
+                                        <Image Source="\assets\icons\cube.png" Width="50" Height="50" Margin="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" />
+                                        <Label Content="Transform" FontSize="14" Margin="0,7.5,0,0" HorizontalContentAlignment="Center" Foreground="#FFC6C6DC" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" />
+                                    </StackPanel>
+                                </Grid>
+                            </Button>
+                            <Button Style="{StaticResource Modern}" Click="OnLayersClick" Height="100" Width="100" HorizontalAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="{x:Null}" Foreground="{x:Null}">
+                                <Grid HorizontalAlignment="Center" Width="100" Height="100">
+                                    <StackPanel>
+                                        <Rectangle Margin="20,0,0,0" Height="10" />
+                                        <Image Source="\assets\icons\layers.png" Width="50" Height="50" Margin="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" />
+                                        <Label Content="Layers" FontSize="14" Margin="0,7.5,0,0" HorizontalContentAlignment="Center" Foreground="#FFC6C6DC" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" />
+                                    </StackPanel>
+                                </Grid>
+                            </Button>
+                        </StackPanel>
+
+                        <StackPanel VerticalAlignment="Bottom">
+                            <Rectangle Width="Auto" Height="2" Fill="White" />
+                            <Button Style="{StaticResource Modern}" Click="OnSettingsClick" Height="60" Width="100" HorizontalAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="{x:Null}" Foreground="{x:Null}">
+                                <Grid HorizontalAlignment="Center">
+                                    <StackPanel>
+                                        <Image Source="\assets\icons\settings.png" Width="25" Height="25" Margin="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" />
+                                    </StackPanel>
+                                </Grid>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </Border>
 
             <!--Right Side-->
             <Border Margin="0,80,0,0" CornerRadius="0,0,0,0" Background="#27272f" HorizontalAlignment="Right" Width="320">

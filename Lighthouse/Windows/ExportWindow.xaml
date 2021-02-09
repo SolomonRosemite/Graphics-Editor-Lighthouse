@@ -5,6 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:Lighthouse.Windows"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Title="Export Image" ResizeMode="NoResize" Width="700" Height="700" >
     <Grid>
         <Label Content="Export Image" FontSize="30" VerticalAlignment="Top" HorizontalAlignment="Center" />

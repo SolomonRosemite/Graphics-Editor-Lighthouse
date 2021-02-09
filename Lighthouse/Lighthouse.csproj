@@ -9,14 +9,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="assets\icons\color-filters.png" />
     <None Remove="assets\icons\color_dots.png" />
+    <None Remove="assets\icons\cube.png" />
     <None Remove="assets\icons\down-arrow.png" />
     <None Remove="assets\icons\edit.png" />
     <None Remove="assets\icons\export.png" />
     <None Remove="assets\icons\image.png" />
+    <None Remove="assets\icons\layers.png" />
     <None Remove="assets\icons\new.png" />
+    <None Remove="assets\icons\pantone.png" />
     <None Remove="assets\icons\redo.png" />
     <None Remove="assets\icons\save.png" />
+    <None Remove="assets\icons\settings.png" />
+    <None Remove="assets\icons\settings2.png" />
+    <None Remove="assets\icons\transform.png" />
     <None Remove="assets\icons\undo.png" />
     <None Remove="assets\icons\upload.png" />
     <None Remove="assets\ic_launcher.png" />
@@ -24,7 +31,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="assets\icons\color-filters.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="assets\icons\color_dots.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\icons\cube.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="assets\icons\down-arrow.png">
@@ -39,13 +52,28 @@
     <Resource Include="assets\icons\image.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="assets\icons\layers.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="assets\icons\new.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\icons\pantone.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="assets\icons\redo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="assets\icons\save.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\icons\settings.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\icons\settings2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\icons\transform.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="assets\icons\undo.png">
@@ -81,6 +109,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="SpicyTaco.AutoGrid" Version="1.2.29" />
     <PackageReference Include="System.Drawing.Common" Version="5.0.0" />
   </ItemGroup>
 
