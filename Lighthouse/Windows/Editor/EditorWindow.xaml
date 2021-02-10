@@ -75,7 +75,7 @@
 
                     <StackPanel HorizontalAlignment="Right" Margin="0,15,0,0" VerticalAlignment="Top" Orientation="Horizontal" Height="50">
                         <Border Margin="0,0,20,0" CornerRadius="5" Background="#001BE4C9" Height="35" BorderThickness="2" BorderBrush="#FF1BE4C9" >
-                            <Button Style="{StaticResource Modern}" VerticalAlignment="Top" Height="35" HorizontalAlignment="Left" HorizontalContentAlignment="Left" BorderBrush="{x:Null}" Foreground="{x:Null}">
+                            <Button Click="OnSaveProject" Style="{StaticResource Modern}" VerticalAlignment="Top" Height="35" HorizontalAlignment="Left" HorizontalContentAlignment="Left" BorderBrush="{x:Null}" Foreground="{x:Null}">
                                 <Button.Content>
                                     <Grid Width="170" Height="35">
                                         <Image Source="\assets\icons\save.png" Width="20" Margin="20,7,130,8" />
@@ -204,6 +204,7 @@
                 <Border Margin="0,80,0,0" CornerRadius="0,0,0,0" Background="#27272f" HorizontalAlignment="Right" Width="400">
                     <Grid>
                         <Frame x:Name="CurrentPage" Margin="0,0,0,0" NavigationUIVisibility="Hidden" />
+                        <Rectangle Name="AnimationRectangle" Fill="#27272f" IsHitTestVisible="False" />
                     </Grid>
                 </Border>
 

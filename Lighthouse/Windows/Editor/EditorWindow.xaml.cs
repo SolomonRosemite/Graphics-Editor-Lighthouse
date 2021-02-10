@@ -11,9 +11,11 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using Lighthouse.Dialogs;
 using Lighthouse.Helpers;
 using Lighthouse.Windows;
+using Lighthouse.Windows.Editor.Pages;
 using Lighthouse.Windows.Editor.Pages.LayersListViewPage;
 using Lighthouse.Windows.Editor.Structs;
 using LighthouseLibrary.Models;
@@ -32,12 +34,14 @@ namespace Lighthouse.Windows.Editor
         private int currentProjectStateId;
         private bool ignoreNextRender;
 
+        private string loadedProjectLocation;
         private Layer lastSelectedLayer;
 
         private EditorPages pages;
 
-        public EditorWindow(Project project)
+        public EditorWindow(Project project, string loadedProjectLocation)
         {
+            this.loadedProjectLocation = loadedProjectLocation;
             lastSelectedLayer = project.Layers[0];
             editorState = new EditorState();
             this.project = project;
@@ -47,11 +51,18 @@ namespace Lighthouse.Windows.Editor
             RegisterEvents();
             InitializeApp();
 
+            PlayAnimation(3000);
+
             Render();
         }
 
         private void InitializePages()
         {
+            pages.ColorGradingPage = new ColorGradingPage();
+            pages.BackgroundPage = new BackgroundPage();
+            pages.FiltersPage = new FiltersPage();
+            pages.ProjectSettings = new ProjectSettings();
+            pages.TransformPage = new TransformPage();
             InitializeLayersListViewPage();
 
             void InitializeLayersListViewPage()
@@ -181,12 +192,27 @@ namespace Lighthouse.Windows.Editor
 
         private void OnExportImage(object sender, RoutedEventArgs e) => new ExportWindow(project).Show();
 
+        private void OnSaveProject(object _, RoutedEventArgs e)
+        {
+            // Todo: Save the Project...
+            // If the Project name contains "unnamed" OpenFileDialog to find a place to save it.
+            // Else just save at where it was loaded from.
+            if (loadedProjectLocation == null)
+            {
+                // This is a newly created Project.
+                return;
+            }
+
+            // This is not a new Project... thus we save at the same Location (same file).
+            // Todo: Implement
+        }
+
         private async void OnEditLayerName(object sender, RoutedEventArgs e)
         {
             Layer layer = lastSelectedLayer;
             var result = await LayerDialog.Open(layer);
 
-            if (!result.Save) return;
+            if (!result.Save || result.LayerName.Length > 50) return;
 
             ignoreNextRender = true;
 
@@ -220,6 +246,7 @@ namespace Lighthouse.Windows.Editor
             currentProjectStateId = editorState.AddNewSnapshot(project);
         }
 
+
         #region ListViewPage
 
         public void Move(Layer source, int sourceIndex, int targetIndex)
@@ -252,32 +279,44 @@ namespace Lighthouse.Windows.Editor
 
         private void OnColorGradingClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            Fade(pages.ColorGradingPage);
         }
 
         private void OnFiltersClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            Fade(pages.FiltersPage);
         }
 
         private void OnLayersClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            Fade(pages.ListViewPage);
         }
 
         private void OnTransformClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            Fade(pages.TransformPage);
         }
 
         private void OnSettingsClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            Fade(pages.ProjectSettings);
         }
 
         private void OnBackgroundClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            Fade(pages.BackgroundPage);
+        }
+
+        private void Fade(Page page)
+        {
+            PlayAnimation();
+
+            CurrentPage.Content = page;
+        }
+
+        private void PlayAnimation(int milliseconds = 1000)
+        {
+            AnimationRectangle.BeginAnimation(OpacityProperty, new DoubleAnimation(1, 0, new Duration(TimeSpan.FromMilliseconds(milliseconds))));
         }
     }
 }

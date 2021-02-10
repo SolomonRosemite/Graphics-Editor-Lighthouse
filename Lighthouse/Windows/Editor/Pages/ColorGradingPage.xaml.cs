@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Lighthouse.Windows.Editor.Pages
 {
     /// <summary>
-    /// Interaction logic for ColorGrading.xaml
+    /// Interaction logic for ColorGradingPage.xaml
     /// </summary>
-    public partial class ColorGrading : Page
+    public partial class ColorGradingPage : Page
     {
-        public ColorGrading()
+        public ColorGradingPage()
         {
             InitializeComponent();
         }

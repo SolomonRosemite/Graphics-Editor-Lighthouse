@@ -18,9 +18,9 @@ namespace Lighthouse.Windows.Editor.Pages
     /// <summary>
     /// Interaction logic for Filters.xaml
     /// </summary>
-    public partial class Filters : Page
+    public partial class FiltersPage : Page
     {
-        public Filters()
+        public FiltersPage()
         {
             InitializeComponent();
         }

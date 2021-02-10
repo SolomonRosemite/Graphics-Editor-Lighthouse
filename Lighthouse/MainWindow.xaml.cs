@@ -53,11 +53,14 @@ namespace Lighthouse
 
             try
             {
-                Project project = filePath.EndsWith(".lh")
+                bool isProjectType = filePath.EndsWith(".lh");
+                string loadedProjectLocation = !isProjectType ? null : filePath;
+
+                Project project = isProjectType
                     ? ImportService.LoadImportedProject(filePath)
                     : ImportService.LoadImportedImage(filePath);
 
-                new EditorWindow(project).Show();
+                new EditorWindow(project, loadedProjectLocation).Show();
                 this.Hide();
             }
             catch (Exception e)
