@@ -116,5 +116,7 @@ namespace Lighthouse.Windows.Editor.Pages.LayersListViewPage
                 editorWindow.Move(source, sourceIndex, targetIndex);
             }
         }
+
+        private void OnAddLayerClick(object sender, RoutedEventArgs e) => editorWindow.OnImportImage(sender, e);
     }
 }

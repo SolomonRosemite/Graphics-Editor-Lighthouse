@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="assets\icons\background.png" />
     <None Remove="assets\icons\color-filters.png" />
     <None Remove="assets\icons\color_dots.png" />
     <None Remove="assets\icons\cube.png" />
@@ -31,6 +32,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="assets\icons\background.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="assets\icons\color-filters.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

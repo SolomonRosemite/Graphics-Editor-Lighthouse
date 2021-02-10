@@ -12,6 +12,7 @@
         MinHeight="800"
         MinWidth="1200"
         WindowStyle="SingleBorderWindow"
+        WindowState="Maximized"
         ResizeMode="CanResize"
         Background="{x:Null}"
         >
@@ -51,82 +52,82 @@
             </Menu>
 
             <Grid>
-            <!--Top-->
-            <Grid Height="80" VerticalAlignment="Top" Background="#00000000">
-                <Image Width="50" Height="50" Margin="30,15,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" >
-                    <Image.Source>
-                        <ImageSource>\assets\icons\color_dots.png</ImageSource>
-                    </Image.Source>
-                </Image>
-
-                <StackPanel HorizontalAlignment="Left" Margin="110,15,0,0" VerticalAlignment="Top" Orientation="Horizontal" Height="50">
-                    <Label Name="LayerNameLabel" Content="layer name" Margin="0,0,0,0"  Foreground="White" FontSize="20" FontFamily="Roboto" FontWeight="Medium" Height="34"/>
-                    <Button Style="{StaticResource Modern}" Click="OnEditLayerName" Margin="10,0,0,0" BorderBrush="{x:Null}" Foreground="{x:Null}" Width="50">
-                        <Button.Content>
-                            <Image Width="25" Height="25">
-                                <Image.Source>
-                                    <ImageSource>\assets\icons\edit.png</ImageSource>
-                                </Image.Source>
-                            </Image>
-                        </Button.Content>
-                    </Button>
-                </StackPanel>
-
-                <StackPanel HorizontalAlignment="Right" Margin="0,15,0,0" VerticalAlignment="Top" Orientation="Horizontal" Height="50">
-                    <Border Margin="0,0,20,0" CornerRadius="5" Background="#001BE4C9" Height="35" BorderThickness="2" BorderBrush="#FF1BE4C9" >
-                        <Button Style="{StaticResource Modern}" VerticalAlignment="Top" Height="35" HorizontalAlignment="Left" HorizontalContentAlignment="Left" BorderBrush="{x:Null}" Foreground="{x:Null}">
-                            <Button.Content>
-                                <Grid Width="170" Height="35">
-                                    <Image Source="\assets\icons\save.png" Width="20" Margin="20,7,130,8" />
-                                    <TextBlock FontSize="15" Margin="63,7,0,10" Foreground="White" HorizontalAlignment="Left" Width="84" FontFamily="Roboto" ><Run Language="de-de" Text="Save Project"/></TextBlock>
-                                </Grid>
-                            </Button.Content>
-                        </Button>
-                    </Border>
-
-                    <Border CornerRadius="5" Background="#1be4c9" Height="35" BorderThickness="0.3" BorderBrush="#00B62F2F" >
-                        <Button Style="{StaticResource Modern}" Click="OnExportImage" VerticalAlignment="Center" Height="35" HorizontalAlignment="Center" HorizontalContentAlignment="Left" BorderBrush="{x:Null}" Foreground="{x:Null}" Width="170">
-                            <Button.Content>
-                                <Grid Width="170" Height="35">
-                                    <Image Source="\assets\icons\export.png" Width="20" Margin="20,7,130,8" />
-                                    <TextBlock FontSize="15" Margin="60,7.5,0,5" Foreground="#1b262b" HorizontalAlignment="Left" Width="92" Text="Export Image" />
-                                </Grid>
-                            </Button.Content>
-                        </Button>
-                    </Border>
-
-                    <Image Width="50" Height="50" Margin="20,0,20,0" >
+                <!--Top-->
+                <Grid Height="80" VerticalAlignment="Top" Background="#00000000">
+                    <Image Width="50" Height="50" Margin="30,15,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" >
                         <Image.Source>
-                            <BitmapImage UriSource="\assets\ic_launcher.png"/>
+                            <ImageSource>\assets\icons\color_dots.png</ImageSource>
                         </Image.Source>
                     </Image>
 
-                    <Image Width="20" Height="20" Margin="0,15,30,0" VerticalAlignment="Top" HorizontalAlignment="Right" >
-                        <Image.Source>
-                            <BitmapImage UriSource="\assets\icons\down-arrow.png"/>
-                        </Image.Source>
-                    </Image>
-                </StackPanel>
+                    <StackPanel HorizontalAlignment="Left" Margin="110,15,0,0" VerticalAlignment="Top" Orientation="Horizontal" Height="50">
+                        <Label Name="LayerNameLabel" Content="layer name" Margin="0,0,0,0"  Foreground="White" FontSize="20" FontFamily="Roboto" FontWeight="Medium" Height="34"/>
+                        <Button Style="{StaticResource Modern}" Click="OnEditLayerName" Margin="10,0,0,0" BorderBrush="{x:Null}" Foreground="{x:Null}" Width="50">
+                            <Button.Content>
+                                <Image Width="25" Height="25">
+                                    <Image.Source>
+                                        <ImageSource>\assets\icons\edit.png</ImageSource>
+                                    </Image.Source>
+                                </Image>
+                            </Button.Content>
+                        </Button>
+                    </StackPanel>
 
-                <Menu HorizontalAlignment="Right" Width="55" Height="40" VerticalAlignment="Top" Opacity="0.00000001" Margin="0,20,10,0">
-                    <MenuItem Header="Menu" Height="38" Width="62">
-                        <MenuItem Click="OnUndoClick" Header="Undo"/>
-                        <MenuItem Click="OnRedoClick" Header="Redo"/>
-                        <MenuItem Click="TestRotateImage" Header="(Test) Rotate Image 90°"/>
-                    </MenuItem>
-                </Menu>
-            </Grid>
+                    <StackPanel HorizontalAlignment="Right" Margin="0,15,0,0" VerticalAlignment="Top" Orientation="Horizontal" Height="50">
+                        <Border Margin="0,0,20,0" CornerRadius="5" Background="#001BE4C9" Height="35" BorderThickness="2" BorderBrush="#FF1BE4C9" >
+                            <Button Style="{StaticResource Modern}" VerticalAlignment="Top" Height="35" HorizontalAlignment="Left" HorizontalContentAlignment="Left" BorderBrush="{x:Null}" Foreground="{x:Null}">
+                                <Button.Content>
+                                    <Grid Width="170" Height="35">
+                                        <Image Source="\assets\icons\save.png" Width="20" Margin="20,7,130,8" />
+                                        <TextBlock FontSize="15" Margin="63,7,0,10" Foreground="White" HorizontalAlignment="Left" Width="84" FontFamily="Roboto" ><Run Language="de-de" Text="Save Project"/></TextBlock>
+                                    </Grid>
+                                </Button.Content>
+                            </Button>
+                        </Border>
 
-            <!--Center-->
-            <Grid Margin="100,80,320,0" Background="#1b1b22">
-                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Image Name="ImageView" Height="500" Width="500"/>
-                </StackPanel>
-            </Grid>
+                        <Border CornerRadius="5" Background="#1be4c9" Height="35" BorderThickness="0.3" BorderBrush="#00B62F2F" >
+                            <Button Style="{StaticResource Modern}" Click="OnExportImage" VerticalAlignment="Center" Height="35" HorizontalAlignment="Center" HorizontalContentAlignment="Left" BorderBrush="{x:Null}" Foreground="{x:Null}" Width="170">
+                                <Button.Content>
+                                    <Grid Width="170" Height="35">
+                                        <Image Source="\assets\icons\export.png" Width="20" Margin="20,7,130,8" />
+                                        <TextBlock FontSize="15" Margin="60,7.5,0,5" Foreground="#1b262b" HorizontalAlignment="Left" Width="92" Text="Export Image" />
+                                    </Grid>
+                                </Button.Content>
+                            </Button>
+                        </Border>
 
-            <!--Left Side-->
-            <Border Margin="0,80,0,0" CornerRadius="0,0,0,0" Background="#27272f" HorizontalAlignment="Left" Width="100">
-                <Grid>
+                        <Image Width="50" Height="50" Margin="20,0,20,0" >
+                            <Image.Source>
+                                <BitmapImage UriSource="\assets\ic_launcher.png"/>
+                            </Image.Source>
+                        </Image>
+
+                        <Image Width="20" Height="20" Margin="0,15,30,0" VerticalAlignment="Top" HorizontalAlignment="Right" >
+                            <Image.Source>
+                                <BitmapImage UriSource="\assets\icons\down-arrow.png"/>
+                            </Image.Source>
+                        </Image>
+                    </StackPanel>
+
+                    <Menu HorizontalAlignment="Right" Width="55" Height="40" VerticalAlignment="Top" Opacity="0.00000001" Margin="0,20,10,0">
+                        <MenuItem Header="Menu" Height="38" Width="62">
+                            <MenuItem Click="OnUndoClick" Header="Undo"/>
+                            <MenuItem Click="OnRedoClick" Header="Redo"/>
+                            <MenuItem Click="TestRotateImage" Header="(Test) Rotate Image 90°"/>
+                        </MenuItem>
+                    </Menu>
+                </Grid>
+
+                <!--Center-->
+                <Grid Margin="100,80,400,0" Background="#1b1b22">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Image Name="ImageView" Height="500" Width="500"/>
+                    </StackPanel>
+                </Grid>
+
+                <!--Left Side-->
+                <Border Margin="0,80,0,0" CornerRadius="0,0,0,0" Background="#27272f" HorizontalAlignment="Left" Width="100">
+                    <Grid>
                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Width="100">
                             <Button Style="{StaticResource Modern}" Click="OnImportImage" Height="100" Width="100" HorizontalAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="{x:Null}" Foreground="{x:Null}">
                                 <Button.Content>
@@ -175,6 +176,15 @@
                                     </StackPanel>
                                 </Grid>
                             </Button>
+                            <Button Style="{StaticResource Modern}" Click="OnBackgroundClick" Height="100" Width="100" HorizontalAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="{x:Null}" Foreground="{x:Null}">
+                                <Grid HorizontalAlignment="Center" Width="100" Height="100">
+                                    <StackPanel>
+                                        <Rectangle Margin="20,0,0,0" Height="10" />
+                                        <Image Source="\assets\icons\Background.png" Width="50" Height="50" Margin="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" />
+                                        <Label Content="Background" FontSize="14" Margin="0,7.5,0,0" HorizontalContentAlignment="Center" Foreground="#FFC6C6DC" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" />
+                                    </StackPanel>
+                                </Grid>
+                            </Button>
                         </StackPanel>
 
                         <StackPanel VerticalAlignment="Bottom">
@@ -190,38 +200,38 @@
                     </Grid>
                 </Border>
 
-            <!--Right Side-->
-            <Border Margin="0,80,0,0" CornerRadius="0,0,0,0" Background="#27272f" HorizontalAlignment="Right" Width="320">
-                <Grid>
-                    <Frame x:Name="CurrentPage" Margin="0,0,0,0" NavigationUIVisibility="Hidden" />
-                </Grid>
-            </Border>
+                <!--Right Side-->
+                <Border Margin="0,80,0,0" CornerRadius="0,0,0,0" Background="#27272f" HorizontalAlignment="Right" Width="400">
+                    <Grid>
+                        <Frame x:Name="CurrentPage" Margin="0,0,0,0" NavigationUIVisibility="Hidden" />
+                    </Grid>
+                </Border>
 
-            <!--Top Center-->
-            <Grid Margin="100,100,320,0" VerticalAlignment="Top" HorizontalAlignment="Center" Height="60">
-                <StackPanel Orientation="Horizontal" Height="80" VerticalAlignment="Top" HorizontalAlignment="Center">
-                    <Border CornerRadius="5" Background="#27272f" VerticalAlignment="Top" BorderBrush="Gray" BorderThickness="2.5" HorizontalAlignment="Center" Width="100" Height="40">
-                        <Button Style="{StaticResource Modern}" Click="OnUndoClick">
-                            <StackPanel Orientation="Horizontal">
-                                <Image Source="\assets\icons\undo.png" Width="20" Height="20" Margin="10,2,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" />
-                                <Rectangle Margin="7,0,0,0" Height="10" />
-                                <Label FontSize="14" Margin="0,0,0,0" HorizontalContentAlignment="Center" Foreground="#FFC6C6DC" VerticalAlignment="Center" Width="43" Content="Undo" />
-                            </StackPanel>
-                        </Button>
-                    </Border>
-                    <Rectangle Width="30" Opacity="0" />
-                    <Border CornerRadius="5" Background="#27272f" VerticalAlignment="Top" BorderBrush="Gray" BorderThickness="2.5" HorizontalAlignment="Center" Width="100" Height="40">
-                        <Button Style="{StaticResource Modern}" Click="OnRedoClick">
-                            <StackPanel Orientation="Horizontal">
-                                <Image Source="\assets\icons\redo.png" Width="20" Height="20" Margin="10,2,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" />
-                                <Rectangle Margin="7,0,0,0" Height="10" />
-                                <Label FontSize="14" Margin="0,0,0,0" HorizontalContentAlignment="Center" Foreground="#FFC6C6DC" VerticalAlignment="Center" Width="43" Content="Redo" />
-                            </StackPanel>
-                        </Button>
-                    </Border>
-                </StackPanel>
+                <!--Top Center Undo Redo Buttons-->
+                <!--<Grid Margin="100,100,320,0" VerticalAlignment="Top" HorizontalAlignment="Center" Height="60">
+                    <StackPanel Orientation="Horizontal" Height="80" VerticalAlignment="Top" HorizontalAlignment="Center">
+                        <Border CornerRadius="5" Background="#27272f" VerticalAlignment="Top" BorderBrush="Gray" BorderThickness="2.5" HorizontalAlignment="Center" Width="100" Height="40">
+                            <Button Style="{StaticResource Modern}" Click="OnUndoClick">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="\assets\icons\undo.png" Width="20" Height="20" Margin="10,2,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" />
+                                    <Rectangle Margin="7,0,0,0" Height="10" />
+                                    <Label FontSize="14" Margin="0,0,0,0" HorizontalContentAlignment="Center" Foreground="#FFC6C6DC" VerticalAlignment="Center" Width="43" Content="Undo" />
+                                </StackPanel>
+                            </Button>
+                        </Border>
+                        <Rectangle Width="30" Opacity="0" />
+                        <Border CornerRadius="5" Background="#27272f" VerticalAlignment="Top" BorderBrush="Gray" BorderThickness="2.5" HorizontalAlignment="Center" Width="100" Height="40">
+                            <Button Style="{StaticResource Modern}" Click="OnRedoClick">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="\assets\icons\redo.png" Width="20" Height="20" Margin="10,2,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" />
+                                    <Rectangle Margin="7,0,0,0" Height="10" />
+                                    <Label FontSize="14" Margin="0,0,0,0" HorizontalContentAlignment="Center" Foreground="#FFC6C6DC" VerticalAlignment="Center" Width="43" Content="Redo" />
+                                </StackPanel>
+                            </Button>
+                        </Border>
+                    </StackPanel>
+                </Grid>-->
             </Grid>
-        </Grid>
         </DockPanel>
     </Border>
 </Window>

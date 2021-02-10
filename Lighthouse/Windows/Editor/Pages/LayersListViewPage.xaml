@@ -1,0 +1,24 @@
+﻿<Page x:Class="Lighthouse.Windows.Editor.Pages.LayersListViewPage.LayersListViewPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Lighthouse.Windows.Editor.Pages.LayersListViewPage"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="400"
+      Title="LayersListViewPage">
+
+    <StackPanel>
+        <Rectangle Height="20"/>
+        <Grid>
+            <Image Source="\assets\icons\Layers.png" Width="25" Height="25" Margin="15,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
+            <Label Content="Layers Settings" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" FontWeight="ExtraLight" />
+        </Grid>
+        <Rectangle Height="10"/>
+        <Rectangle Height="1" Fill="Gray" />
+        <Rectangle Height="20"/>
+        <Button Content="Add Layer" Height="30" Click="OnAddLayerClick" />
+        <Rectangle Height="5" />
+        <ListBox BorderThickness="0" Background="#0027272F" x:Name="listBox" Foreground="White"/>
+    </StackPanel>
+</Page>

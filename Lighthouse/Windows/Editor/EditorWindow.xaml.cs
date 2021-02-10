@@ -38,31 +38,33 @@ namespace Lighthouse.Windows.Editor
 
         public EditorWindow(Project project)
         {
+            lastSelectedLayer = project.Layers[0];
             editorState = new EditorState();
             this.project = project;
 
             InitializeComponent();
+            InitializePages();
+            RegisterEvents();
             InitializeApp();
 
-            RegisterEvents();
+            Render();
+        }
 
+        private void InitializePages()
+        {
             InitializeLayersListViewPage();
 
-            lastSelectedLayer = project.Layers[0];
-
-            Render();
+            void InitializeLayersListViewPage()
+            {
+                pages.ListViewPage = new LayersListViewPage(this, project, OnLayerListViewSelectionChanged);
+                CurrentPage.Content = pages.ListViewPage;
+            }
         }
 
         private void InitializeApp()
         {
             LayerNameLabel.Content = project.Layers[0].LayerName;
             this.Title = $"Lighthouse - {project.ProjectName}";
-        }
-
-        private void InitializeLayersListViewPage()
-        {
-            pages.ListViewPage = new LayersListViewPage(this, project, OnLayerListViewSelectionChanged);
-            CurrentPage.Content = pages.ListViewPage;
         }
 
         private void OnLayerListViewSelectionChanged(object _, ListBox listBox)
@@ -146,7 +148,7 @@ namespace Lighthouse.Windows.Editor
             ImageView.Source = bitmapImage;
         }
 
-        private void OnImportImage(object sender, RoutedEventArgs e)
+        public void OnImportImage(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog
             {
@@ -269,6 +271,11 @@ namespace Lighthouse.Windows.Editor
         }
 
         private void OnSettingsClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void OnBackgroundClick(object sender, RoutedEventArgs e)
         {
             throw new NotImplementedException();
         }
