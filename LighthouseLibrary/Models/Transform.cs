@@ -39,12 +39,10 @@ namespace LighthouseLibrary.Models
 
         public void ResizeEqually(int value)
         {
-            // Todo: This somehow doesn't work yet.
-            // Fix me...
             LayerState = LayerState.Updated;
 
-            Width += value;
             Height += value;
+            Width += value;
         }
 
         public Transform(int id, int width, int height)

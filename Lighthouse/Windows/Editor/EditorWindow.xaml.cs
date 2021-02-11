@@ -39,8 +39,6 @@ namespace Lighthouse.Windows.Editor
 
         private EditorPages pages;
 
-        private Random testRandom = new Random();
-
         public EditorWindow(Project project, string loadedProjectLocation)
         {
             this.loadedProjectLocation = loadedProjectLocation;
@@ -152,9 +150,8 @@ namespace Lighthouse.Windows.Editor
 
         private void TestResizeImage(object _, RoutedEventArgs e)
         {
-            var value = testRandom.Next(10, project.Layers[0].Bitmap.Height);
-            //project.Layers[0].Metadata.Transform.ResizeOnlyWidth(value);
-            project.Layers[0].Metadata.Transform.ResizeEqually(2000);
+            var value = Math.Min(project.Layers[0].Bitmap.Height, project.Layers[0].Bitmap.Height);
+            project.Layers[0].Metadata.Transform.ResizeEqually(-100);
 
             Render();
         }
