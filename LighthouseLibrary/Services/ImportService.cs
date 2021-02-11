@@ -20,7 +20,7 @@ namespace LighthouseLibrary.Services
 
             Layer layer = new Layer(image, id, "Layer1", target, new LayerMetadata(image.Width, image.Height));
 
-            return new Project("unnamed", null, layer, image.Width, image.Height, true, projectFolder);
+            return new Project("Unnamed", null, layer, image.Width, image.Height, true, projectFolder);
         }
 
         public static Layer LoadImportedImageToLayer(string filePath, string layerName, Project project)
@@ -31,7 +31,7 @@ namespace LighthouseLibrary.Services
 
             var id = UtilService.GenerateNewId();
 
-            var target = CopyImageToProject(id ,project.ProjectFolder, filePath);
+            var target = CopyImageToProject(id, project.ProjectFolder, filePath);
 
             Layer layer = new Layer(image, UtilService.GenerateNewId(), layerName, target, new LayerMetadata(image.Width, image.Height));
 

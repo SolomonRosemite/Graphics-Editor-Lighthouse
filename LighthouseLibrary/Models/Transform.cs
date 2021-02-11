@@ -28,9 +28,6 @@ namespace LighthouseLibrary.Models
             LayerState = LayerState.Updated;
 
             Width = width;
-
-            //int originalWidth = 1 / Percent * ; 
-            //Width = (int)(originalWidth * Percent);
         }
 
         public void ResizeOnlyHeight(int height)
