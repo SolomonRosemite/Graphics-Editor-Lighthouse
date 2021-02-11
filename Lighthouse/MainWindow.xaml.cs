@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -28,15 +30,6 @@ namespace Lighthouse
 
         public MainWindow()
         {
-            Style style = new Style
-            {
-                TargetType = typeof(Window)
-            };
-
-            style.Setters.Add(new Setter(Window.BackgroundProperty, Brushes.Yellow));
-
-            Application.Current.Resources["MyStyle"] = style;
-
             // Thread.Sleep(1500);
 
             doubleClick = new WindowDoubleClick();

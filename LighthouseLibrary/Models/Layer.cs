@@ -23,7 +23,10 @@ namespace LighthouseLibrary.Models
 
         public Bitmap RenderLayer()
         {
-            if (LayerState == LayerState.Unchanged && Metadata.LayerState == LayerState.Unchanged)
+            if (
+                LayerState == LayerState.Unchanged 
+                && Metadata.LayerState == LayerState.Unchanged && Metadata.Transform.LayerState == LayerState.Unchanged
+               )
                 return PreviousRenderedBitmap;
 
             var image = CloneBitmap();

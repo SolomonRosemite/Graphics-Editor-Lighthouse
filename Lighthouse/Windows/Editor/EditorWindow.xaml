@@ -114,6 +114,7 @@
                             <MenuItem Click="OnUndoClick" Header="Undo"/>
                             <MenuItem Click="OnRedoClick" Header="Redo"/>
                             <MenuItem Click="TestRotateImage" Header="(Test) Rotate Image 90°"/>
+                            <MenuItem Click="TestResizeImage" Header="(Test) Resize Image"/>
                         </MenuItem>
                     </Menu>
                 </Grid>

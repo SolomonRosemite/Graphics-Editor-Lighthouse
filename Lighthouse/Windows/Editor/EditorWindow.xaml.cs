@@ -39,6 +39,8 @@ namespace Lighthouse.Windows.Editor
 
         private EditorPages pages;
 
+        private Random testRandom = new Random();
+
         public EditorWindow(Project project, string loadedProjectLocation)
         {
             this.loadedProjectLocation = loadedProjectLocation;
@@ -51,7 +53,7 @@ namespace Lighthouse.Windows.Editor
             RegisterEvents();
             InitializeApp();
 
-            PlayAnimation(3000);
+            PlayAnimation(2000);
 
             Render();
         }
@@ -148,6 +150,15 @@ namespace Lighthouse.Windows.Editor
             Render();
         }
 
+        private void TestResizeImage(object _, RoutedEventArgs e)
+        {
+            var value = testRandom.Next(10, project.Layers[0].Bitmap.Height);
+            //project.Layers[0].Metadata.Transform.ResizeOnlyWidth(value);
+            project.Layers[0].Metadata.Transform.ResizeEqually(2000);
+
+            Render();
+        }
+
         private void Render(bool updateSnapshot = true)
         {
             if (updateSnapshot)
@@ -204,7 +215,7 @@ namespace Lighthouse.Windows.Editor
             }
 
             // This is not a new Project... thus we save at the same Location (same file).
-            // Todo: Implement
+            // Todo: Implement...
         }
 
         private async void OnEditLayerName(object sender, RoutedEventArgs e)

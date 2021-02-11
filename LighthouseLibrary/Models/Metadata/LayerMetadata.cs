@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LighthouseLibrary.Services;
+using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Drawing;
@@ -13,6 +14,7 @@ namespace LighthouseLibrary.Models.Metadata
         private RotateFlipType rotationType = RotateFlipType.RotateNoneFlipNone;
         private ObservableCollection<Filter> Filters { get; }
         public LayerState LayerState { get; private set; } = LayerState.Updated;
+        public Transform Transform { get; }
 
         public RotateFlipType RotationType
         {
@@ -26,6 +28,9 @@ namespace LighthouseLibrary.Models.Metadata
 
         public void ApplyMetadata(ref Bitmap bitmap)
         {
+            if (Transform.LayerState == LayerState.Updated)
+                bitmap = Transform.ApplyTransform(bitmap);
+            
             foreach (var filter in Filters) filter.ApplyFilter(ref bitmap);
             bitmap.RotateFlip(RotationType);
 
@@ -40,17 +45,22 @@ namespace LighthouseLibrary.Models.Metadata
         {
             info.AddValue("Filters", Filters);
             info.AddValue("RotationType", RotationType);
+            info.AddValue("Transform", Transform);
         }
+
         public LayerMetadata(SerializationInfo info, StreamingContext _)
         {
             Filters = GetValue<ObservableCollection<Filter>>("Filters");
             RotationType = GetValue<RotateFlipType>("RotationType");
+            Transform = GetValue<Transform>("Transform");
             Filters.CollectionChanged += OnCollectionChanged;
 
             T GetValue<T>(string name) => (T)info.GetValue(name, typeof(T));
         }
-        public LayerMetadata()
+
+        public LayerMetadata(int width, int height)
         {
+            Transform = new Transform(UtilService.GenerateNewId(), width, height);
             Filters = new ObservableCollection<Filter>();
             Filters.CollectionChanged += OnCollectionChanged;
         }

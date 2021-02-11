@@ -18,7 +18,7 @@ namespace LighthouseLibrary.Services
             var projectFolder = SetupProjectFolder();
             var target = CopyImageToProject(id, projectFolder, filePath);
 
-            Layer layer = new Layer(image, id, "Layer1", target, new LayerMetadata());
+            Layer layer = new Layer(image, id, "Layer1", target, new LayerMetadata(image.Width, image.Height));
 
             return new Project("unnamed", null, layer, image.Width, image.Height, true, projectFolder);
         }
@@ -33,7 +33,7 @@ namespace LighthouseLibrary.Services
 
             var target = CopyImageToProject(id ,project.ProjectFolder, filePath);
 
-            Layer layer = new Layer(image, UtilService.GenerateNewId(), layerName, target, new LayerMetadata());
+            Layer layer = new Layer(image, UtilService.GenerateNewId(), layerName, target, new LayerMetadata(image.Width, image.Height));
 
             return layer;
         }
