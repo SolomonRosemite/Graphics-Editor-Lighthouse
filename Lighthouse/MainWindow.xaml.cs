@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -30,14 +31,17 @@ namespace Lighthouse
 
         public MainWindow()
         {
-            // Thread.Sleep(1500);
+            #if (!DEBUG)
+                // Let that Splashscreen sink in for a second
+                Thread.Sleep(1000);
+            #endif
 
             doubleClick = new WindowDoubleClick();
             InitializeComponent();
 
             DropArea.BorderBrush = new SolidColorBrush(Color.FromArgb(0, 255, 255, 255));
             dispatcherTimer.Tick += DispatcherTimer_Tick;
-            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(10);
+            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(7);
         }
 
         private void HandleIncomingFile(string filePath)

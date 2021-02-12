@@ -9,8 +9,6 @@
         Title="Lighthouse"
         Height="800"
         Width="1400"
-        MinHeight="800"
-        MinWidth="1200"
         WindowStyle="SingleBorderWindow"
         WindowState="Maximized"
         ResizeMode="CanResize"

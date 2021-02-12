@@ -9,8 +9,6 @@
         
         WindowState="Normal"
         Title="MainWindow"
-        MinHeight="400"
-        MinWidth="600"
         Height="650"
         Width="1200"
         AllowsTransparency="True"
