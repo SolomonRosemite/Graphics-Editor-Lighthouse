@@ -9,6 +9,7 @@
         Title="Lighthouse"
         Height="800"
         Width="1400"
+        MinHeight="600"
         WindowStyle="SingleBorderWindow"
         WindowState="Maximized"
         ResizeMode="CanResize"
@@ -144,7 +145,16 @@
                                     <StackPanel>
                                         <Rectangle Margin="20,0,0,0" Height="10" />
                                         <Image Source="\assets\icons\pantone.png" Width="50" Height="50" Margin="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" />
-                                        <Label Content="Color Grading" FontSize="14" Margin="0,7.5,0,0" HorizontalContentAlignment="Center" Foreground="#FFC6C6DC" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" />
+                                        <Label Content="Colors" FontSize="14" Margin="0,7.5,0,0" HorizontalContentAlignment="Center" Foreground="#FFC6C6DC" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" />
+                                    </StackPanel>
+                                </Grid>
+                            </Button>
+                            <Button Style="{StaticResource Modern}" Click="OnLayersClick" Height="100" Width="100" HorizontalAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="{x:Null}" Foreground="{x:Null}">
+                                <Grid HorizontalAlignment="Center" Width="100" Height="100">
+                                    <StackPanel>
+                                        <Rectangle Margin="20,0,0,0" Height="10" />
+                                        <Image Source="\assets\icons\layers.png" Width="50" Height="50" Margin="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" />
+                                        <Label Content="Layers" FontSize="14" Margin="0,7.5,0,0" HorizontalContentAlignment="Center" Foreground="#FFC6C6DC" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" />
                                     </StackPanel>
                                 </Grid>
                             </Button>
@@ -166,16 +176,7 @@
                                     </StackPanel>
                                 </Grid>
                             </Button>
-                            <Button Style="{StaticResource Modern}" Click="OnLayersClick" Height="100" Width="100" HorizontalAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="{x:Null}" Foreground="{x:Null}">
-                                <Grid HorizontalAlignment="Center" Width="100" Height="100">
-                                    <StackPanel>
-                                        <Rectangle Margin="20,0,0,0" Height="10" />
-                                        <Image Source="\assets\icons\layers.png" Width="50" Height="50" Margin="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" />
-                                        <Label Content="Layers" FontSize="14" Margin="0,7.5,0,0" HorizontalContentAlignment="Center" Foreground="#FFC6C6DC" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" />
-                                    </StackPanel>
-                                </Grid>
-                            </Button>
-                            <Button Style="{StaticResource Modern}" Click="OnBackgroundClick" Height="100" Width="100" HorizontalAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="{x:Null}" Foreground="{x:Null}">
+                            <!--<Button Style="{StaticResource Modern}" Click="OnBackgroundClick" Height="100" Width="100" HorizontalAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="{x:Null}" Foreground="{x:Null}">
                                 <Grid HorizontalAlignment="Center" Width="100" Height="100">
                                     <StackPanel>
                                         <Rectangle Margin="20,0,0,0" Height="10" />
@@ -183,7 +184,7 @@
                                         <Label Content="Background" FontSize="14" Margin="0,7.5,0,0" HorizontalContentAlignment="Center" Foreground="#FFC6C6DC" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" />
                                     </StackPanel>
                                 </Grid>
-                            </Button>
+                            </Button>-->
                         </StackPanel>
 
                         <StackPanel VerticalAlignment="Bottom">

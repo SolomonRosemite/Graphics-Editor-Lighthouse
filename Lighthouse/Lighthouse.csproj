@@ -10,18 +10,24 @@
 
   <ItemGroup>
     <None Remove="assets\icons\background.png" />
+    <None Remove="assets\icons\blur.png" />
+    <None Remove="assets\icons\brightness.png" />
     <None Remove="assets\icons\color-filters.png" />
     <None Remove="assets\icons\color_dots.png" />
+    <None Remove="assets\icons\contrast.png" />
     <None Remove="assets\icons\cube.png" />
     <None Remove="assets\icons\down-arrow.png" />
     <None Remove="assets\icons\edit.png" />
     <None Remove="assets\icons\export.png" />
     <None Remove="assets\icons\image.png" />
+    <None Remove="assets\icons\isChained.png" />
+    <None Remove="assets\icons\isNotChained.png" />
     <None Remove="assets\icons\layers.png" />
     <None Remove="assets\icons\new.png" />
     <None Remove="assets\icons\opacity.png" />
     <None Remove="assets\icons\pantone.png" />
     <None Remove="assets\icons\redo.png" />
+    <None Remove="assets\icons\saturation.png" />
     <None Remove="assets\icons\save.png" />
     <None Remove="assets\icons\settings.png" />
     <None Remove="assets\icons\settings2.png" />
@@ -36,10 +42,19 @@
     <Resource Include="assets\icons\background.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="assets\icons\blur.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\icons\brightness.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="assets\icons\color-filters.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="assets\icons\color_dots.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\icons\contrast.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="assets\icons\cube.png">
@@ -57,6 +72,12 @@
     <Resource Include="assets\icons\image.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="assets\icons\isChained.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\icons\isNotChained.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="assets\icons\layers.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -70,6 +91,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="assets\icons\redo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\icons\saturation.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="assets\icons\save.png">

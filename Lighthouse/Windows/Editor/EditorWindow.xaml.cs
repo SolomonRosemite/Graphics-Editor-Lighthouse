@@ -317,6 +317,7 @@ namespace Lighthouse.Windows.Editor
 
         private void Fade(Page page)
         {
+            if (CurrentPage.Content == page) return;
             PlayAnimation();
 
             CurrentPage.Content = page;

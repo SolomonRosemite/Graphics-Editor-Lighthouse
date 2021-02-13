@@ -20,6 +20,8 @@ namespace Lighthouse.Windows.Editor.Pages
     /// </summary>
     public partial class TransformPage : Page
     {
+        private bool isChained = false;
+
         public TransformPage()
         {
             InitializeComponent();
@@ -28,6 +30,22 @@ namespace Lighthouse.Windows.Editor.Pages
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void OnChainClick(object sender, RoutedEventArgs e)
+        {
+            if (isChained)
+            {
+                IsChainedImg.Opacity = 0;
+                IsNotChainedImg.Opacity = 1;
+            }
+            else
+            {
+                IsChainedImg.Opacity = 1;
+                IsNotChainedImg.Opacity = 0;
+            }
+
+            isChained = !isChained;
         }
     }
 }

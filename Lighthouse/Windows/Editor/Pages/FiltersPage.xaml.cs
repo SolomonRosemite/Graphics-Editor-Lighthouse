@@ -1,4 +1,7 @@
-﻿using System;
+﻿using LighthouseLibrary.Models;
+using LighthouseLibrary.Models.Enums;
+using LighthouseLibrary.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +26,14 @@ namespace Lighthouse.Windows.Editor.Pages
         public FiltersPage()
         {
             InitializeComponent();
+
+            List<Filter> items = new List<Filter>
+            {
+                new Filter(UtilService.GenerateNewId(), FilterType.GaussianBlur),
+                new Filter(UtilService.GenerateNewId(), FilterType.None)
+            };
+
+            icFilters.ItemsSource = items;
         }
     }
 }

@@ -5,17 +5,84 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Lighthouse.Windows.Editor.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="700" d:DesignWidth="400"
       Title="ColorGradingPage">
 
     <StackPanel>
         <Rectangle Height="20"/>
         <Grid>
             <Image Source="\assets\icons\pantone.png" Width="25" Height="25" Margin="15,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
-            <Label Content="Color Grading Settings" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" FontWeight="ExtraLight" />
+            <Label Content="Color Settings" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" FontWeight="ExtraLight" />
         </Grid>
         <Rectangle Height="10"/>
         <Rectangle Height="1" Fill="Gray" />
-        <Rectangle Height="20"/>
+
+        <StackPanel Margin="10, 0">
+            <!--Brightness Settings-->
+            <Rectangle Height="35" />
+            <Label Content="Brightness" Foreground="#a1a1cc" FontSize="14.5" />
+            <Rectangle Height="5" />
+            <Grid>
+                <Grid HorizontalAlignment="Stretch" Margin="5, 0">
+                    <Grid>
+                        <Grid HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0">
+                            <Image Source="\assets\icons\brightness.png" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        </Grid>
+                        <Grid Margin="-40,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Slider Minimum="-100" Maximum="100" Value="0" Width="200" />
+                        </Grid>
+                        <Border HorizontalAlignment="Right" BorderBrush="White" BorderThickness="1" CornerRadius="10">
+                            <Grid Width="75" Height="45">
+                                <TextBox FontSize="20" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="55" BorderBrush="Transparent" Background="Transparent" Foreground="White" Text="0%" />
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </Grid>
+
+            <!--Contrast Settings-->
+            <Rectangle Height="35" />
+            <Label Content="Contrast" Foreground="#a1a1cc" FontSize="14.5" />
+            <Rectangle Height="5" />
+            <Grid>
+                <Grid HorizontalAlignment="Stretch" Margin="5, 0">
+                    <Grid>
+                        <Grid HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0">
+                            <Image Source="\assets\icons\contrast.png" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        </Grid>
+                        <Grid Margin="-40,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Slider Minimum="-100" Maximum="100" Value="0" Width="200" />
+                        </Grid>
+                        <Border HorizontalAlignment="Right" BorderBrush="White" BorderThickness="1" CornerRadius="10">
+                            <Grid Width="75" Height="45">
+                                <TextBox FontSize="20" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="55" BorderBrush="Transparent" Background="Transparent" Foreground="White" Text="0%" />
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </Grid>
+
+            <!--Saturation Settings-->
+            <Rectangle Height="35" />
+            <Label Content="Saturation" Foreground="#a1a1cc" FontSize="14.5" />
+            <Rectangle Height="5" />
+            <Grid>
+                <Grid HorizontalAlignment="Stretch" Margin="5, 0">
+                    <Grid>
+                        <Grid HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0">
+                            <Image Source="\assets\icons\saturation.png" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        </Grid>
+                        <Grid Margin="-40,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Slider Minimum="-100" Maximum="100" Value="0" Width="200" />
+                        </Grid>
+                        <Border HorizontalAlignment="Right" BorderBrush="White" BorderThickness="1" CornerRadius="10">
+                            <Grid Width="75" Height="45">
+                                <TextBox FontSize="20" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="55" BorderBrush="Transparent" Background="Transparent" Foreground="White" Text="0%" />
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </StackPanel>
     </StackPanel>
 </Page>

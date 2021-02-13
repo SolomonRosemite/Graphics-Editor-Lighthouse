@@ -82,6 +82,13 @@
                         </Grid>
                     </Border>
 
+                    <Button Click="OnChainClick" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource Modern}" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="40" Width="40">
+                        <Grid>
+                            <Image Opacity="0" Name="IsChainedImg" VerticalAlignment="Center" HorizontalAlignment="Center" Width="30" Height="30" Source="\assets\icons\isChained.png" />
+                            <Image Name="IsNotChainedImg" VerticalAlignment="Center" HorizontalAlignment="Center" Width="30" Height="30" Source="\assets\icons\isNotChained.png" />
+                        </Grid>
+                    </Button>
+
                     <Border HorizontalAlignment="Right" BorderBrush="White" BorderThickness="1" CornerRadius="10">
                         <Grid Width="150" Height="45">
                             <TextBox FontSize="20" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" BorderBrush="Transparent" Background="Transparent" Foreground="White" Text="Height Value" />
@@ -102,7 +109,7 @@
                             <Image Source="\assets\icons\opacity.png" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
                         </Grid>
                         <Grid Margin="-40,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Slider Width="200" />
+                            <Slider Minimum="0" Maximum="100" Value="100" Width="200" />
                         </Grid>
                         <Border HorizontalAlignment="Right" BorderBrush="White" BorderThickness="1" CornerRadius="10">
                             <Grid Width="75" Height="45">

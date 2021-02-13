@@ -4,18 +4,47 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Lighthouse.Windows.Editor.Pages"
+      xmlns:local1="clr-namespace:Lighthouse.Helpers"
+      xmlns:local2="clr-namespace:LighthouseLibrary.Models.Enums;assembly=LighthouseLibrary"
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="400"
       Title="FiltersPage">
 
-    <StackPanel>
-        <Rectangle Height="20"/>
-        <Grid>
-            <Image Source="\assets\icons\color-filters.png" Width="25" Height="25" Margin="15,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
-            <Label Content="Filters Settings" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" FontWeight="ExtraLight" />
+    <Grid>
+        <Grid Margin="0,20,0,0" VerticalAlignment="Top">
+            <Grid>
+                <Image Source="\assets\icons\color-filters.png" Width="25" Height="25" Margin="15,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                <Label Content="Filters Settings" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" FontWeight="ExtraLight" />
+            </Grid>
+            <Rectangle Margin="0,40,0,0" Height="1" Fill="Gray" />
         </Grid>
-        <Rectangle Height="10"/>
-        <Rectangle Height="1" Fill="Gray" />
-        <Rectangle Height="20"/>
-    </StackPanel>
+
+        <Grid VerticalAlignment="Top" Margin="0,90,0,0 ">
+            <!--Filters Settings-->
+            <Grid HorizontalAlignment="Stretch">
+                <Label Margin="10, 0" Content="Filters" Foreground="#a1a1cc" FontSize="14.5" />
+            </Grid>
+
+            <Grid Margin="0,40,0,0">
+                <DockPanel>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <ItemsControl x:Name="icFilters">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,0,0,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="200" />
+                                        </Grid.ColumnDefinitions>
+                                        <Label Foreground="#a1a1cc" FontSize="18" Margin="15,0,0,0" HorizontalAlignment="Left" Content="{Binding Type}" />
+                                        <ComboBox ItemsSource="{Binding Source={local1:EnumBindingExtension {x:Type local2:FilterType}}}" Grid.Column="1" Width="150" Margin="0,0,15,0" HorizontalAlignment="Right" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </DockPanel>
+            </Grid>
+        </Grid>
+    </Grid>
 </Page>
