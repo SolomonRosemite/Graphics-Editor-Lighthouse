@@ -220,7 +220,7 @@ namespace Lighthouse.Windows.Editor
             Layer layer = lastSelectedLayer;
             var result = await LayerDialog.Open(layer);
 
-            if (!result.Save || result.LayerName.Length > 50) return;
+            if (!result.Save || result.LayerName.Length > 50 || result.LayerName.Trim().Length == 0) return;
 
             ignoreNextRender = true;
 
@@ -235,14 +235,13 @@ namespace Lighthouse.Windows.Editor
             }
 
             if (index == -1)
-                throw new Exception("Index was -1");
-
+                throw new Exception("Couldn't find Layer to match Id with.");
 
             // Remove Item from list
             project.Layers.RemoveAt(index);
 
             // Update that layer's name
-            layer.LayerName = result.LayerName;
+            layer.LayerName = result.LayerName.Trim();
 
             ignoreNextRender = true;
 
@@ -317,7 +316,7 @@ namespace Lighthouse.Windows.Editor
 
         private void Fade(Page page)
         {
-            if (CurrentPage.Content == page) return;
+            if (Equals(CurrentPage.Content, page)) return;
             PlayAnimation();
 
             CurrentPage.Content = page;
