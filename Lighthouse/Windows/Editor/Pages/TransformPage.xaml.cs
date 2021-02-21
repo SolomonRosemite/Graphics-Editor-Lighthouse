@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using LighthouseLibrary.Models;
 
 namespace Lighthouse.Windows.Editor.Pages
 {
@@ -20,16 +23,54 @@ namespace Lighthouse.Windows.Editor.Pages
     /// </summary>
     public partial class TransformPage : Page
     {
-        private bool isChained = false;
+        private readonly Regex regex = new Regex("^[0-9]+$");
+        private readonly EditorWindow editorWindow;
+        private Layer lastSelectedLayer;
 
-        public TransformPage()
+        private byte layerOpacity = 100;
+        private bool isInitialized;
+        private bool isChained;
+
+        private byte LayerOpacity
         {
-            InitializeComponent();
+            get => layerOpacity;
+            set
+            {
+                lastSelectedLayer.Metadata.Transform.Opacity = value;
+                layerOpacity = value;
+            }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        public TransformPage(EditorWindow editorWindow)
         {
+            Loaded += OnLoaded;
 
+            InitializeComponent();
+
+            this.editorWindow = editorWindow;
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            lastSelectedLayer = editorWindow.LastSelectedLayer;
+
+            PositionXTextBox.Text = lastSelectedLayer.Metadata.Transform.XPosition.ToString();
+            PositionYTextBox.Text = lastSelectedLayer.Metadata.Transform.YPosition.ToString();
+            HeightTextBox.Text = lastSelectedLayer.Metadata.Transform.Height.ToString();
+            WidthTextBox.Text = lastSelectedLayer.Metadata.Transform.Width.ToString();
+            Opacity = lastSelectedLayer.Metadata.Transform.Opacity;
+
+            isInitialized = true;
+        }
+
+        private void OnClickRotateLeft(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void OnClickRotateRight(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void OnChainClick(object sender, RoutedEventArgs e)
@@ -46,6 +87,82 @@ namespace Lighthouse.Windows.Editor.Pages
             }
 
             isChained = !isChained;
+        }
+
+        private void OnPositionXChange(object sender, TextChangedEventArgs e)
+        {
+            if (!isInitialized || !(sender is TextBox item)) return;
+
+            if (item.Text.Trim().Length == 0) return;
+
+            int value = int.Parse(item.Text);
+
+            lastSelectedLayer.Metadata.Transform.XPosition = value;
+
+            editorWindow.Render();
+        }
+
+        private void OnPositionYChange(object sender, TextChangedEventArgs e)
+        {
+            if (!isInitialized || !(sender is TextBox item)) return;
+
+            if (item.Text.Trim().Length == 0) return;
+
+            int value = int.Parse(item.Text);
+
+            lastSelectedLayer.Metadata.Transform.YPosition = value;
+
+            editorWindow.Render();
+        }
+
+        private void OnWidthChange(object sender, TextChangedEventArgs e)
+        {
+            if (!isInitialized || !(sender is TextBox item)) return;
+
+            if (item.Text.Trim().Length == 0) return;
+
+            int value = int.Parse(item.Text);
+
+            if (isChained)
+            {
+                // lastSelectedLayer.Metadata.Transform.SetEqually();
+            }
+            else
+            {
+                lastSelectedLayer.Metadata.Transform.SetWidth(value);
+            }
+
+            editorWindow.Render();
+        }
+
+        private void OnHeightChange(object sender, TextChangedEventArgs e)
+        {
+            if (!isInitialized || !(sender is TextBox item)) return;
+
+            if (item.Text.Trim().Length == 0) return;
+
+            int value = int.Parse(item.Text);
+
+            if (isChained)
+            {
+                // lastSelectedLayer.Metadata.Transform.SetEqually();
+            }
+            else
+            {
+                lastSelectedLayer.Metadata.Transform.SetHeight(value);
+            }
+
+            editorWindow.Render();
+        }
+
+        private new void PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !IsNumbersOnly(e.Text);
+        }
+
+        private bool IsNumbersOnly(string text)
+        {
+            return regex.IsMatch(text) && text.Trim().Length != 0;
         }
     }
 }

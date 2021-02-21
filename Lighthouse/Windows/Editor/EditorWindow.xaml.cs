@@ -28,21 +28,21 @@ namespace Lighthouse.Windows.Editor
     /// </summary>
     public partial class EditorWindow : Window
     {
-        private readonly EditorState editorState;
+        public readonly EditorState editorState;
         private Project project;
 
         private int currentProjectStateId;
         private bool ignoreNextRender;
 
         private string loadedProjectLocation;
-        private Layer lastSelectedLayer;
+        public Layer LastSelectedLayer { get; private set; }
 
         private EditorPages pages;
 
         public EditorWindow(Project project, string loadedProjectLocation)
         {
             this.loadedProjectLocation = loadedProjectLocation;
-            lastSelectedLayer = project.Layers[0];
+            LastSelectedLayer = project.Layers[0];
             editorState = new EditorState();
             this.project = project;
 
@@ -62,7 +62,7 @@ namespace Lighthouse.Windows.Editor
             pages.BackgroundPage = new BackgroundPage();
             pages.FiltersPage = new FiltersPage();
             pages.ProjectSettings = new ProjectSettings();
-            pages.TransformPage = new TransformPage();
+            pages.TransformPage = new TransformPage(this);
             InitializeLayersListViewPage();
 
             void InitializeLayersListViewPage()
@@ -85,7 +85,7 @@ namespace Lighthouse.Windows.Editor
                 if (listBox.SelectedItem == null || !(listBox.SelectedItem is Layer item)) return;
 
                 LayerNameLabel.Content = item.LayerName;
-                lastSelectedLayer = item;
+                LastSelectedLayer = item;
             }
             catch { }
         }
@@ -99,7 +99,7 @@ namespace Lighthouse.Windows.Editor
 
         private void OnUndoClick(object sender, RoutedEventArgs e) => HandleRedoUndoAction(editorState.Undo(currentProjectStateId));
 
-        private void HandleRedoUndoAction(ActionResponse res)
+        public void HandleRedoUndoAction(ActionResponse res)
         {
             if (res.Successful)
             {
@@ -150,13 +150,13 @@ namespace Lighthouse.Windows.Editor
 
         private void TestResizeImage(object _, RoutedEventArgs e)
         {
-            var value = Math.Min(project.Layers[0].Bitmap.Height, project.Layers[0].Bitmap.Height);
-            project.Layers[0].Metadata.Transform.ResizeEqually(-100);
+            // var value = Math.Min(project.Layers[0].Bitmap.Height, project.Layers[0].Bitmap.Height);
+            // project.Layers[0].Metadata.Transform.ResizeEqually(-100);
 
             Render();
         }
 
-        private void Render(bool updateSnapshot = true)
+        public void Render(bool updateSnapshot = true)
         {
             if (updateSnapshot)
                 this.currentProjectStateId = editorState.AddNewSnapshot(project);
@@ -217,7 +217,7 @@ namespace Lighthouse.Windows.Editor
 
         private async void OnEditLayerName(object sender, RoutedEventArgs e)
         {
-            Layer layer = lastSelectedLayer;
+            Layer layer = LastSelectedLayer;
             var result = await LayerDialog.Open(layer);
 
             if (!result.Save || result.LayerName.Length > 50 || result.LayerName.Trim().Length == 0) return;
