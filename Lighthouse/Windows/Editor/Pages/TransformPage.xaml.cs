@@ -28,6 +28,7 @@ namespace Lighthouse.Windows.Editor.Pages
         private Layer lastSelectedLayer;
 
         private byte layerOpacity = 100;
+        private bool skipNextChange;
         private bool isInitialized;
         private bool isChained;
 
@@ -121,16 +122,19 @@ namespace Lighthouse.Windows.Editor.Pages
 
             if (item.Text.Trim().Length == 0) return;
 
+            if (skipNextChange)
+            {
+                skipNextChange = false;
+                return;
+            }
+
             int value = int.Parse(item.Text);
 
-            if (isChained)
-            {
-                // lastSelectedLayer.Metadata.Transform.SetEqually();
-            }
-            else
-            {
-                lastSelectedLayer.Metadata.Transform.SetWidth(value);
-            }
+            if (value == 0) return;
+
+            var result = lastSelectedLayer.Metadata.Transform.SetWidth(value, isChained);
+            skipNextChange = true;
+            HeightTextBox.Text = result.Height.ToString();
 
             editorWindow.Render();
         }
@@ -141,16 +145,19 @@ namespace Lighthouse.Windows.Editor.Pages
 
             if (item.Text.Trim().Length == 0) return;
 
+            if (skipNextChange)
+            {
+                skipNextChange = false;
+                return;
+            }
+
             int value = int.Parse(item.Text);
 
-            if (isChained)
-            {
-                // lastSelectedLayer.Metadata.Transform.SetEqually();
-            }
-            else
-            {
-                lastSelectedLayer.Metadata.Transform.SetHeight(value);
-            }
+            if (value == 0) return;
+
+            var result = lastSelectedLayer.Metadata.Transform.SetHeight(value, isChained);
+            skipNextChange = true;
+            WidthTextBox.Text = result.Width.ToString();
 
             editorWindow.Render();
         }

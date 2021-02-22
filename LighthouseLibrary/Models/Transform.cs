@@ -13,9 +13,6 @@ namespace LighthouseLibrary.Models
 
         public int Id { get; set; }
 
-        public int PreviousWidth { get; private set; }
-        public int PreviousHeight { get; private set; }
-
         public int Width { get; private set; }
         public int Height { get; private set; }
 
@@ -63,42 +60,54 @@ namespace LighthouseLibrary.Models
             return result;
         }
 
-        public void SetWidth(int width)
+        public ResizeResult SetWidth(int width, bool resizeEqually)
         {
             LayerState = LayerState.Updated;
 
-            PreviousWidth = Width;
-            Width = width;
+            if (!resizeEqually)
+            {
+                Width = width;
+            }
+            else
+            {
+                var diff = Width - width;
+
+                Height -= diff;
+                Width = width;
+            }
 
             if (Width <= 0)
-                throw new Exception("Width was zero or less.");
-        }
-
-        public void SetHeight(int height)
-        {
-            Console.WriteLine();
-            LayerState = LayerState.Updated;
-
-            PreviousWidth = Width;
-
-            Height = height;
+                Width = 1;
 
             if (Height <= 0)
-                throw new Exception("Height was zero or less.");
+                Height = 1;
+
+            return new ResizeResult(Width, Height);
         }
 
-        public void SetEqually(int value)
+        public ResizeResult SetHeight(int height, bool resizeEqually)
         {
             LayerState = LayerState.Updated;
 
-            PreviousHeight = Height;
-            PreviousWidth = Width;
+            if (!resizeEqually)
+            {
+                Height = height;
+            }
+            else
+            {
+                var diff = Height - height;
 
-            Height += value;
-            Width += value;
+                Width -= diff;
+                Height = height;
+            }
 
-            if (Height <= 0 || Width <= 0)
-                throw new Exception("Width or Height was zero or less.");
+            if (Width <= 0)
+                Width = 1;
+
+            if (Height <= 0)
+                Height = 1;
+
+            return new ResizeResult(Width, Height);
         }
 
         public Transform(int id, int width, int height)
@@ -107,8 +116,6 @@ namespace LighthouseLibrary.Models
             Width = width;
             Height = height;
 
-            PreviousWidth = Width;
-            PreviousHeight = Height;
             xPosition = 0;
             yPosition = 0;
             Opacity = 100;
@@ -120,8 +127,6 @@ namespace LighthouseLibrary.Models
             info.AddValue("Id", Id);
             info.AddValue("Width", Width);
             info.AddValue("Height", Height);
-            info.AddValue("PreviousWidth", PreviousWidth);
-            info.AddValue("PreviousHeight", PreviousHeight);
             info.AddValue("XPosition", XPosition);
             info.AddValue("YPosition", YPosition);
             info.AddValue("Opacity", Opacity);
@@ -133,14 +138,26 @@ namespace LighthouseLibrary.Models
             Id = GetValue<int>("Id");
             Width = GetValue<int>("Width");
             Height = GetValue<int>("Height");
-            LayerState = LayerState.Updated;
-            PreviousWidth = GetValue<int>("PreviousWidth");
-            PreviousHeight = GetValue<int>("PreviousHeight");
+            yPosition = GetValue<int>("Opacity");
             xPosition = GetValue<int>("XPosition");
             yPosition = GetValue<int>("YPosition");
-            yPosition = GetValue<int>("Opacity");
+
+            LayerState = LayerState.Updated;
+
 
             T GetValue<T>(string name) => (T)info.GetValue(name, typeof(T));
         }
+    }
+
+    public struct ResizeResult
+    {
+        public ResizeResult(int width, int height)
+        {
+            Width = width;
+            Height = height;
+        }
+
+        public int Height { get; private set; }
+        public int Width { get; private set; }
     }
 }
