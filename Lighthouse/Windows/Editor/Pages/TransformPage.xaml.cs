@@ -133,7 +133,10 @@ namespace Lighthouse.Windows.Editor.Pages
             if (value == 0) return;
 
             var result = lastSelectedLayer.Metadata.Transform.SetWidth(value, isChained);
-            skipNextChange = true;
+
+            if (isChained)
+                skipNextChange = true;
+
             HeightTextBox.Text = result.Height.ToString();
 
             editorWindow.Render();
@@ -156,7 +159,9 @@ namespace Lighthouse.Windows.Editor.Pages
             if (value == 0) return;
 
             var result = lastSelectedLayer.Metadata.Transform.SetHeight(value, isChained);
-            skipNextChange = true;
+            if (isChained)
+                skipNextChange = true;
+
             WidthTextBox.Text = result.Width.ToString();
 
             editorWindow.Render();
