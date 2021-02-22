@@ -113,7 +113,6 @@
                             <MenuItem Click="OnUndoClick" Header="Undo"/>
                             <MenuItem Click="OnRedoClick" Header="Redo"/>
                             <MenuItem Click="TestRotateImage" Header="(Test) Rotate Image 90°"/>
-                            <MenuItem Click="TestResizeImage" Header="(Test) Resize Image"/>
                         </MenuItem>
                     </Menu>
                 </Grid>
@@ -189,7 +188,7 @@
 
                         <StackPanel VerticalAlignment="Bottom">
                             <Rectangle Width="Auto" Height="2" Fill="White" />
-                            <Button Style="{StaticResource Modern}" Click="OnSettingsClick" Height="60" Width="100" HorizontalAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="{x:Null}" Foreground="{x:Null}">
+                            <Button Style="{StaticResource Modern}" Background="#27272f" Click="OnSettingsClick" Height="60" Width="100" HorizontalAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="{x:Null}" Foreground="{x:Null}">
                                 <Grid HorizontalAlignment="Center">
                                     <StackPanel>
                                         <Image Source="\assets\icons\settings.png" Width="25" Height="25" Margin="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" />

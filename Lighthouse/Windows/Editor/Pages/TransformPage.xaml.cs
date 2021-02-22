@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using LighthouseLibrary.Models;
+using LighthouseLibrary.Models.Metadata;
 
 namespace Lighthouse.Windows.Editor.Pages
 {
@@ -25,41 +26,46 @@ namespace Lighthouse.Windows.Editor.Pages
     {
         private readonly Regex regex = new Regex("^[0-9]+$");
         private readonly EditorWindow editorWindow;
-        private Layer lastSelectedLayer;
+
+        private Layer LastSelectedLayer { get; set; }
+
 
         private byte layerOpacity = 100;
-        private bool skipNextChange;
-        private bool isInitialized;
-        private bool isChained;
-
         private byte LayerOpacity
         {
             get => layerOpacity;
             set
             {
-                lastSelectedLayer.Metadata.Transform.Opacity = value;
+                LastSelectedLayer.Metadata.Transform.Opacity = value;
                 layerOpacity = value;
             }
         }
 
+        private bool skipNextChange;
+        private bool isInitialized;
+        private bool isChained;
+
         public TransformPage(EditorWindow editorWindow)
         {
-            Loaded += OnLoaded;
-
             InitializeComponent();
 
             this.editorWindow = editorWindow;
+
+            Loaded += OnLoaded;
         }
 
-        private void OnLoaded(object sender, RoutedEventArgs e)
+        public void OnLoaded(object sender, RoutedEventArgs e)
         {
-            lastSelectedLayer = editorWindow.LastSelectedLayer;
+            isInitialized = false;
+            LastSelectedLayer = editorWindow.LastSelectedLayer;
 
-            PositionXTextBox.Text = lastSelectedLayer.Metadata.Transform.XPosition.ToString();
-            PositionYTextBox.Text = lastSelectedLayer.Metadata.Transform.YPosition.ToString();
-            HeightTextBox.Text = lastSelectedLayer.Metadata.Transform.Height.ToString();
-            WidthTextBox.Text = lastSelectedLayer.Metadata.Transform.Width.ToString();
-            Opacity = lastSelectedLayer.Metadata.Transform.Opacity;
+            // LastSelectedLayer = new Layer(new Bitmap(1, 1), 21, "Test", "Test", new LayerMetadata(1, 1));
+
+            PositionXTextBox.Text = LastSelectedLayer.Metadata.Transform.XPosition.ToString();
+            PositionYTextBox.Text = LastSelectedLayer.Metadata.Transform.YPosition.ToString();
+            HeightTextBox.Text = LastSelectedLayer.Metadata.Transform.Height.ToString();
+            WidthTextBox.Text = LastSelectedLayer.Metadata.Transform.Width.ToString();
+            LayerOpacity = LastSelectedLayer.Metadata.Transform.Opacity;
 
             isInitialized = true;
         }
@@ -98,7 +104,7 @@ namespace Lighthouse.Windows.Editor.Pages
 
             int value = int.Parse(item.Text);
 
-            lastSelectedLayer.Metadata.Transform.XPosition = value;
+            LastSelectedLayer.Metadata.Transform.XPosition = value;
 
             editorWindow.Render();
         }
@@ -111,7 +117,7 @@ namespace Lighthouse.Windows.Editor.Pages
 
             int value = int.Parse(item.Text);
 
-            lastSelectedLayer.Metadata.Transform.YPosition = value;
+            LastSelectedLayer.Metadata.Transform.YPosition = value;
 
             editorWindow.Render();
         }
@@ -132,7 +138,7 @@ namespace Lighthouse.Windows.Editor.Pages
 
             if (value == 0) return;
 
-            var result = lastSelectedLayer.Metadata.Transform.SetWidth(value, isChained);
+            var result = LastSelectedLayer.Metadata.Transform.SetWidth(value, isChained);
 
             if (isChained)
                 skipNextChange = true;
@@ -158,7 +164,7 @@ namespace Lighthouse.Windows.Editor.Pages
 
             if (value == 0) return;
 
-            var result = lastSelectedLayer.Metadata.Transform.SetHeight(value, isChained);
+            var result = LastSelectedLayer.Metadata.Transform.SetHeight(value, isChained);
             if (isChained)
                 skipNextChange = true;
 

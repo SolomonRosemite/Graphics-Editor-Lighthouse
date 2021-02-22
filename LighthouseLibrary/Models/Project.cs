@@ -52,15 +52,13 @@ namespace LighthouseLibrary.Models
             {
                 case 0:
                     return new Bitmap(1, 1);
-                case 1:
-                    return Layers[0].RenderLayer();
             }
 
             // Merge Layers into One Bitmap
-            Bitmap res = Layers[0].RenderLayer();
+            Bitmap res = new Bitmap(Width, Height);
 
-            for (int i = 1; i < Layers.Count; i++)
-                res = MergedBitmaps(res, Layers[i].RenderLayer());
+            foreach (var t in Layers)
+                res = MergedBitmaps(res, t.RenderLayer());
 
             return res;
         }

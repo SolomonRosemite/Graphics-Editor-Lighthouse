@@ -3,6 +3,7 @@ using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Threading;
@@ -28,16 +29,28 @@ namespace Lighthouse.Windows.Editor
     /// </summary>
     public partial class EditorWindow : Window
     {
-        public readonly EditorState editorState;
+        private readonly EditorState editorState;
         private Project project;
 
         private int currentProjectStateId;
         private bool ignoreNextRender;
 
-        private string loadedProjectLocation;
-        public Layer LastSelectedLayer { get; private set; }
+        private readonly string loadedProjectLocation;
+
+        public Layer LastSelectedLayer
+        {
+            get => lastSelectedLayer;
+            private set
+            {
+                if (IsInitialized)
+                    LayerNameLabel.Content = value.LayerName;
+
+                lastSelectedLayer = value;
+            }
+        }
 
         private EditorPages pages;
+        private Layer lastSelectedLayer;
 
         public EditorWindow(Project project, string loadedProjectLocation)
         {
@@ -74,7 +87,7 @@ namespace Lighthouse.Windows.Editor
 
         private void InitializeApp()
         {
-            LayerNameLabel.Content = project.Layers[0].LayerName;
+            this.LayerNameLabel.Content = LastSelectedLayer.LayerName;
             this.Title = $"Lighthouse - {project.ProjectName}";
         }
 
@@ -84,7 +97,6 @@ namespace Lighthouse.Windows.Editor
             {
                 if (listBox.SelectedItem == null || !(listBox.SelectedItem is Layer item)) return;
 
-                LayerNameLabel.Content = item.LayerName;
                 LastSelectedLayer = item;
             }
             catch { }
@@ -107,12 +119,20 @@ namespace Lighthouse.Windows.Editor
                 currentProjectStateId = res.StateId;
 
                 var fi = project.Layers.GetType().GetEventField("CollectionChanged");
+
                 if (fi == null) return;
                 fi.SetValue(project.Layers, null);
 
                 pages.ListViewPage.listBox.ItemsSource = project.Layers;
 
                 project.Layers.CollectionChanged += OnLayerCollectionChanged;
+
+                var result = project.Layers.FirstOrDefault(l => l.Id == LastSelectedLayer.Id)
+                             ?? project.Layers[^1];
+
+                LastSelectedLayer = result;
+
+                pages.TransformPage.OnLoaded(null, null);
 
                 Render(false);
             }
@@ -148,14 +168,6 @@ namespace Lighthouse.Windows.Editor
             Render();
         }
 
-        private void TestResizeImage(object _, RoutedEventArgs e)
-        {
-            // var value = Math.Min(project.Layers[0].Bitmap.Height, project.Layers[0].Bitmap.Height);
-            // project.Layers[0].Metadata.Transform.ResizeEqually(-100);
-
-            Render();
-        }
-
         public void Render(bool updateSnapshot = true)
         {
             if (updateSnapshot)
@@ -180,9 +192,13 @@ namespace Lighthouse.Windows.Editor
             {
                 // Open document
                 string filename = dlg.FileName;
-                Layer layer = ImportService.LoadImportedImageToLayer(filename, $"Layer {project.Layers.Count + 1}", project);
+                Layer layer = ImportService.LoadImportedImageToLayer(filename, $"Layer{project.Layers.Count + 1}", project);
 
                 project.Layers.Insert(0, layer);
+
+                LastSelectedLayer = layer;
+
+                pages.TransformPage.OnLoaded(null, null);
             }
         }
 
@@ -248,7 +264,7 @@ namespace Lighthouse.Windows.Editor
             // Put back the same layer at the same index...
             project.Layers.Insert(index, layer);
 
-            LayerNameLabel.Content = layer.LayerName;
+            LastSelectedLayer = layer;
 
             currentProjectStateId = editorState.AddNewSnapshot(project);
         }

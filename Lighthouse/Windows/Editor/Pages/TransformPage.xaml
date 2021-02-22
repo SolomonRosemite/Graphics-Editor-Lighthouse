@@ -126,7 +126,7 @@
                 <!--(Left) Flip X-->
                 <Grid>
                     <Label Content="Flip X" Foreground="#a1a1cc" FontSize="14.5" />
-                    
+
                     <Grid HorizontalAlignment="Stretch" Margin="10, 40, 0, 0">
                         <Grid HorizontalAlignment="Left">
                             <ComboBox Width="130" Height="40">
@@ -136,7 +136,7 @@
                         </Grid>
                     </Grid>
                 </Grid>
-                
+
                 <!--(Right) Flip Y-->
                 <Grid HorizontalAlignment="Right">
                     <Label Content="Flip Y" Foreground="#a1a1cc" FontSize="14.5" />
