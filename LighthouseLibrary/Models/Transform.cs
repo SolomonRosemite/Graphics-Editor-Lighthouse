@@ -1,6 +1,7 @@
 ﻿using System.Runtime.Serialization;
 using System.Drawing;
 using System;
+using System.Drawing.Imaging;
 
 namespace LighthouseLibrary.Models
 {
@@ -9,7 +10,7 @@ namespace LighthouseLibrary.Models
     {
         private int xPosition;
         private int yPosition;
-        private byte opacity;
+        private double opacity;
 
         public int Id { get; set; }
 
@@ -37,7 +38,7 @@ namespace LighthouseLibrary.Models
             }
         }
 
-        public byte Opacity
+        public double Opacity
         {
             get => opacity;
             set
@@ -49,15 +50,26 @@ namespace LighthouseLibrary.Models
 
         public LayerState LayerState { get; private set; } = LayerState.Updated;
 
-        public Bitmap ApplyTransform(Bitmap bitmap)
+        public Bitmap ApplyTransform(Bitmap image)
         {
             LayerState = LayerState.Updated;
 
-            Bitmap result = new Bitmap(Width, Height);
-            using (Graphics g = Graphics.FromImage(result))
-                g.DrawImage(bitmap, 0, 0, Width, Height);
+            Bitmap bmp = new Bitmap(Width, Height);
+            using Graphics gfx = Graphics.FromImage(bmp);
 
-            return result;
+            ColorMatrix matrix = new ColorMatrix {Matrix33 = (float)Opacity};
+            ImageAttributes attributes = new ImageAttributes();
+
+            attributes.SetColorMatrix(matrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+
+            gfx.DrawImage(image,
+                new Rectangle(0, 0, Width, Height),
+                0, 0,
+                image.Width, image.Height,
+                GraphicsUnit.Pixel,
+                attributes);
+
+            return bmp;
         }
 
         public ResizeResult SetWidth(int width, bool resizeEqually)
@@ -118,7 +130,7 @@ namespace LighthouseLibrary.Models
 
             xPosition = 0;
             yPosition = 0;
-            Opacity = 100;
+            Opacity = 1;
         }
 
         // Serializable & Constructors
@@ -130,7 +142,6 @@ namespace LighthouseLibrary.Models
             info.AddValue("XPosition", XPosition);
             info.AddValue("YPosition", YPosition);
             info.AddValue("Opacity", Opacity);
-
         }
 
         public Transform(SerializationInfo info, StreamingContext _)
@@ -138,12 +149,11 @@ namespace LighthouseLibrary.Models
             Id = GetValue<int>("Id");
             Width = GetValue<int>("Width");
             Height = GetValue<int>("Height");
-            yPosition = GetValue<int>("Opacity");
+            Opacity = GetValue<double>("Opacity");
             xPosition = GetValue<int>("XPosition");
             yPosition = GetValue<int>("YPosition");
 
             LayerState = LayerState.Updated;
-
 
             T GetValue<T>(string name) => (T)info.GetValue(name, typeof(T));
         }
@@ -157,7 +167,7 @@ namespace LighthouseLibrary.Models
             Height = height;
         }
 
-        public int Height { get; private set; }
-        public int Width { get; private set; }
+        public int Height { get; }
+        public int Width { get; }
     }
 }

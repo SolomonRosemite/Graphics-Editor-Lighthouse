@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using LighthouseLibrary.Models;
 using LighthouseLibrary.Models.Metadata;
 
@@ -26,27 +27,48 @@ namespace Lighthouse.Windows.Editor.Pages
     {
         private readonly Regex regex = new Regex("^[0-9]+$");
         private readonly EditorWindow editorWindow;
+        private readonly DispatcherTimer dispatcherTimer;
 
         private Layer LastSelectedLayer { get; set; }
 
-
-        private byte layerOpacity = 100;
-        private byte LayerOpacity
+        private double layerOpacity = 1;
+        private double LayerOpacity
         {
             get => layerOpacity;
             set
             {
                 LastSelectedLayer.Metadata.Transform.Opacity = value;
                 layerOpacity = value;
+
+                dispatcherTimer.Stop();
+                dispatcherTimer.Start();
+            }
+        }
+
+        private bool initialRun = true;
+
+        private bool InitialRun
+        {
+            get => initialRun;
+            set
+            {
+                if (initialRun == false)
+                    return;
+
+                initialRun = value;
             }
         }
 
         private bool skipNextChange;
         private bool isInitialized;
         private bool isChained;
+        private bool skipNextRender;
 
         public TransformPage(EditorWindow editorWindow)
         {
+            dispatcherTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(80) };
+            dispatcherTimer.Tick += OnTickOpacity;
+
             InitializeComponent();
 
             this.editorWindow = editorWindow;
@@ -57,17 +79,23 @@ namespace Lighthouse.Windows.Editor.Pages
         public void OnLoaded(object sender, RoutedEventArgs e)
         {
             isInitialized = false;
-            LastSelectedLayer = editorWindow.LastSelectedLayer;
+            skipNextRender = true;
 
-            // LastSelectedLayer = new Layer(new Bitmap(1, 1), 21, "Test", "Test", new LayerMetadata(1, 1));
+            LastSelectedLayer = editorWindow.LastSelectedLayer;
 
             PositionXTextBox.Text = LastSelectedLayer.Metadata.Transform.XPosition.ToString();
             PositionYTextBox.Text = LastSelectedLayer.Metadata.Transform.YPosition.ToString();
             HeightTextBox.Text = LastSelectedLayer.Metadata.Transform.Height.ToString();
             WidthTextBox.Text = LastSelectedLayer.Metadata.Transform.Width.ToString();
+
             LayerOpacity = LastSelectedLayer.Metadata.Transform.Opacity;
+            MySlider.Value = LayerOpacity * 100;
+
+            if (InitialRun)
+                MySlider.ValueChanged += (o, args) => LayerOpacity = args.NewValue / 100;
 
             isInitialized = true;
+            InitialRun = false;
         }
 
         private void OnClickRotateLeft(object sender, RoutedEventArgs e)
@@ -78,6 +106,16 @@ namespace Lighthouse.Windows.Editor.Pages
         private void OnClickRotateRight(object sender, RoutedEventArgs e)
         {
             throw new NotImplementedException();
+        }
+
+        private void OnTickOpacity(object _, EventArgs e)
+        {
+            if (skipNextRender)
+                skipNextRender = false;
+            else if (isInitialized)
+                editorWindow.Render();
+
+            dispatcherTimer.Stop();
         }
 
         private void OnChainClick(object sender, RoutedEventArgs e)

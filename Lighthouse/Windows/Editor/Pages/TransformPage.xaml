@@ -77,7 +77,7 @@
                 <Grid HorizontalAlignment="Stretch" Margin="5, 0">
                     <Border HorizontalAlignment="Left" BorderBrush="White" BorderThickness="1" CornerRadius="10">
                         <Grid Width="150" Height="45">
-                            <TextBox Name="WidthTextBox" TextChanged="OnWidthChange" FontSize="20" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" BorderBrush="Transparent" Background="Transparent" Foreground="White" Text="Width Value" />
+                            <TextBox Name="WidthTextBox" PreviewTextInput="PreviewTextInput" TextChanged="OnWidthChange" FontSize="20" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" BorderBrush="Transparent" Background="Transparent" Foreground="White" Text="Width Value" />
                             <Label FontSize="20" Margin="0,0,10,0" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="White" Content="W"/>
                         </Grid>
                     </Border>
@@ -91,7 +91,7 @@
 
                     <Border HorizontalAlignment="Right" BorderBrush="White" BorderThickness="1" CornerRadius="10">
                         <Grid Width="150" Height="45">
-                            <TextBox Name="HeightTextBox" TextChanged="OnHeightChange" FontSize="20" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" BorderBrush="Transparent" Background="Transparent" Foreground="White" Text="Height Value" />
+                            <TextBox Name="HeightTextBox" PreviewTextInput="PreviewTextInput" TextChanged="OnHeightChange" FontSize="20" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" BorderBrush="Transparent" Background="Transparent" Foreground="White" Text="Height Value" />
                             <Label FontSize="20" Margin="0,0,10,0" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="White" Content="H"/>
                         </Grid>
                     </Border>
@@ -113,7 +113,7 @@
                         </Grid>
                         <Border HorizontalAlignment="Right" BorderBrush="White" BorderThickness="1" CornerRadius="10">
                             <Grid Width="75" Height="45">
-                                <TextBox FontSize="20" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="55" BorderBrush="Transparent" Background="Transparent" Foreground="White" Text="{Binding ElementName=MySlider, Path=Value}" />
+                                <TextBox PreviewTextInput="PreviewTextInput" FontSize="20" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="55" BorderBrush="Transparent" Background="Transparent" Foreground="White" Text="{Binding ElementName=MySlider, Path=Value}" />
                             </Grid>
                         </Border>
                     </Grid>
