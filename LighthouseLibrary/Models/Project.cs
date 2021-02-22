@@ -58,18 +58,20 @@ namespace LighthouseLibrary.Models
             Bitmap res = new Bitmap(Width, Height);
 
             foreach (var t in Layers)
-                res = MergedBitmaps(res, t.RenderLayer());
+                res = MergedBitmaps(res, t);
 
             return res;
         }
 
-        private Bitmap MergedBitmaps(Bitmap bmp1, Bitmap bmp2)
+        private Bitmap MergedBitmaps(Bitmap bmp1, Layer layer)
         {
+            var bmp2 = layer.RenderLayer();
+
             if (bmp2 == null) return bmp1;
 
             Bitmap result = new Bitmap(Width, Height);
             using (Graphics g = Graphics.FromImage(result)) {
-                g.DrawImage(bmp2, 0, 0, bmp2.Width, bmp2.Height);
+                g.DrawImage(bmp2, layer.Metadata.Transform.XPosition, layer.Metadata.Transform.YPosition, bmp2.Width, bmp2.Height);
                 g.DrawImage(bmp1, 0, 0, bmp1.Width, bmp1.Height);
             }
 

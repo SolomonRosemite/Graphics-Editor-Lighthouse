@@ -170,6 +170,8 @@ namespace Lighthouse.Windows.Editor
 
         public void Render(bool updateSnapshot = true)
         {
+            Console.WriteLine($"Fired Render by: {UtilService.GetCallerStr(new StackTrace())}");
+
             if (updateSnapshot)
                 this.currentProjectStateId = editorState.AddNewSnapshot(project);
 

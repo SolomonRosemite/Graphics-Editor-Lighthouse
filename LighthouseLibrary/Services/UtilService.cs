@@ -65,5 +65,14 @@ namespace LighthouseLibrary.Services
 
             return result;
         }
+
+        public static string GetCallerStr(StackTrace stackTrace)
+        {
+            var methodBase = stackTrace.GetFrame(1).GetMethod();
+            var type = methodBase.ReflectedType;
+            var space = type?.Namespace;
+
+            return space + "." + type?.Name + "." + methodBase.Name;
+        }
     }
 }
