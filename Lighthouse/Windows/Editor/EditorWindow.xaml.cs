@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -296,10 +297,19 @@ namespace Lighthouse.Windows.Editor
 
         #endregion
 
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            if(!ExitApp())
+                return;
+
+            base.OnClosing(e);
+            Application.Current.Shutdown();
+        }
+
         private void OnExitClick(object sender, RoutedEventArgs e)
         {
-            // Todo: Don't exit if there are unsaved changes...
-            Application.Current.Shutdown();
+            if(ExitApp())
+                Application.Current.Shutdown();
         }
 
         private void OnColorGradingClick(object sender, RoutedEventArgs e)
@@ -343,6 +353,12 @@ namespace Lighthouse.Windows.Editor
         private void PlayAnimation(int milliseconds = 1000)
         {
             AnimationRectangle.BeginAnimation(OpacityProperty, new DoubleAnimation(1, 0, new Duration(TimeSpan.FromMilliseconds(milliseconds))));
+        }
+
+        private bool ExitApp()
+        {
+            // Todo: Don't exit if there are unsaved changes...
+            return true;
         }
     }
 }
