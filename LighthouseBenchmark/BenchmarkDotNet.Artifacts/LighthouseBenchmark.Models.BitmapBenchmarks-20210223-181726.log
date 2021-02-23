@@ -1,0 +1,1603 @@
+// Validating benchmarks:
+// ***** BenchmarkRunner: Start   *****
+// ***** Found 14 benchmark(s) in total *****
+// ***** Building 1 exe(s) in Parallel: Start   *****
+// start dotnet restore  /p:UseSharedCompilation=false /p:BuildInParallel=false /m:1 in C:\Users\Jesse\Dev\C#\Projects\Lighthouse\LighthouseBenchmark\bin\release\net5.0\cc4e9269-a815-4809-ab2d-cf1d82678f56
+// command took 1.96s and exited with 0
+// start dotnet build -c Release  --no-restore /p:UseSharedCompilation=false /p:BuildInParallel=false /m:1 in C:\Users\Jesse\Dev\C#\Projects\Lighthouse\LighthouseBenchmark\bin\release\net5.0\cc4e9269-a815-4809-ab2d-cf1d82678f56
+// command took 13.16s and exited with 1
+// start dotnet build -c Release  --no-restore --no-dependencies /p:UseSharedCompilation=false /p:BuildInParallel=false /m:1 in C:\Users\Jesse\Dev\C#\Projects\Lighthouse\LighthouseBenchmark\bin\release\net5.0\cc4e9269-a815-4809-ab2d-cf1d82678f56
+// command took 3.05s and exited with 0
+// ***** Done, took 00:00:18 (18.31 sec)   *****
+// Found 14 benchmarks:
+//   BitmapBenchmarks.Simple2000X2000FastBitmap: DefaultJob
+//   BitmapBenchmarks.SmallFastBitmap: DefaultJob
+//   BitmapBenchmarks.MediumFastBitmap: DefaultJob
+//   BitmapBenchmarks.LargeFastBitmap: DefaultJob
+//   BitmapBenchmarks.MaximumFastBitmap: DefaultJob
+//   BitmapBenchmarks.Simple2000X2000DirectBitmap: DefaultJob
+//   BitmapBenchmarks.SmallDirectBitmap: DefaultJob
+//   BitmapBenchmarks.MediumDirectBitmap: DefaultJob
+//   BitmapBenchmarks.LargeDirectBitmap: DefaultJob
+//   BitmapBenchmarks.MaximumDirectBitmap: DefaultJob
+//   BitmapBenchmarks.Simple2000X2000SBitmap: DefaultJob
+//   BitmapBenchmarks.SmallBitmap: DefaultJob
+//   BitmapBenchmarks.MediumBitmap: DefaultJob
+//   BitmapBenchmarks.LargeBitmap: DefaultJob
+
+// **************************
+// Benchmark: BitmapBenchmarks.Simple2000X2000FastBitmap: DefaultJob
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet "cc4e9269-a815-4809-ab2d-cf1d82678f56.dll" --benchmarkName "LighthouseBenchmark.Models.BitmapBenchmarks.Simple2000X2000FastBitmap" --job "Default" --benchmarkId 0 in C:\Users\Jesse\Dev\C#\Projects\Lighthouse\LighthouseBenchmark\bin\release\net5.0\cc4e9269-a815-4809-ab2d-cf1d82678f56\bin\Release\netcoreapp5.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET Core 5.0.1 (CoreCLR 5.0.120.57516, CoreFX 5.0.120.57516), X64 RyuJIT
+// GC=Concurrent Workstation
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 1167200.00 ns, 1.1672 ms/op
+WorkloadJitting  1: 1 op, 182841500.00 ns, 182.8415 ms/op
+
+WorkloadPilot    1: 2 op, 158611600.00 ns, 79.3058 ms/op
+WorkloadPilot    2: 3 op, 259570900.00 ns, 86.5236 ms/op
+WorkloadPilot    3: 4 op, 318943200.00 ns, 79.7358 ms/op
+WorkloadPilot    4: 5 op, 451831900.00 ns, 90.3664 ms/op
+WorkloadPilot    5: 6 op, 495622800.00 ns, 82.6038 ms/op
+WorkloadPilot    6: 7 op, 565880600.00 ns, 80.8401 ms/op
+
+WorkloadWarmup   1: 7 op, 562660700.00 ns, 80.3801 ms/op
+WorkloadWarmup   2: 7 op, 563598100.00 ns, 80.5140 ms/op
+WorkloadWarmup   3: 7 op, 567414800.00 ns, 81.0593 ms/op
+WorkloadWarmup   4: 7 op, 566456800.00 ns, 80.9224 ms/op
+WorkloadWarmup   5: 7 op, 566311700.00 ns, 80.9017 ms/op
+WorkloadWarmup   6: 7 op, 568147800.00 ns, 81.1640 ms/op
+WorkloadWarmup   7: 7 op, 580983600.00 ns, 82.9977 ms/op
+WorkloadWarmup   8: 7 op, 561823100.00 ns, 80.2604 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 7 op, 462433200.00 ns, 66.0619 ms/op
+WorkloadActual   2: 7 op, 442156100.00 ns, 63.1652 ms/op
+WorkloadActual   3: 7 op, 448375700.00 ns, 64.0537 ms/op
+WorkloadActual   4: 7 op, 442199200.00 ns, 63.1713 ms/op
+WorkloadActual   5: 7 op, 445259500.00 ns, 63.6085 ms/op
+WorkloadActual   6: 7 op, 449670500.00 ns, 64.2386 ms/op
+WorkloadActual   7: 7 op, 451260100.00 ns, 64.4657 ms/op
+WorkloadActual   8: 7 op, 445685400.00 ns, 63.6693 ms/op
+WorkloadActual   9: 7 op, 438251300.00 ns, 62.6073 ms/op
+WorkloadActual  10: 7 op, 459659400.00 ns, 65.6656 ms/op
+WorkloadActual  11: 7 op, 444220700.00 ns, 63.4601 ms/op
+WorkloadActual  12: 7 op, 441871600.00 ns, 63.1245 ms/op
+WorkloadActual  13: 7 op, 453706000.00 ns, 64.8151 ms/op
+WorkloadActual  14: 7 op, 443275900.00 ns, 63.3251 ms/op
+WorkloadActual  15: 7 op, 448610700.00 ns, 64.0872 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 7 op, 442156100.00 ns, 63.1652 ms/op
+WorkloadResult   2: 7 op, 448375700.00 ns, 64.0537 ms/op
+WorkloadResult   3: 7 op, 442199200.00 ns, 63.1713 ms/op
+WorkloadResult   4: 7 op, 445259500.00 ns, 63.6085 ms/op
+WorkloadResult   5: 7 op, 449670500.00 ns, 64.2386 ms/op
+WorkloadResult   6: 7 op, 451260100.00 ns, 64.4657 ms/op
+WorkloadResult   7: 7 op, 445685400.00 ns, 63.6693 ms/op
+WorkloadResult   8: 7 op, 438251300.00 ns, 62.6073 ms/op
+WorkloadResult   9: 7 op, 459659400.00 ns, 65.6656 ms/op
+WorkloadResult  10: 7 op, 444220700.00 ns, 63.4601 ms/op
+WorkloadResult  11: 7 op, 441871600.00 ns, 63.1245 ms/op
+WorkloadResult  12: 7 op, 453706000.00 ns, 64.8151 ms/op
+WorkloadResult  13: 7 op, 443275900.00 ns, 63.3251 ms/op
+WorkloadResult  14: 7 op, 448610700.00 ns, 64.0872 ms/op
+GC:  0 0 0 9568 7
+Threading:  2 0 7
+
+// AfterAll
+// Benchmark Process 18020 has exited with code 0
+
+Mean = 63.818 ms, StdErr = 0.214 ms (0.34%), N = 14, StdDev = 0.802 ms
+Min = 62.607 ms, Q1 = 63.210 ms, Median = 63.639 ms, Q3 = 64.201 ms, Max = 65.666 ms
+IQR = 0.991 ms, LowerFence = 61.723 ms, UpperFence = 65.687 ms
+ConfidenceInterval = [62.914 ms; 64.723 ms] (CI 99.9%), Margin = 0.905 ms (1.42% of Mean)
+Skewness = 0.67, Kurtosis = 2.71, MValue = 2
+
+// **************************
+// Benchmark: BitmapBenchmarks.SmallFastBitmap: DefaultJob
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet "cc4e9269-a815-4809-ab2d-cf1d82678f56.dll" --benchmarkName "LighthouseBenchmark.Models.BitmapBenchmarks.SmallFastBitmap" --job "Default" --benchmarkId 1 in C:\Users\Jesse\Dev\C#\Projects\Lighthouse\LighthouseBenchmark\bin\release\net5.0\cc4e9269-a815-4809-ab2d-cf1d82678f56\bin\Release\netcoreapp5.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET Core 5.0.1 (CoreCLR 5.0.120.57516, CoreFX 5.0.120.57516), X64 RyuJIT
+// GC=Concurrent Workstation
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 235100.00 ns, 235.1000 us/op
+WorkloadJitting  1: 1 op, 12372700.00 ns, 12.3727 ms/op
+
+OverheadJitting  2: 16 op, 424900.00 ns, 26.5562 us/op
+WorkloadJitting  2: 16 op, 145798000.00 ns, 9.1124 ms/op
+
+WorkloadPilot    1: 16 op, 132123500.00 ns, 8.2577 ms/op
+WorkloadPilot    2: 32 op, 121001900.00 ns, 3.7813 ms/op
+WorkloadPilot    3: 64 op, 187618200.00 ns, 2.9315 ms/op
+WorkloadPilot    4: 128 op, 335476500.00 ns, 2.6209 ms/op
+WorkloadPilot    5: 256 op, 675142800.00 ns, 2.6373 ms/op
+
+OverheadWarmup   1: 256 op, 2300.00 ns, 8.9844 ns/op
+OverheadWarmup   2: 256 op, 2100.00 ns, 8.2031 ns/op
+OverheadWarmup   3: 256 op, 1700.00 ns, 6.6406 ns/op
+OverheadWarmup   4: 256 op, 1600.00 ns, 6.2500 ns/op
+OverheadWarmup   5: 256 op, 1500.00 ns, 5.8594 ns/op
+OverheadWarmup   6: 256 op, 1700.00 ns, 6.6406 ns/op
+OverheadWarmup   7: 256 op, 1400.00 ns, 5.4688 ns/op
+OverheadWarmup   8: 256 op, 1400.00 ns, 5.4688 ns/op
+OverheadWarmup   9: 256 op, 2600.00 ns, 10.1562 ns/op
+
+OverheadActual   1: 256 op, 1900.00 ns, 7.4219 ns/op
+OverheadActual   2: 256 op, 1500.00 ns, 5.8594 ns/op
+OverheadActual   3: 256 op, 1400.00 ns, 5.4688 ns/op
+OverheadActual   4: 256 op, 1800.00 ns, 7.0312 ns/op
+OverheadActual   5: 256 op, 1500.00 ns, 5.8594 ns/op
+OverheadActual   6: 256 op, 1300.00 ns, 5.0781 ns/op
+OverheadActual   7: 256 op, 2000.00 ns, 7.8125 ns/op
+OverheadActual   8: 256 op, 1400.00 ns, 5.4688 ns/op
+OverheadActual   9: 256 op, 1900.00 ns, 7.4219 ns/op
+OverheadActual  10: 256 op, 3400.00 ns, 13.2812 ns/op
+OverheadActual  11: 256 op, 2000.00 ns, 7.8125 ns/op
+OverheadActual  12: 256 op, 1600.00 ns, 6.2500 ns/op
+OverheadActual  13: 256 op, 1300.00 ns, 5.0781 ns/op
+OverheadActual  14: 256 op, 1700.00 ns, 6.6406 ns/op
+OverheadActual  15: 256 op, 1500.00 ns, 5.8594 ns/op
+OverheadActual  16: 256 op, 2900.00 ns, 11.3281 ns/op
+OverheadActual  17: 256 op, 1900.00 ns, 7.4219 ns/op
+OverheadActual  18: 256 op, 1800.00 ns, 7.0312 ns/op
+OverheadActual  19: 256 op, 1400.00 ns, 5.4688 ns/op
+OverheadActual  20: 256 op, 2700.00 ns, 10.5469 ns/op
+
+WorkloadWarmup   1: 256 op, 700103000.00 ns, 2.7348 ms/op
+WorkloadWarmup   2: 256 op, 670907900.00 ns, 2.6207 ms/op
+WorkloadWarmup   3: 256 op, 671623300.00 ns, 2.6235 ms/op
+WorkloadWarmup   4: 256 op, 684023100.00 ns, 2.6720 ms/op
+WorkloadWarmup   5: 256 op, 669359500.00 ns, 2.6147 ms/op
+WorkloadWarmup   6: 256 op, 676412400.00 ns, 2.6422 ms/op
+WorkloadWarmup   7: 256 op, 668901200.00 ns, 2.6129 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 256 op, 673654100.00 ns, 2.6315 ms/op
+WorkloadActual   2: 256 op, 677167400.00 ns, 2.6452 ms/op
+WorkloadActual   3: 256 op, 669040500.00 ns, 2.6134 ms/op
+WorkloadActual   4: 256 op, 670733200.00 ns, 2.6201 ms/op
+WorkloadActual   5: 256 op, 671207500.00 ns, 2.6219 ms/op
+WorkloadActual   6: 256 op, 680141500.00 ns, 2.6568 ms/op
+WorkloadActual   7: 256 op, 680092000.00 ns, 2.6566 ms/op
+WorkloadActual   8: 256 op, 667966000.00 ns, 2.6092 ms/op
+WorkloadActual   9: 256 op, 690127600.00 ns, 2.6958 ms/op
+WorkloadActual  10: 256 op, 672594800.00 ns, 2.6273 ms/op
+WorkloadActual  11: 256 op, 673583800.00 ns, 2.6312 ms/op
+WorkloadActual  12: 256 op, 685265800.00 ns, 2.6768 ms/op
+WorkloadActual  13: 256 op, 668412500.00 ns, 2.6110 ms/op
+WorkloadActual  14: 256 op, 677858900.00 ns, 2.6479 ms/op
+WorkloadActual  15: 256 op, 682109900.00 ns, 2.6645 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 256 op, 673652350.00 ns, 2.6315 ms/op
+WorkloadResult   2: 256 op, 677165650.00 ns, 2.6452 ms/op
+WorkloadResult   3: 256 op, 669038750.00 ns, 2.6134 ms/op
+WorkloadResult   4: 256 op, 670731450.00 ns, 2.6200 ms/op
+WorkloadResult   5: 256 op, 671205750.00 ns, 2.6219 ms/op
+WorkloadResult   6: 256 op, 680139750.00 ns, 2.6568 ms/op
+WorkloadResult   7: 256 op, 680090250.00 ns, 2.6566 ms/op
+WorkloadResult   8: 256 op, 667964250.00 ns, 2.6092 ms/op
+WorkloadResult   9: 256 op, 690125850.00 ns, 2.6958 ms/op
+WorkloadResult  10: 256 op, 672593050.00 ns, 2.6273 ms/op
+WorkloadResult  11: 256 op, 673582050.00 ns, 2.6312 ms/op
+WorkloadResult  12: 256 op, 685264050.00 ns, 2.6768 ms/op
+WorkloadResult  13: 256 op, 668410750.00 ns, 2.6110 ms/op
+WorkloadResult  14: 256 op, 677857150.00 ns, 2.6479 ms/op
+WorkloadResult  15: 256 op, 682108150.00 ns, 2.6645 ms/op
+GC:  0 0 0 28672 256
+Threading:  2 0 256
+
+// AfterAll
+// Benchmark Process 17920 has exited with code 0
+
+Mean = 2.641 ms, StdErr = 0.007 ms (0.25%), N = 15, StdDev = 0.026 ms
+Min = 2.609 ms, Q1 = 2.621 ms, Median = 2.631 ms, Q3 = 2.657 ms, Max = 2.696 ms
+IQR = 0.036 ms, LowerFence = 2.567 ms, UpperFence = 2.710 ms
+ConfidenceInterval = [2.613 ms; 2.668 ms] (CI 99.9%), Margin = 0.027 ms (1.04% of Mean)
+Skewness = 0.56, Kurtosis = 2.16, MValue = 2
+
+// **************************
+// Benchmark: BitmapBenchmarks.MediumFastBitmap: DefaultJob
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet "cc4e9269-a815-4809-ab2d-cf1d82678f56.dll" --benchmarkName "LighthouseBenchmark.Models.BitmapBenchmarks.MediumFastBitmap" --job "Default" --benchmarkId 2 in C:\Users\Jesse\Dev\C#\Projects\Lighthouse\LighthouseBenchmark\bin\release\net5.0\cc4e9269-a815-4809-ab2d-cf1d82678f56\bin\Release\netcoreapp5.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET Core 5.0.1 (CoreCLR 5.0.120.57516, CoreFX 5.0.120.57516), X64 RyuJIT
+// GC=Concurrent Workstation
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 233800.00 ns, 233.8000 us/op
+WorkloadJitting  1: 1 op, 93624800.00 ns, 93.6248 ms/op
+
+WorkloadPilot    1: 2 op, 179174700.00 ns, 89.5874 ms/op
+WorkloadPilot    2: 3 op, 133382000.00 ns, 44.4607 ms/op
+WorkloadPilot    3: 4 op, 163637700.00 ns, 40.9094 ms/op
+WorkloadPilot    4: 5 op, 209169600.00 ns, 41.8339 ms/op
+WorkloadPilot    5: 6 op, 233504800.00 ns, 38.9175 ms/op
+WorkloadPilot    6: 7 op, 268087400.00 ns, 38.2982 ms/op
+WorkloadPilot    7: 8 op, 304498900.00 ns, 38.0624 ms/op
+WorkloadPilot    8: 9 op, 343037700.00 ns, 38.1153 ms/op
+WorkloadPilot    9: 10 op, 380542900.00 ns, 38.0543 ms/op
+WorkloadPilot   10: 11 op, 419873600.00 ns, 38.1703 ms/op
+WorkloadPilot   11: 12 op, 432685600.00 ns, 36.0571 ms/op
+WorkloadPilot   12: 13 op, 445547800.00 ns, 34.2729 ms/op
+WorkloadPilot   13: 14 op, 442522400.00 ns, 31.6087 ms/op
+WorkloadPilot   14: 15 op, 471004400.00 ns, 31.4003 ms/op
+WorkloadPilot   15: 16 op, 493142500.00 ns, 30.8214 ms/op
+WorkloadPilot   16: 32 op, 991062900.00 ns, 30.9707 ms/op
+
+WorkloadWarmup   1: 32 op, 984447200.00 ns, 30.7640 ms/op
+WorkloadWarmup   2: 32 op, 988801400.00 ns, 30.9000 ms/op
+WorkloadWarmup   3: 32 op, 988909200.00 ns, 30.9034 ms/op
+WorkloadWarmup   4: 32 op, 1044558300.00 ns, 32.6424 ms/op
+WorkloadWarmup   5: 32 op, 1004938400.00 ns, 31.4043 ms/op
+WorkloadWarmup   6: 32 op, 991877300.00 ns, 30.9962 ms/op
+WorkloadWarmup   7: 32 op, 983744300.00 ns, 30.7420 ms/op
+WorkloadWarmup   8: 32 op, 988491000.00 ns, 30.8903 ms/op
+WorkloadWarmup   9: 32 op, 1031277400.00 ns, 32.2274 ms/op
+WorkloadWarmup  10: 32 op, 999280400.00 ns, 31.2275 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 32 op, 996042900.00 ns, 31.1263 ms/op
+WorkloadActual   2: 32 op, 983818500.00 ns, 30.7443 ms/op
+WorkloadActual   3: 32 op, 993775000.00 ns, 31.0555 ms/op
+WorkloadActual   4: 32 op, 990464100.00 ns, 30.9520 ms/op
+WorkloadActual   5: 32 op, 996434100.00 ns, 31.1386 ms/op
+WorkloadActual   6: 32 op, 1004751400.00 ns, 31.3985 ms/op
+WorkloadActual   7: 32 op, 988341700.00 ns, 30.8857 ms/op
+WorkloadActual   8: 32 op, 993640800.00 ns, 31.0513 ms/op
+WorkloadActual   9: 32 op, 979808000.00 ns, 30.6190 ms/op
+WorkloadActual  10: 32 op, 983515300.00 ns, 30.7349 ms/op
+WorkloadActual  11: 32 op, 981639300.00 ns, 30.6762 ms/op
+WorkloadActual  12: 32 op, 995192900.00 ns, 31.0998 ms/op
+WorkloadActual  13: 32 op, 988171700.00 ns, 30.8804 ms/op
+WorkloadActual  14: 32 op, 987294600.00 ns, 30.8530 ms/op
+WorkloadActual  15: 32 op, 996901900.00 ns, 31.1532 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 32 op, 996042900.00 ns, 31.1263 ms/op
+WorkloadResult   2: 32 op, 983818500.00 ns, 30.7443 ms/op
+WorkloadResult   3: 32 op, 993775000.00 ns, 31.0555 ms/op
+WorkloadResult   4: 32 op, 990464100.00 ns, 30.9520 ms/op
+WorkloadResult   5: 32 op, 996434100.00 ns, 31.1386 ms/op
+WorkloadResult   6: 32 op, 1004751400.00 ns, 31.3985 ms/op
+WorkloadResult   7: 32 op, 988341700.00 ns, 30.8857 ms/op
+WorkloadResult   8: 32 op, 993640800.00 ns, 31.0513 ms/op
+WorkloadResult   9: 32 op, 979808000.00 ns, 30.6190 ms/op
+WorkloadResult  10: 32 op, 983515300.00 ns, 30.7349 ms/op
+WorkloadResult  11: 32 op, 981639300.00 ns, 30.6762 ms/op
+WorkloadResult  12: 32 op, 995192900.00 ns, 31.0998 ms/op
+WorkloadResult  13: 32 op, 988171700.00 ns, 30.8804 ms/op
+WorkloadResult  14: 32 op, 987294600.00 ns, 30.8530 ms/op
+WorkloadResult  15: 32 op, 996901900.00 ns, 31.1532 ms/op
+GC:  0 0 0 3584 32
+Threading:  2 0 32
+
+// AfterAll
+// Benchmark Process 13164 has exited with code 0
+
+Mean = 30.958 ms, StdErr = 0.055 ms (0.18%), N = 15, StdDev = 0.214 ms
+Min = 30.619 ms, Q1 = 30.799 ms, Median = 30.952 ms, Q3 = 31.113 ms, Max = 31.398 ms
+IQR = 0.314 ms, LowerFence = 30.327 ms, UpperFence = 31.585 ms
+ConfidenceInterval = [30.729 ms; 31.187 ms] (CI 99.9%), Margin = 0.229 ms (0.74% of Mean)
+Skewness = 0.16, Kurtosis = 2.08, MValue = 2
+
+// **************************
+// Benchmark: BitmapBenchmarks.LargeFastBitmap: DefaultJob
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet "cc4e9269-a815-4809-ab2d-cf1d82678f56.dll" --benchmarkName "LighthouseBenchmark.Models.BitmapBenchmarks.LargeFastBitmap" --job "Default" --benchmarkId 3 in C:\Users\Jesse\Dev\C#\Projects\Lighthouse\LighthouseBenchmark\bin\release\net5.0\cc4e9269-a815-4809-ab2d-cf1d82678f56\bin\Release\netcoreapp5.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET Core 5.0.1 (CoreCLR 5.0.120.57516, CoreFX 5.0.120.57516), X64 RyuJIT
+// GC=Concurrent Workstation
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 320700.00 ns, 320.7000 us/op
+WorkloadJitting  1: 1 op, 144131000.00 ns, 144.1310 ms/op
+
+WorkloadPilot    1: 2 op, 216258900.00 ns, 108.1295 ms/op
+WorkloadPilot    2: 3 op, 193081000.00 ns, 64.3603 ms/op
+WorkloadPilot    3: 4 op, 255417200.00 ns, 63.8543 ms/op
+WorkloadPilot    4: 5 op, 318346400.00 ns, 63.6693 ms/op
+WorkloadPilot    5: 6 op, 373965200.00 ns, 62.3275 ms/op
+WorkloadPilot    6: 7 op, 423662000.00 ns, 60.5231 ms/op
+WorkloadPilot    7: 8 op, 471104600.00 ns, 58.8881 ms/op
+WorkloadPilot    8: 9 op, 545173600.00 ns, 60.5748 ms/op
+
+WorkloadWarmup   1: 9 op, 530892700.00 ns, 58.9881 ms/op
+WorkloadWarmup   2: 9 op, 558867800.00 ns, 62.0964 ms/op
+WorkloadWarmup   3: 9 op, 550180400.00 ns, 61.1312 ms/op
+WorkloadWarmup   4: 9 op, 484530000.00 ns, 53.8367 ms/op
+WorkloadWarmup   5: 9 op, 455631300.00 ns, 50.6257 ms/op
+WorkloadWarmup   6: 9 op, 462889700.00 ns, 51.4322 ms/op
+WorkloadWarmup   7: 9 op, 445074800.00 ns, 49.4528 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 9 op, 463946700.00 ns, 51.5496 ms/op
+WorkloadActual   2: 9 op, 449434300.00 ns, 49.9371 ms/op
+WorkloadActual   3: 9 op, 455377400.00 ns, 50.5975 ms/op
+WorkloadActual   4: 9 op, 454846200.00 ns, 50.5385 ms/op
+WorkloadActual   5: 9 op, 456525200.00 ns, 50.7250 ms/op
+WorkloadActual   6: 9 op, 454653600.00 ns, 50.5171 ms/op
+WorkloadActual   7: 9 op, 459677000.00 ns, 51.0752 ms/op
+WorkloadActual   8: 9 op, 456836000.00 ns, 50.7596 ms/op
+WorkloadActual   9: 9 op, 449201200.00 ns, 49.9112 ms/op
+WorkloadActual  10: 9 op, 462351500.00 ns, 51.3724 ms/op
+WorkloadActual  11: 9 op, 455921100.00 ns, 50.6579 ms/op
+WorkloadActual  12: 9 op, 453018500.00 ns, 50.3354 ms/op
+WorkloadActual  13: 9 op, 455230300.00 ns, 50.5811 ms/op
+WorkloadActual  14: 9 op, 473573000.00 ns, 52.6192 ms/op
+WorkloadActual  15: 9 op, 464870200.00 ns, 51.6522 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 9 op, 463946700.00 ns, 51.5496 ms/op
+WorkloadResult   2: 9 op, 449434300.00 ns, 49.9371 ms/op
+WorkloadResult   3: 9 op, 455377400.00 ns, 50.5975 ms/op
+WorkloadResult   4: 9 op, 454846200.00 ns, 50.5385 ms/op
+WorkloadResult   5: 9 op, 456525200.00 ns, 50.7250 ms/op
+WorkloadResult   6: 9 op, 454653600.00 ns, 50.5171 ms/op
+WorkloadResult   7: 9 op, 459677000.00 ns, 51.0752 ms/op
+WorkloadResult   8: 9 op, 456836000.00 ns, 50.7596 ms/op
+WorkloadResult   9: 9 op, 449201200.00 ns, 49.9112 ms/op
+WorkloadResult  10: 9 op, 462351500.00 ns, 51.3724 ms/op
+WorkloadResult  11: 9 op, 455921100.00 ns, 50.6579 ms/op
+WorkloadResult  12: 9 op, 453018500.00 ns, 50.3354 ms/op
+WorkloadResult  13: 9 op, 455230300.00 ns, 50.5811 ms/op
+WorkloadResult  14: 9 op, 464870200.00 ns, 51.6522 ms/op
+GC:  0 0 0 9488 9
+Threading:  2 0 9
+
+// AfterAll
+// Benchmark Process 4256 has exited with code 0
+
+Mean = 50.729 ms, StdErr = 0.141 ms (0.28%), N = 14, StdDev = 0.529 ms
+Min = 49.911 ms, Q1 = 50.522 ms, Median = 50.628 ms, Q3 = 50.996 ms, Max = 51.652 ms
+IQR = 0.474 ms, LowerFence = 49.812 ms, UpperFence = 51.707 ms
+ConfidenceInterval = [50.133 ms; 51.326 ms] (CI 99.9%), Margin = 0.597 ms (1.18% of Mean)
+Skewness = 0.25, Kurtosis = 2.04, MValue = 2
+
+// **************************
+// Benchmark: BitmapBenchmarks.MaximumFastBitmap: DefaultJob
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet "cc4e9269-a815-4809-ab2d-cf1d82678f56.dll" --benchmarkName "LighthouseBenchmark.Models.BitmapBenchmarks.MaximumFastBitmap" --job "Default" --benchmarkId 4 in C:\Users\Jesse\Dev\C#\Projects\Lighthouse\LighthouseBenchmark\bin\release\net5.0\cc4e9269-a815-4809-ab2d-cf1d82678f56\bin\Release\netcoreapp5.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET Core 5.0.1 (CoreCLR 5.0.120.57516, CoreFX 5.0.120.57516), X64 RyuJIT
+// GC=Concurrent Workstation
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 274500.00 ns, 274.5000 us/op
+WorkloadJitting  1: 1 op, 562985500.00 ns, 562.9855 ms/op
+
+WorkloadWarmup   1: 1 op, 429744100.00 ns, 429.7441 ms/op
+WorkloadWarmup   2: 1 op, 423433700.00 ns, 423.4337 ms/op
+WorkloadWarmup   3: 1 op, 421266700.00 ns, 421.2667 ms/op
+WorkloadWarmup   4: 1 op, 448612400.00 ns, 448.6124 ms/op
+WorkloadWarmup   5: 1 op, 433096400.00 ns, 433.0964 ms/op
+WorkloadWarmup   6: 1 op, 466103200.00 ns, 466.1032 ms/op
+WorkloadWarmup   7: 1 op, 436043800.00 ns, 436.0438 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 1 op, 441121400.00 ns, 441.1214 ms/op
+WorkloadActual   2: 1 op, 455535400.00 ns, 455.5354 ms/op
+WorkloadActual   3: 1 op, 434896100.00 ns, 434.8961 ms/op
+WorkloadActual   4: 1 op, 441486900.00 ns, 441.4869 ms/op
+WorkloadActual   5: 1 op, 426268700.00 ns, 426.2687 ms/op
+WorkloadActual   6: 1 op, 440904200.00 ns, 440.9042 ms/op
+WorkloadActual   7: 1 op, 423027200.00 ns, 423.0272 ms/op
+WorkloadActual   8: 1 op, 463096600.00 ns, 463.0966 ms/op
+WorkloadActual   9: 1 op, 500290600.00 ns, 500.2906 ms/op
+WorkloadActual  10: 1 op, 399670900.00 ns, 399.6709 ms/op
+WorkloadActual  11: 1 op, 392916700.00 ns, 392.9167 ms/op
+WorkloadActual  12: 1 op, 379544100.00 ns, 379.5441 ms/op
+WorkloadActual  13: 1 op, 383532200.00 ns, 383.5322 ms/op
+WorkloadActual  14: 1 op, 381038400.00 ns, 381.0384 ms/op
+WorkloadActual  15: 1 op, 406943800.00 ns, 406.9438 ms/op
+WorkloadActual  16: 1 op, 381502800.00 ns, 381.5028 ms/op
+WorkloadActual  17: 1 op, 380313600.00 ns, 380.3136 ms/op
+WorkloadActual  18: 1 op, 377210500.00 ns, 377.2105 ms/op
+WorkloadActual  19: 1 op, 380369400.00 ns, 380.3694 ms/op
+WorkloadActual  20: 1 op, 375291700.00 ns, 375.2917 ms/op
+WorkloadActual  21: 1 op, 385562300.00 ns, 385.5623 ms/op
+WorkloadActual  22: 1 op, 375690700.00 ns, 375.6907 ms/op
+WorkloadActual  23: 1 op, 387784300.00 ns, 387.7843 ms/op
+WorkloadActual  24: 1 op, 372399100.00 ns, 372.3991 ms/op
+WorkloadActual  25: 1 op, 377985700.00 ns, 377.9857 ms/op
+WorkloadActual  26: 1 op, 385786900.00 ns, 385.7869 ms/op
+WorkloadActual  27: 1 op, 405002300.00 ns, 405.0023 ms/op
+WorkloadActual  28: 1 op, 375955000.00 ns, 375.9550 ms/op
+WorkloadActual  29: 1 op, 380141200.00 ns, 380.1412 ms/op
+WorkloadActual  30: 1 op, 383317100.00 ns, 383.3171 ms/op
+WorkloadActual  31: 1 op, 379310500.00 ns, 379.3105 ms/op
+WorkloadActual  32: 1 op, 373492400.00 ns, 373.4924 ms/op
+WorkloadActual  33: 1 op, 371268400.00 ns, 371.2684 ms/op
+WorkloadActual  34: 1 op, 379588400.00 ns, 379.5884 ms/op
+WorkloadActual  35: 1 op, 377543000.00 ns, 377.5430 ms/op
+WorkloadActual  36: 1 op, 375888800.00 ns, 375.8888 ms/op
+WorkloadActual  37: 1 op, 370945600.00 ns, 370.9456 ms/op
+WorkloadActual  38: 1 op, 390000300.00 ns, 390.0003 ms/op
+WorkloadActual  39: 1 op, 367222400.00 ns, 367.2224 ms/op
+WorkloadActual  40: 1 op, 364300100.00 ns, 364.3001 ms/op
+WorkloadActual  41: 1 op, 374954300.00 ns, 374.9543 ms/op
+WorkloadActual  42: 1 op, 367560200.00 ns, 367.5602 ms/op
+WorkloadActual  43: 1 op, 366548400.00 ns, 366.5484 ms/op
+WorkloadActual  44: 1 op, 364897100.00 ns, 364.8971 ms/op
+WorkloadActual  45: 1 op, 391503400.00 ns, 391.5034 ms/op
+WorkloadActual  46: 1 op, 370877400.00 ns, 370.8774 ms/op
+WorkloadActual  47: 1 op, 379058500.00 ns, 379.0585 ms/op
+WorkloadActual  48: 1 op, 364606100.00 ns, 364.6061 ms/op
+WorkloadActual  49: 1 op, 371911900.00 ns, 371.9119 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 1 op, 399670900.00 ns, 399.6709 ms/op
+WorkloadResult   2: 1 op, 392916700.00 ns, 392.9167 ms/op
+WorkloadResult   3: 1 op, 379544100.00 ns, 379.5441 ms/op
+WorkloadResult   4: 1 op, 383532200.00 ns, 383.5322 ms/op
+WorkloadResult   5: 1 op, 381038400.00 ns, 381.0384 ms/op
+WorkloadResult   6: 1 op, 406943800.00 ns, 406.9438 ms/op
+WorkloadResult   7: 1 op, 381502800.00 ns, 381.5028 ms/op
+WorkloadResult   8: 1 op, 380313600.00 ns, 380.3136 ms/op
+WorkloadResult   9: 1 op, 377210500.00 ns, 377.2105 ms/op
+WorkloadResult  10: 1 op, 380369400.00 ns, 380.3694 ms/op
+WorkloadResult  11: 1 op, 375291700.00 ns, 375.2917 ms/op
+WorkloadResult  12: 1 op, 385562300.00 ns, 385.5623 ms/op
+WorkloadResult  13: 1 op, 375690700.00 ns, 375.6907 ms/op
+WorkloadResult  14: 1 op, 387784300.00 ns, 387.7843 ms/op
+WorkloadResult  15: 1 op, 372399100.00 ns, 372.3991 ms/op
+WorkloadResult  16: 1 op, 377985700.00 ns, 377.9857 ms/op
+WorkloadResult  17: 1 op, 385786900.00 ns, 385.7869 ms/op
+WorkloadResult  18: 1 op, 405002300.00 ns, 405.0023 ms/op
+WorkloadResult  19: 1 op, 375955000.00 ns, 375.9550 ms/op
+WorkloadResult  20: 1 op, 380141200.00 ns, 380.1412 ms/op
+WorkloadResult  21: 1 op, 383317100.00 ns, 383.3171 ms/op
+WorkloadResult  22: 1 op, 379310500.00 ns, 379.3105 ms/op
+WorkloadResult  23: 1 op, 373492400.00 ns, 373.4924 ms/op
+WorkloadResult  24: 1 op, 371268400.00 ns, 371.2684 ms/op
+WorkloadResult  25: 1 op, 379588400.00 ns, 379.5884 ms/op
+WorkloadResult  26: 1 op, 377543000.00 ns, 377.5430 ms/op
+WorkloadResult  27: 1 op, 375888800.00 ns, 375.8888 ms/op
+WorkloadResult  28: 1 op, 370945600.00 ns, 370.9456 ms/op
+WorkloadResult  29: 1 op, 390000300.00 ns, 390.0003 ms/op
+WorkloadResult  30: 1 op, 367222400.00 ns, 367.2224 ms/op
+WorkloadResult  31: 1 op, 364300100.00 ns, 364.3001 ms/op
+WorkloadResult  32: 1 op, 374954300.00 ns, 374.9543 ms/op
+WorkloadResult  33: 1 op, 367560200.00 ns, 367.5602 ms/op
+WorkloadResult  34: 1 op, 366548400.00 ns, 366.5484 ms/op
+WorkloadResult  35: 1 op, 364897100.00 ns, 364.8971 ms/op
+WorkloadResult  36: 1 op, 391503400.00 ns, 391.5034 ms/op
+WorkloadResult  37: 1 op, 370877400.00 ns, 370.8774 ms/op
+WorkloadResult  38: 1 op, 379058500.00 ns, 379.0585 ms/op
+WorkloadResult  39: 1 op, 364606100.00 ns, 364.6061 ms/op
+WorkloadResult  40: 1 op, 371911900.00 ns, 371.9119 ms/op
+GC:  0 0 0 112 1
+Threading:  2 0 1
+
+// AfterAll
+// Benchmark Process 16816 has exited with code 0
+
+Mean = 379.236 ms, StdErr = 1.602 ms (0.42%), N = 40, StdDev = 10.131 ms
+Min = 364.300 ms, Q1 = 372.277 ms, Median = 378.522 ms, Q3 = 383.371 ms, Max = 406.944 ms
+IQR = 11.094 ms, LowerFence = 355.637 ms, UpperFence = 400.011 ms
+ConfidenceInterval = [373.537 ms; 384.935 ms] (CI 99.9%), Margin = 5.699 ms (1.50% of Mean)
+Skewness = 0.87, Kurtosis = 3.58, MValue = 2
+
+// **************************
+// Benchmark: BitmapBenchmarks.Simple2000X2000DirectBitmap: DefaultJob
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet "cc4e9269-a815-4809-ab2d-cf1d82678f56.dll" --benchmarkName "LighthouseBenchmark.Models.BitmapBenchmarks.Simple2000X2000DirectBitmap" --job "Default" --benchmarkId 5 in C:\Users\Jesse\Dev\C#\Projects\Lighthouse\LighthouseBenchmark\bin\release\net5.0\cc4e9269-a815-4809-ab2d-cf1d82678f56\bin\Release\netcoreapp5.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET Core 5.0.1 (CoreCLR 5.0.120.57516, CoreFX 5.0.120.57516), X64 RyuJIT
+// GC=Concurrent Workstation
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 250300.00 ns, 250.3000 us/op
+WorkloadJitting  1: 1 op, 84748100.00 ns, 84.7481 ms/op
+
+WorkloadPilot    1: 2 op, 156599600.00 ns, 78.2998 ms/op
+WorkloadPilot    2: 3 op, 233341200.00 ns, 77.7804 ms/op
+WorkloadPilot    3: 4 op, 311353800.00 ns, 77.8384 ms/op
+WorkloadPilot    4: 5 op, 438626200.00 ns, 87.7252 ms/op
+WorkloadPilot    5: 6 op, 463587000.00 ns, 77.2645 ms/op
+WorkloadPilot    6: 7 op, 558623100.00 ns, 79.8033 ms/op
+
+WorkloadWarmup   1: 7 op, 545453900.00 ns, 77.9220 ms/op
+WorkloadWarmup   2: 7 op, 557184800.00 ns, 79.5978 ms/op
+WorkloadWarmup   3: 7 op, 544494100.00 ns, 77.7849 ms/op
+WorkloadWarmup   4: 7 op, 551080900.00 ns, 78.7258 ms/op
+WorkloadWarmup   5: 7 op, 550991200.00 ns, 78.7130 ms/op
+WorkloadWarmup   6: 7 op, 551018100.00 ns, 78.7169 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 7 op, 550620300.00 ns, 78.6600 ms/op
+WorkloadActual   2: 7 op, 555409700.00 ns, 79.3442 ms/op
+WorkloadActual   3: 7 op, 423372800.00 ns, 60.4818 ms/op
+WorkloadActual   4: 7 op, 406725400.00 ns, 58.1036 ms/op
+WorkloadActual   5: 7 op, 401847900.00 ns, 57.4068 ms/op
+WorkloadActual   6: 7 op, 411605700.00 ns, 58.8008 ms/op
+WorkloadActual   7: 7 op, 407676000.00 ns, 58.2394 ms/op
+WorkloadActual   8: 7 op, 406990500.00 ns, 58.1415 ms/op
+WorkloadActual   9: 7 op, 412878300.00 ns, 58.9826 ms/op
+WorkloadActual  10: 7 op, 402223500.00 ns, 57.4605 ms/op
+WorkloadActual  11: 7 op, 403219600.00 ns, 57.6028 ms/op
+WorkloadActual  12: 7 op, 413051600.00 ns, 59.0074 ms/op
+WorkloadActual  13: 7 op, 415491100.00 ns, 59.3559 ms/op
+WorkloadActual  14: 7 op, 414713200.00 ns, 59.2447 ms/op
+WorkloadActual  15: 7 op, 402919300.00 ns, 57.5599 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 7 op, 423372800.00 ns, 60.4818 ms/op
+WorkloadResult   2: 7 op, 406725400.00 ns, 58.1036 ms/op
+WorkloadResult   3: 7 op, 401847900.00 ns, 57.4068 ms/op
+WorkloadResult   4: 7 op, 411605700.00 ns, 58.8008 ms/op
+WorkloadResult   5: 7 op, 407676000.00 ns, 58.2394 ms/op
+WorkloadResult   6: 7 op, 406990500.00 ns, 58.1415 ms/op
+WorkloadResult   7: 7 op, 412878300.00 ns, 58.9826 ms/op
+WorkloadResult   8: 7 op, 402223500.00 ns, 57.4605 ms/op
+WorkloadResult   9: 7 op, 403219600.00 ns, 57.6028 ms/op
+WorkloadResult  10: 7 op, 413051600.00 ns, 59.0074 ms/op
+WorkloadResult  11: 7 op, 415491100.00 ns, 59.3559 ms/op
+WorkloadResult  12: 7 op, 414713200.00 ns, 59.2447 ms/op
+WorkloadResult  13: 7 op, 402919300.00 ns, 57.5599 ms/op
+GC:  0 0 0 568 7
+Threading:  2 0 7
+
+// AfterAll
+// Benchmark Process 1436 has exited with code 0
+
+Mean = 58.491 ms, StdErr = 0.255 ms (0.44%), N = 13, StdDev = 0.918 ms
+Min = 57.407 ms, Q1 = 57.603 ms, Median = 58.239 ms, Q3 = 59.007 ms, Max = 60.482 ms
+IQR = 1.405 ms, LowerFence = 55.496 ms, UpperFence = 61.114 ms
+ConfidenceInterval = [57.392 ms; 59.591 ms] (CI 99.9%), Margin = 1.099 ms (1.88% of Mean)
+Skewness = 0.52, Kurtosis = 2.24, MValue = 2
+
+// **************************
+// Benchmark: BitmapBenchmarks.SmallDirectBitmap: DefaultJob
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet "cc4e9269-a815-4809-ab2d-cf1d82678f56.dll" --benchmarkName "LighthouseBenchmark.Models.BitmapBenchmarks.SmallDirectBitmap" --job "Default" --benchmarkId 6 in C:\Users\Jesse\Dev\C#\Projects\Lighthouse\LighthouseBenchmark\bin\release\net5.0\cc4e9269-a815-4809-ab2d-cf1d82678f56\bin\Release\netcoreapp5.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET Core 5.0.1 (CoreCLR 5.0.120.57516, CoreFX 5.0.120.57516), X64 RyuJIT
+// GC=Concurrent Workstation
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 278200.00 ns, 278.2000 us/op
+WorkloadJitting  1: 1 op, 3533900.00 ns, 3.5339 ms/op
+
+OverheadJitting  2: 16 op, 263600.00 ns, 16.4750 us/op
+WorkloadJitting  2: 16 op, 43829400.00 ns, 2.7393 ms/op
+
+WorkloadPilot    1: 16 op, 42185000.00 ns, 2.6366 ms/op
+WorkloadPilot    2: 32 op, 88613900.00 ns, 2.7692 ms/op
+WorkloadPilot    3: 64 op, 120073000.00 ns, 1.8761 ms/op
+WorkloadPilot    4: 128 op, 213479600.00 ns, 1.6678 ms/op
+WorkloadPilot    5: 256 op, 443180400.00 ns, 1.7312 ms/op
+WorkloadPilot    6: 512 op, 932177900.00 ns, 1.8207 ms/op
+
+OverheadWarmup   1: 512 op, 4500.00 ns, 8.7891 ns/op
+OverheadWarmup   2: 512 op, 2200.00 ns, 4.2969 ns/op
+OverheadWarmup   3: 512 op, 2200.00 ns, 4.2969 ns/op
+OverheadWarmup   4: 512 op, 2000.00 ns, 3.9062 ns/op
+OverheadWarmup   5: 512 op, 2400.00 ns, 4.6875 ns/op
+OverheadWarmup   6: 512 op, 1900.00 ns, 3.7109 ns/op
+
+OverheadActual   1: 512 op, 2200.00 ns, 4.2969 ns/op
+OverheadActual   2: 512 op, 2200.00 ns, 4.2969 ns/op
+OverheadActual   3: 512 op, 2200.00 ns, 4.2969 ns/op
+OverheadActual   4: 512 op, 2200.00 ns, 4.2969 ns/op
+OverheadActual   5: 512 op, 3300.00 ns, 6.4453 ns/op
+OverheadActual   6: 512 op, 2100.00 ns, 4.1016 ns/op
+OverheadActual   7: 512 op, 2200.00 ns, 4.2969 ns/op
+OverheadActual   8: 512 op, 2300.00 ns, 4.4922 ns/op
+OverheadActual   9: 512 op, 2000.00 ns, 3.9062 ns/op
+OverheadActual  10: 512 op, 2300.00 ns, 4.4922 ns/op
+OverheadActual  11: 512 op, 2100.00 ns, 4.1016 ns/op
+OverheadActual  12: 512 op, 2000.00 ns, 3.9062 ns/op
+OverheadActual  13: 512 op, 2000.00 ns, 3.9062 ns/op
+OverheadActual  14: 512 op, 4600.00 ns, 8.9844 ns/op
+OverheadActual  15: 512 op, 2000.00 ns, 3.9062 ns/op
+OverheadActual  16: 512 op, 3500.00 ns, 6.8359 ns/op
+OverheadActual  17: 512 op, 2300.00 ns, 4.4922 ns/op
+OverheadActual  18: 512 op, 2100.00 ns, 4.1016 ns/op
+OverheadActual  19: 512 op, 2700.00 ns, 5.2734 ns/op
+OverheadActual  20: 512 op, 2300.00 ns, 4.4922 ns/op
+
+WorkloadWarmup   1: 512 op, 898744400.00 ns, 1.7554 ms/op
+WorkloadWarmup   2: 512 op, 870855800.00 ns, 1.7009 ms/op
+WorkloadWarmup   3: 512 op, 854483700.00 ns, 1.6689 ms/op
+WorkloadWarmup   4: 512 op, 936274100.00 ns, 1.8287 ms/op
+WorkloadWarmup   5: 512 op, 873803400.00 ns, 1.7066 ms/op
+WorkloadWarmup   6: 512 op, 956533900.00 ns, 1.8682 ms/op
+WorkloadWarmup   7: 512 op, 923517000.00 ns, 1.8037 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 512 op, 856844900.00 ns, 1.6735 ms/op
+WorkloadActual   2: 512 op, 845082500.00 ns, 1.6506 ms/op
+WorkloadActual   3: 512 op, 846359600.00 ns, 1.6530 ms/op
+WorkloadActual   4: 512 op, 868622100.00 ns, 1.6965 ms/op
+WorkloadActual   5: 512 op, 847966400.00 ns, 1.6562 ms/op
+WorkloadActual   6: 512 op, 928039900.00 ns, 1.8126 ms/op
+WorkloadActual   7: 512 op, 869038700.00 ns, 1.6973 ms/op
+WorkloadActual   8: 512 op, 1341279000.00 ns, 2.6197 ms/op
+WorkloadActual   9: 512 op, 1056640400.00 ns, 2.0638 ms/op
+WorkloadActual  10: 512 op, 852822300.00 ns, 1.6657 ms/op
+WorkloadActual  11: 512 op, 853091700.00 ns, 1.6662 ms/op
+WorkloadActual  12: 512 op, 869880600.00 ns, 1.6990 ms/op
+WorkloadActual  13: 512 op, 840680900.00 ns, 1.6420 ms/op
+WorkloadActual  14: 512 op, 871615100.00 ns, 1.7024 ms/op
+WorkloadActual  15: 512 op, 956099000.00 ns, 1.8674 ms/op
+WorkloadActual  16: 512 op, 967385200.00 ns, 1.8894 ms/op
+WorkloadActual  17: 512 op, 1694958800.00 ns, 3.3105 ms/op
+WorkloadActual  18: 512 op, 1056083100.00 ns, 2.0627 ms/op
+WorkloadActual  19: 512 op, 967374600.00 ns, 1.8894 ms/op
+WorkloadActual  20: 512 op, 1074475900.00 ns, 2.0986 ms/op
+WorkloadActual  21: 512 op, 972477800.00 ns, 1.8994 ms/op
+WorkloadActual  22: 512 op, 975104000.00 ns, 1.9045 ms/op
+WorkloadActual  23: 512 op, 947603600.00 ns, 1.8508 ms/op
+WorkloadActual  24: 512 op, 852253500.00 ns, 1.6646 ms/op
+WorkloadActual  25: 512 op, 846742400.00 ns, 1.6538 ms/op
+WorkloadActual  26: 512 op, 880829200.00 ns, 1.7204 ms/op
+WorkloadActual  27: 512 op, 1127431600.00 ns, 2.2020 ms/op
+WorkloadActual  28: 512 op, 1712028400.00 ns, 3.3438 ms/op
+WorkloadActual  29: 512 op, 912527100.00 ns, 1.7823 ms/op
+WorkloadActual  30: 512 op, 872862900.00 ns, 1.7048 ms/op
+WorkloadActual  31: 512 op, 868917600.00 ns, 1.6971 ms/op
+WorkloadActual  32: 512 op, 875766200.00 ns, 1.7105 ms/op
+WorkloadActual  33: 512 op, 936439800.00 ns, 1.8290 ms/op
+WorkloadActual  34: 512 op, 1001281000.00 ns, 1.9556 ms/op
+WorkloadActual  35: 512 op, 1206383400.00 ns, 2.3562 ms/op
+WorkloadActual  36: 512 op, 934101300.00 ns, 1.8244 ms/op
+WorkloadActual  37: 512 op, 872804600.00 ns, 1.7047 ms/op
+WorkloadActual  38: 512 op, 880705400.00 ns, 1.7201 ms/op
+WorkloadActual  39: 512 op, 985379100.00 ns, 1.9246 ms/op
+WorkloadActual  40: 512 op, 954951600.00 ns, 1.8651 ms/op
+WorkloadActual  41: 512 op, 895459500.00 ns, 1.7489 ms/op
+WorkloadActual  42: 512 op, 1323462200.00 ns, 2.5849 ms/op
+WorkloadActual  43: 512 op, 1073365400.00 ns, 2.0964 ms/op
+WorkloadActual  44: 512 op, 1120496900.00 ns, 2.1885 ms/op
+WorkloadActual  45: 512 op, 1040213700.00 ns, 2.0317 ms/op
+WorkloadActual  46: 512 op, 963106400.00 ns, 1.8811 ms/op
+WorkloadActual  47: 512 op, 1001052900.00 ns, 1.9552 ms/op
+WorkloadActual  48: 512 op, 940088000.00 ns, 1.8361 ms/op
+WorkloadActual  49: 512 op, 1019740000.00 ns, 1.9917 ms/op
+WorkloadActual  50: 512 op, 882235700.00 ns, 1.7231 ms/op
+WorkloadActual  51: 512 op, 871072800.00 ns, 1.7013 ms/op
+WorkloadActual  52: 512 op, 887449000.00 ns, 1.7333 ms/op
+WorkloadActual  53: 512 op, 901444800.00 ns, 1.7606 ms/op
+WorkloadActual  54: 512 op, 907817700.00 ns, 1.7731 ms/op
+WorkloadActual  55: 512 op, 1281078900.00 ns, 2.5021 ms/op
+WorkloadActual  56: 512 op, 1423032800.00 ns, 2.7794 ms/op
+WorkloadActual  57: 512 op, 1692298200.00 ns, 3.3053 ms/op
+WorkloadActual  58: 512 op, 1627298700.00 ns, 3.1783 ms/op
+WorkloadActual  59: 512 op, 1744334700.00 ns, 3.4069 ms/op
+WorkloadActual  60: 512 op, 1854939400.00 ns, 3.6229 ms/op
+WorkloadActual  61: 512 op, 1913701400.00 ns, 3.7377 ms/op
+WorkloadActual  62: 512 op, 1837288800.00 ns, 3.5885 ms/op
+WorkloadActual  63: 512 op, 1249237800.00 ns, 2.4399 ms/op
+WorkloadActual  64: 512 op, 1112480300.00 ns, 2.1728 ms/op
+WorkloadActual  65: 512 op, 888331100.00 ns, 1.7350 ms/op
+WorkloadActual  66: 512 op, 921802600.00 ns, 1.8004 ms/op
+WorkloadActual  67: 512 op, 984150000.00 ns, 1.9222 ms/op
+WorkloadActual  68: 512 op, 987813800.00 ns, 1.9293 ms/op
+WorkloadActual  69: 512 op, 870748700.00 ns, 1.7007 ms/op
+WorkloadActual  70: 512 op, 868443600.00 ns, 1.6962 ms/op
+WorkloadActual  71: 512 op, 871134400.00 ns, 1.7014 ms/op
+WorkloadActual  72: 512 op, 899313900.00 ns, 1.7565 ms/op
+WorkloadActual  73: 512 op, 874146200.00 ns, 1.7073 ms/op
+WorkloadActual  74: 512 op, 871011200.00 ns, 1.7012 ms/op
+WorkloadActual  75: 512 op, 859490000.00 ns, 1.6787 ms/op
+WorkloadActual  76: 512 op, 865450900.00 ns, 1.6903 ms/op
+WorkloadActual  77: 512 op, 863653400.00 ns, 1.6868 ms/op
+WorkloadActual  78: 512 op, 862635500.00 ns, 1.6848 ms/op
+WorkloadActual  79: 512 op, 857266900.00 ns, 1.6743 ms/op
+WorkloadActual  80: 512 op, 860476300.00 ns, 1.6806 ms/op
+WorkloadActual  81: 512 op, 874815300.00 ns, 1.7086 ms/op
+WorkloadActual  82: 512 op, 870570900.00 ns, 1.7003 ms/op
+WorkloadActual  83: 512 op, 863811400.00 ns, 1.6871 ms/op
+WorkloadActual  84: 512 op, 909041000.00 ns, 1.7755 ms/op
+WorkloadActual  85: 512 op, 860359800.00 ns, 1.6804 ms/op
+WorkloadActual  86: 512 op, 854608500.00 ns, 1.6692 ms/op
+WorkloadActual  87: 512 op, 1103419000.00 ns, 2.1551 ms/op
+WorkloadActual  88: 512 op, 1330250600.00 ns, 2.5981 ms/op
+WorkloadActual  89: 512 op, 943190300.00 ns, 1.8422 ms/op
+WorkloadActual  90: 512 op, 973275000.00 ns, 1.9009 ms/op
+WorkloadActual  91: 512 op, 946104900.00 ns, 1.8479 ms/op
+WorkloadActual  92: 512 op, 890542500.00 ns, 1.7393 ms/op
+WorkloadActual  93: 512 op, 863729300.00 ns, 1.6870 ms/op
+WorkloadActual  94: 512 op, 858327400.00 ns, 1.6764 ms/op
+WorkloadActual  95: 512 op, 884183500.00 ns, 1.7269 ms/op
+WorkloadActual  96: 512 op, 919020500.00 ns, 1.7950 ms/op
+WorkloadActual  97: 512 op, 872509100.00 ns, 1.7041 ms/op
+WorkloadActual  98: 512 op, 896676500.00 ns, 1.7513 ms/op
+WorkloadActual  99: 512 op, 914543800.00 ns, 1.7862 ms/op
+WorkloadActual  100: 512 op, 879897200.00 ns, 1.7185 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 512 op, 856842700.00 ns, 1.6735 ms/op
+WorkloadResult   2: 512 op, 845080300.00 ns, 1.6505 ms/op
+WorkloadResult   3: 512 op, 846357400.00 ns, 1.6530 ms/op
+WorkloadResult   4: 512 op, 868619900.00 ns, 1.6965 ms/op
+WorkloadResult   5: 512 op, 847964200.00 ns, 1.6562 ms/op
+WorkloadResult   6: 512 op, 928037700.00 ns, 1.8126 ms/op
+WorkloadResult   7: 512 op, 869036500.00 ns, 1.6973 ms/op
+WorkloadResult   8: 512 op, 1056638200.00 ns, 2.0637 ms/op
+WorkloadResult   9: 512 op, 852820100.00 ns, 1.6657 ms/op
+WorkloadResult  10: 512 op, 853089500.00 ns, 1.6662 ms/op
+WorkloadResult  11: 512 op, 869878400.00 ns, 1.6990 ms/op
+WorkloadResult  12: 512 op, 840678700.00 ns, 1.6420 ms/op
+WorkloadResult  13: 512 op, 871612900.00 ns, 1.7024 ms/op
+WorkloadResult  14: 512 op, 956096800.00 ns, 1.8674 ms/op
+WorkloadResult  15: 512 op, 967383000.00 ns, 1.8894 ms/op
+WorkloadResult  16: 512 op, 1056080900.00 ns, 2.0627 ms/op
+WorkloadResult  17: 512 op, 967372400.00 ns, 1.8894 ms/op
+WorkloadResult  18: 512 op, 1074473700.00 ns, 2.0986 ms/op
+WorkloadResult  19: 512 op, 972475600.00 ns, 1.8994 ms/op
+WorkloadResult  20: 512 op, 975101800.00 ns, 1.9045 ms/op
+WorkloadResult  21: 512 op, 947601400.00 ns, 1.8508 ms/op
+WorkloadResult  22: 512 op, 852251300.00 ns, 1.6646 ms/op
+WorkloadResult  23: 512 op, 846740200.00 ns, 1.6538 ms/op
+WorkloadResult  24: 512 op, 880827000.00 ns, 1.7204 ms/op
+WorkloadResult  25: 512 op, 1127429400.00 ns, 2.2020 ms/op
+WorkloadResult  26: 512 op, 912524900.00 ns, 1.7823 ms/op
+WorkloadResult  27: 512 op, 872860700.00 ns, 1.7048 ms/op
+WorkloadResult  28: 512 op, 868915400.00 ns, 1.6971 ms/op
+WorkloadResult  29: 512 op, 875764000.00 ns, 1.7105 ms/op
+WorkloadResult  30: 512 op, 936437600.00 ns, 1.8290 ms/op
+WorkloadResult  31: 512 op, 1001278800.00 ns, 1.9556 ms/op
+WorkloadResult  32: 512 op, 1206381200.00 ns, 2.3562 ms/op
+WorkloadResult  33: 512 op, 934099100.00 ns, 1.8244 ms/op
+WorkloadResult  34: 512 op, 872802400.00 ns, 1.7047 ms/op
+WorkloadResult  35: 512 op, 880703200.00 ns, 1.7201 ms/op
+WorkloadResult  36: 512 op, 985376900.00 ns, 1.9246 ms/op
+WorkloadResult  37: 512 op, 954949400.00 ns, 1.8651 ms/op
+WorkloadResult  38: 512 op, 895457300.00 ns, 1.7489 ms/op
+WorkloadResult  39: 512 op, 1073363200.00 ns, 2.0964 ms/op
+WorkloadResult  40: 512 op, 1120494700.00 ns, 2.1885 ms/op
+WorkloadResult  41: 512 op, 1040211500.00 ns, 2.0317 ms/op
+WorkloadResult  42: 512 op, 963104200.00 ns, 1.8811 ms/op
+WorkloadResult  43: 512 op, 1001050700.00 ns, 1.9552 ms/op
+WorkloadResult  44: 512 op, 940085800.00 ns, 1.8361 ms/op
+WorkloadResult  45: 512 op, 1019737800.00 ns, 1.9917 ms/op
+WorkloadResult  46: 512 op, 882233500.00 ns, 1.7231 ms/op
+WorkloadResult  47: 512 op, 871070600.00 ns, 1.7013 ms/op
+WorkloadResult  48: 512 op, 887446800.00 ns, 1.7333 ms/op
+WorkloadResult  49: 512 op, 901442600.00 ns, 1.7606 ms/op
+WorkloadResult  50: 512 op, 907815500.00 ns, 1.7731 ms/op
+WorkloadResult  51: 512 op, 1112478100.00 ns, 2.1728 ms/op
+WorkloadResult  52: 512 op, 888328900.00 ns, 1.7350 ms/op
+WorkloadResult  53: 512 op, 921800400.00 ns, 1.8004 ms/op
+WorkloadResult  54: 512 op, 984147800.00 ns, 1.9222 ms/op
+WorkloadResult  55: 512 op, 987811600.00 ns, 1.9293 ms/op
+WorkloadResult  56: 512 op, 870746500.00 ns, 1.7007 ms/op
+WorkloadResult  57: 512 op, 868441400.00 ns, 1.6962 ms/op
+WorkloadResult  58: 512 op, 871132200.00 ns, 1.7014 ms/op
+WorkloadResult  59: 512 op, 899311700.00 ns, 1.7565 ms/op
+WorkloadResult  60: 512 op, 874144000.00 ns, 1.7073 ms/op
+WorkloadResult  61: 512 op, 871009000.00 ns, 1.7012 ms/op
+WorkloadResult  62: 512 op, 859487800.00 ns, 1.6787 ms/op
+WorkloadResult  63: 512 op, 865448700.00 ns, 1.6903 ms/op
+WorkloadResult  64: 512 op, 863651200.00 ns, 1.6868 ms/op
+WorkloadResult  65: 512 op, 862633300.00 ns, 1.6848 ms/op
+WorkloadResult  66: 512 op, 857264700.00 ns, 1.6743 ms/op
+WorkloadResult  67: 512 op, 860474100.00 ns, 1.6806 ms/op
+WorkloadResult  68: 512 op, 874813100.00 ns, 1.7086 ms/op
+WorkloadResult  69: 512 op, 870568700.00 ns, 1.7003 ms/op
+WorkloadResult  70: 512 op, 863809200.00 ns, 1.6871 ms/op
+WorkloadResult  71: 512 op, 909038800.00 ns, 1.7755 ms/op
+WorkloadResult  72: 512 op, 860357600.00 ns, 1.6804 ms/op
+WorkloadResult  73: 512 op, 854606300.00 ns, 1.6692 ms/op
+WorkloadResult  74: 512 op, 1103416800.00 ns, 2.1551 ms/op
+WorkloadResult  75: 512 op, 943188100.00 ns, 1.8422 ms/op
+WorkloadResult  76: 512 op, 973272800.00 ns, 1.9009 ms/op
+WorkloadResult  77: 512 op, 946102700.00 ns, 1.8479 ms/op
+WorkloadResult  78: 512 op, 890540300.00 ns, 1.7393 ms/op
+WorkloadResult  79: 512 op, 863727100.00 ns, 1.6870 ms/op
+WorkloadResult  80: 512 op, 858325200.00 ns, 1.6764 ms/op
+WorkloadResult  81: 512 op, 884181300.00 ns, 1.7269 ms/op
+WorkloadResult  82: 512 op, 919018300.00 ns, 1.7950 ms/op
+WorkloadResult  83: 512 op, 872506900.00 ns, 1.7041 ms/op
+WorkloadResult  84: 512 op, 896674300.00 ns, 1.7513 ms/op
+WorkloadResult  85: 512 op, 914541600.00 ns, 1.7862 ms/op
+WorkloadResult  86: 512 op, 879895000.00 ns, 1.7185 ms/op
+GC:  0 0 0 0 512
+Threading:  2 0 512
+
+// AfterAll
+// Benchmark Process 17548 has exited with code 0
+
+Mean = 1.802 ms, StdErr = 0.017 ms (0.92%), N = 86, StdDev = 0.154 ms
+Min = 1.642 ms, Q1 = 1.697 ms, Median = 1.734 ms, Q3 = 1.878 ms, Max = 2.356 ms
+IQR = 0.181 ms, LowerFence = 1.425 ms, UpperFence = 2.149 ms
+ConfidenceInterval = [1.745 ms; 1.858 ms] (CI 99.9%), Margin = 0.057 ms (3.14% of Mean)
+Skewness = 1.42, Kurtosis = 4.49, MValue = 2.36
+
+// **************************
+// Benchmark: BitmapBenchmarks.MediumDirectBitmap: DefaultJob
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet "cc4e9269-a815-4809-ab2d-cf1d82678f56.dll" --benchmarkName "LighthouseBenchmark.Models.BitmapBenchmarks.MediumDirectBitmap" --job "Default" --benchmarkId 7 in C:\Users\Jesse\Dev\C#\Projects\Lighthouse\LighthouseBenchmark\bin\release\net5.0\cc4e9269-a815-4809-ab2d-cf1d82678f56\bin\Release\netcoreapp5.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET Core 5.0.1 (CoreCLR 5.0.120.57516, CoreFX 5.0.120.57516), X64 RyuJIT
+// GC=Concurrent Workstation
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 368800.00 ns, 368.8000 us/op
+WorkloadJitting  1: 1 op, 71528300.00 ns, 71.5283 ms/op
+
+WorkloadPilot    1: 2 op, 141963200.00 ns, 70.9816 ms/op
+WorkloadPilot    2: 3 op, 228278900.00 ns, 76.0930 ms/op
+WorkloadPilot    3: 4 op, 304106900.00 ns, 76.0267 ms/op
+WorkloadPilot    4: 5 op, 362930800.00 ns, 72.5862 ms/op
+WorkloadPilot    5: 6 op, 417338500.00 ns, 69.5564 ms/op
+WorkloadPilot    6: 7 op, 481810500.00 ns, 68.8301 ms/op
+WorkloadPilot    7: 8 op, 534341800.00 ns, 66.7927 ms/op
+
+WorkloadWarmup   1: 8 op, 530383100.00 ns, 66.2979 ms/op
+WorkloadWarmup   2: 8 op, 530347600.00 ns, 66.2935 ms/op
+WorkloadWarmup   3: 8 op, 526803100.00 ns, 65.8504 ms/op
+WorkloadWarmup   4: 8 op, 518990000.00 ns, 64.8737 ms/op
+WorkloadWarmup   5: 8 op, 484033200.00 ns, 60.5042 ms/op
+WorkloadWarmup   6: 8 op, 469571200.00 ns, 58.6964 ms/op
+WorkloadWarmup   7: 8 op, 453341700.00 ns, 56.6677 ms/op
+WorkloadWarmup   8: 8 op, 455430800.00 ns, 56.9288 ms/op
+WorkloadWarmup   9: 8 op, 444564800.00 ns, 55.5706 ms/op
+WorkloadWarmup  10: 8 op, 454489800.00 ns, 56.8112 ms/op
+WorkloadWarmup  11: 8 op, 448375400.00 ns, 56.0469 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 8 op, 448231700.00 ns, 56.0290 ms/op
+WorkloadActual   2: 8 op, 453786000.00 ns, 56.7233 ms/op
+WorkloadActual   3: 8 op, 453107700.00 ns, 56.6385 ms/op
+WorkloadActual   4: 8 op, 454745000.00 ns, 56.8431 ms/op
+WorkloadActual   5: 8 op, 441858200.00 ns, 55.2323 ms/op
+WorkloadActual   6: 8 op, 447777500.00 ns, 55.9722 ms/op
+WorkloadActual   7: 8 op, 449728200.00 ns, 56.2160 ms/op
+WorkloadActual   8: 8 op, 452184900.00 ns, 56.5231 ms/op
+WorkloadActual   9: 8 op, 454859900.00 ns, 56.8575 ms/op
+WorkloadActual  10: 8 op, 451424500.00 ns, 56.4281 ms/op
+WorkloadActual  11: 8 op, 447218700.00 ns, 55.9023 ms/op
+WorkloadActual  12: 8 op, 447469100.00 ns, 55.9336 ms/op
+WorkloadActual  13: 8 op, 452329200.00 ns, 56.5412 ms/op
+WorkloadActual  14: 8 op, 454129700.00 ns, 56.7662 ms/op
+WorkloadActual  15: 8 op, 445274300.00 ns, 55.6593 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 8 op, 448231700.00 ns, 56.0290 ms/op
+WorkloadResult   2: 8 op, 453786000.00 ns, 56.7233 ms/op
+WorkloadResult   3: 8 op, 453107700.00 ns, 56.6385 ms/op
+WorkloadResult   4: 8 op, 454745000.00 ns, 56.8431 ms/op
+WorkloadResult   5: 8 op, 441858200.00 ns, 55.2323 ms/op
+WorkloadResult   6: 8 op, 447777500.00 ns, 55.9722 ms/op
+WorkloadResult   7: 8 op, 449728200.00 ns, 56.2160 ms/op
+WorkloadResult   8: 8 op, 452184900.00 ns, 56.5231 ms/op
+WorkloadResult   9: 8 op, 454859900.00 ns, 56.8575 ms/op
+WorkloadResult  10: 8 op, 451424500.00 ns, 56.4281 ms/op
+WorkloadResult  11: 8 op, 447218700.00 ns, 55.9023 ms/op
+WorkloadResult  12: 8 op, 447469100.00 ns, 55.9336 ms/op
+WorkloadResult  13: 8 op, 452329200.00 ns, 56.5412 ms/op
+WorkloadResult  14: 8 op, 454129700.00 ns, 56.7662 ms/op
+WorkloadResult  15: 8 op, 445274300.00 ns, 55.6593 ms/op
+GC:  0 0 0 0 8
+Threading:  2 0 8
+
+// AfterAll
+// Benchmark Process 4804 has exited with code 0
+
+Mean = 56.284 ms, StdErr = 0.125 ms (0.22%), N = 15, StdDev = 0.483 ms
+Min = 55.232 ms, Q1 = 55.953 ms, Median = 56.428 ms, Q3 = 56.681 ms, Max = 56.857 ms
+IQR = 0.728 ms, LowerFence = 54.861 ms, UpperFence = 57.773 ms
+ConfidenceInterval = [55.768 ms; 56.801 ms] (CI 99.9%), Margin = 0.517 ms (0.92% of Mean)
+Skewness = -0.54, Kurtosis = 2.14, MValue = 2
+
+// **************************
+// Benchmark: BitmapBenchmarks.LargeDirectBitmap: DefaultJob
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet "cc4e9269-a815-4809-ab2d-cf1d82678f56.dll" --benchmarkName "LighthouseBenchmark.Models.BitmapBenchmarks.LargeDirectBitmap" --job "Default" --benchmarkId 8 in C:\Users\Jesse\Dev\C#\Projects\Lighthouse\LighthouseBenchmark\bin\release\net5.0\cc4e9269-a815-4809-ab2d-cf1d82678f56\bin\Release\netcoreapp5.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET Core 5.0.1 (CoreCLR 5.0.120.57516, CoreFX 5.0.120.57516), X64 RyuJIT
+// GC=Concurrent Workstation
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 249000.00 ns, 249.0000 us/op
+WorkloadJitting  1: 1 op, 86087500.00 ns, 86.0875 ms/op
+
+WorkloadPilot    1: 2 op, 167513500.00 ns, 83.7567 ms/op
+WorkloadPilot    2: 3 op, 257075200.00 ns, 85.6917 ms/op
+WorkloadPilot    3: 4 op, 348209600.00 ns, 87.0524 ms/op
+WorkloadPilot    4: 5 op, 411731800.00 ns, 82.3464 ms/op
+WorkloadPilot    5: 6 op, 482717600.00 ns, 80.4529 ms/op
+WorkloadPilot    6: 7 op, 552937900.00 ns, 78.9911 ms/op
+
+WorkloadWarmup   1: 7 op, 541131500.00 ns, 77.3045 ms/op
+WorkloadWarmup   2: 7 op, 537108500.00 ns, 76.7298 ms/op
+WorkloadWarmup   3: 7 op, 532839400.00 ns, 76.1199 ms/op
+WorkloadWarmup   4: 7 op, 532458200.00 ns, 76.0655 ms/op
+WorkloadWarmup   5: 7 op, 533679000.00 ns, 76.2399 ms/op
+WorkloadWarmup   6: 7 op, 518717800.00 ns, 74.1025 ms/op
+WorkloadWarmup   7: 7 op, 487894900.00 ns, 69.6993 ms/op
+WorkloadWarmup   8: 7 op, 458046400.00 ns, 65.4352 ms/op
+WorkloadWarmup   9: 7 op, 453421700.00 ns, 64.7745 ms/op
+WorkloadWarmup  10: 7 op, 456773900.00 ns, 65.2534 ms/op
+WorkloadWarmup  11: 7 op, 468960600.00 ns, 66.9944 ms/op
+WorkloadWarmup  12: 7 op, 459219200.00 ns, 65.6027 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 7 op, 448697300.00 ns, 64.0996 ms/op
+WorkloadActual   2: 7 op, 451789400.00 ns, 64.5413 ms/op
+WorkloadActual   3: 7 op, 448443000.00 ns, 64.0633 ms/op
+WorkloadActual   4: 7 op, 455859100.00 ns, 65.1227 ms/op
+WorkloadActual   5: 7 op, 452425300.00 ns, 64.6322 ms/op
+WorkloadActual   6: 7 op, 448341600.00 ns, 64.0488 ms/op
+WorkloadActual   7: 7 op, 450687600.00 ns, 64.3839 ms/op
+WorkloadActual   8: 7 op, 524939800.00 ns, 74.9914 ms/op
+WorkloadActual   9: 7 op, 454911000.00 ns, 64.9873 ms/op
+WorkloadActual  10: 7 op, 448160400.00 ns, 64.0229 ms/op
+WorkloadActual  11: 7 op, 452450800.00 ns, 64.6358 ms/op
+WorkloadActual  12: 7 op, 450514500.00 ns, 64.3592 ms/op
+WorkloadActual  13: 7 op, 451210300.00 ns, 64.4586 ms/op
+WorkloadActual  14: 7 op, 458683700.00 ns, 65.5262 ms/op
+WorkloadActual  15: 7 op, 449671800.00 ns, 64.2388 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 7 op, 448697300.00 ns, 64.0996 ms/op
+WorkloadResult   2: 7 op, 451789400.00 ns, 64.5413 ms/op
+WorkloadResult   3: 7 op, 448443000.00 ns, 64.0633 ms/op
+WorkloadResult   4: 7 op, 455859100.00 ns, 65.1227 ms/op
+WorkloadResult   5: 7 op, 452425300.00 ns, 64.6322 ms/op
+WorkloadResult   6: 7 op, 448341600.00 ns, 64.0488 ms/op
+WorkloadResult   7: 7 op, 450687600.00 ns, 64.3839 ms/op
+WorkloadResult   8: 7 op, 454911000.00 ns, 64.9873 ms/op
+WorkloadResult   9: 7 op, 448160400.00 ns, 64.0229 ms/op
+WorkloadResult  10: 7 op, 452450800.00 ns, 64.6358 ms/op
+WorkloadResult  11: 7 op, 450514500.00 ns, 64.3592 ms/op
+WorkloadResult  12: 7 op, 451210300.00 ns, 64.4586 ms/op
+WorkloadResult  13: 7 op, 458683700.00 ns, 65.5262 ms/op
+WorkloadResult  14: 7 op, 449671800.00 ns, 64.2388 ms/op
+GC:  0 0 0 0 7
+Threading:  2 0 7
+
+// AfterAll
+// Benchmark Process 12140 has exited with code 0
+
+Mean = 64.509 ms, StdErr = 0.120 ms (0.19%), N = 14, StdDev = 0.447 ms
+Min = 64.023 ms, Q1 = 64.134 ms, Median = 64.421 ms, Q3 = 64.635 ms, Max = 65.526 ms
+IQR = 0.501 ms, LowerFence = 63.384 ms, UpperFence = 65.386 ms
+ConfidenceInterval = [64.004 ms; 65.013 ms] (CI 99.9%), Margin = 0.505 ms (0.78% of Mean)
+Skewness = 0.8, Kurtosis = 2.57, MValue = 2
+
+// **************************
+// Benchmark: BitmapBenchmarks.MaximumDirectBitmap: DefaultJob
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet "cc4e9269-a815-4809-ab2d-cf1d82678f56.dll" --benchmarkName "LighthouseBenchmark.Models.BitmapBenchmarks.MaximumDirectBitmap" --job "Default" --benchmarkId 9 in C:\Users\Jesse\Dev\C#\Projects\Lighthouse\LighthouseBenchmark\bin\release\net5.0\cc4e9269-a815-4809-ab2d-cf1d82678f56\bin\Release\netcoreapp5.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET Core 5.0.1 (CoreCLR 5.0.120.57516, CoreFX 5.0.120.57516), X64 RyuJIT
+// GC=Concurrent Workstation
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 240500.00 ns, 240.5000 us/op
+WorkloadJitting  1: 1 op, 340146200.00 ns, 340.1462 ms/op
+
+WorkloadWarmup   1: 1 op, 347277700.00 ns, 347.2777 ms/op
+WorkloadWarmup   2: 1 op, 351557600.00 ns, 351.5576 ms/op
+WorkloadWarmup   3: 1 op, 350945300.00 ns, 350.9453 ms/op
+WorkloadWarmup   4: 1 op, 348200200.00 ns, 348.2002 ms/op
+WorkloadWarmup   5: 1 op, 352225700.00 ns, 352.2257 ms/op
+WorkloadWarmup   6: 1 op, 352843700.00 ns, 352.8437 ms/op
+WorkloadWarmup   7: 1 op, 350915600.00 ns, 350.9156 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 1 op, 347060500.00 ns, 347.0605 ms/op
+WorkloadActual   2: 1 op, 350382600.00 ns, 350.3826 ms/op
+WorkloadActual   3: 1 op, 349941000.00 ns, 349.9410 ms/op
+WorkloadActual   4: 1 op, 340380900.00 ns, 340.3809 ms/op
+WorkloadActual   5: 1 op, 330459600.00 ns, 330.4596 ms/op
+WorkloadActual   6: 1 op, 330120100.00 ns, 330.1201 ms/op
+WorkloadActual   7: 1 op, 326803600.00 ns, 326.8036 ms/op
+WorkloadActual   8: 1 op, 318424300.00 ns, 318.4243 ms/op
+WorkloadActual   9: 1 op, 318475000.00 ns, 318.4750 ms/op
+WorkloadActual  10: 1 op, 318408000.00 ns, 318.4080 ms/op
+WorkloadActual  11: 1 op, 318659700.00 ns, 318.6597 ms/op
+WorkloadActual  12: 1 op, 313781900.00 ns, 313.7819 ms/op
+WorkloadActual  13: 1 op, 316757400.00 ns, 316.7574 ms/op
+WorkloadActual  14: 1 op, 313842500.00 ns, 313.8425 ms/op
+WorkloadActual  15: 1 op, 310852200.00 ns, 310.8522 ms/op
+WorkloadActual  16: 1 op, 307546700.00 ns, 307.5467 ms/op
+WorkloadActual  17: 1 op, 312918700.00 ns, 312.9187 ms/op
+WorkloadActual  18: 1 op, 304149400.00 ns, 304.1494 ms/op
+WorkloadActual  19: 1 op, 309508300.00 ns, 309.5083 ms/op
+WorkloadActual  20: 1 op, 307167500.00 ns, 307.1675 ms/op
+WorkloadActual  21: 1 op, 303965900.00 ns, 303.9659 ms/op
+WorkloadActual  22: 1 op, 307143000.00 ns, 307.1430 ms/op
+WorkloadActual  23: 1 op, 310719300.00 ns, 310.7193 ms/op
+WorkloadActual  24: 1 op, 304880400.00 ns, 304.8804 ms/op
+WorkloadActual  25: 1 op, 303557600.00 ns, 303.5576 ms/op
+WorkloadActual  26: 1 op, 301913500.00 ns, 301.9135 ms/op
+WorkloadActual  27: 1 op, 306751900.00 ns, 306.7519 ms/op
+WorkloadActual  28: 1 op, 302763100.00 ns, 302.7631 ms/op
+WorkloadActual  29: 1 op, 300137900.00 ns, 300.1379 ms/op
+WorkloadActual  30: 1 op, 302364700.00 ns, 302.3647 ms/op
+WorkloadActual  31: 1 op, 296974800.00 ns, 296.9748 ms/op
+WorkloadActual  32: 1 op, 305272200.00 ns, 305.2722 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 1 op, 330459600.00 ns, 330.4596 ms/op
+WorkloadResult   2: 1 op, 330120100.00 ns, 330.1201 ms/op
+WorkloadResult   3: 1 op, 326803600.00 ns, 326.8036 ms/op
+WorkloadResult   4: 1 op, 318424300.00 ns, 318.4243 ms/op
+WorkloadResult   5: 1 op, 318475000.00 ns, 318.4750 ms/op
+WorkloadResult   6: 1 op, 318408000.00 ns, 318.4080 ms/op
+WorkloadResult   7: 1 op, 318659700.00 ns, 318.6597 ms/op
+WorkloadResult   8: 1 op, 313781900.00 ns, 313.7819 ms/op
+WorkloadResult   9: 1 op, 316757400.00 ns, 316.7574 ms/op
+WorkloadResult  10: 1 op, 313842500.00 ns, 313.8425 ms/op
+WorkloadResult  11: 1 op, 310852200.00 ns, 310.8522 ms/op
+WorkloadResult  12: 1 op, 307546700.00 ns, 307.5467 ms/op
+WorkloadResult  13: 1 op, 312918700.00 ns, 312.9187 ms/op
+WorkloadResult  14: 1 op, 304149400.00 ns, 304.1494 ms/op
+WorkloadResult  15: 1 op, 309508300.00 ns, 309.5083 ms/op
+WorkloadResult  16: 1 op, 307167500.00 ns, 307.1675 ms/op
+WorkloadResult  17: 1 op, 303965900.00 ns, 303.9659 ms/op
+WorkloadResult  18: 1 op, 307143000.00 ns, 307.1430 ms/op
+WorkloadResult  19: 1 op, 310719300.00 ns, 310.7193 ms/op
+WorkloadResult  20: 1 op, 304880400.00 ns, 304.8804 ms/op
+WorkloadResult  21: 1 op, 303557600.00 ns, 303.5576 ms/op
+WorkloadResult  22: 1 op, 301913500.00 ns, 301.9135 ms/op
+WorkloadResult  23: 1 op, 306751900.00 ns, 306.7519 ms/op
+WorkloadResult  24: 1 op, 302763100.00 ns, 302.7631 ms/op
+WorkloadResult  25: 1 op, 300137900.00 ns, 300.1379 ms/op
+WorkloadResult  26: 1 op, 302364700.00 ns, 302.3647 ms/op
+WorkloadResult  27: 1 op, 296974800.00 ns, 296.9748 ms/op
+WorkloadResult  28: 1 op, 305272200.00 ns, 305.2722 ms/op
+GC:  0 0 0 152 1
+Threading:  2 0 1
+
+// AfterAll
+// Benchmark Process 12444 has exited with code 0
+
+Mean = 310.869 ms, StdErr = 1.664 ms (0.54%), N = 28, StdDev = 8.807 ms
+Min = 296.975 ms, Q1 = 304.104 ms, Median = 308.527 ms, Q3 = 317.170 ms, Max = 330.460 ms
+IQR = 13.067 ms, LowerFence = 284.504 ms, UpperFence = 336.770 ms
+ConfidenceInterval = [304.728 ms; 317.010 ms] (CI 99.9%), Margin = 6.141 ms (1.98% of Mean)
+Skewness = 0.7, Kurtosis = 2.62, MValue = 2
+
+// **************************
+// Benchmark: BitmapBenchmarks.Simple2000X2000SBitmap: DefaultJob
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet "cc4e9269-a815-4809-ab2d-cf1d82678f56.dll" --benchmarkName "LighthouseBenchmark.Models.BitmapBenchmarks.Simple2000X2000SBitmap" --job "Default" --benchmarkId 10 in C:\Users\Jesse\Dev\C#\Projects\Lighthouse\LighthouseBenchmark\bin\release\net5.0\cc4e9269-a815-4809-ab2d-cf1d82678f56\bin\Release\netcoreapp5.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET Core 5.0.1 (CoreCLR 5.0.120.57516, CoreFX 5.0.120.57516), X64 RyuJIT
+// GC=Concurrent Workstation
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 252900.00 ns, 252.9000 us/op
+WorkloadJitting  1: 1 op, 2799904800.00 ns, 2.7999 s/op
+
+WorkloadWarmup   1: 1 op, 2807220200.00 ns, 2.8072 s/op
+WorkloadWarmup   2: 1 op, 2772802300.00 ns, 2.7728 s/op
+WorkloadWarmup   3: 1 op, 2782134600.00 ns, 2.7821 s/op
+WorkloadWarmup   4: 1 op, 3075634900.00 ns, 3.0756 s/op
+WorkloadWarmup   5: 1 op, 2790359100.00 ns, 2.7904 s/op
+WorkloadWarmup   6: 1 op, 2792485200.00 ns, 2.7925 s/op
+WorkloadWarmup   7: 1 op, 2782115600.00 ns, 2.7821 s/op
+
+// BeforeActualRun
+WorkloadActual   1: 1 op, 2832983200.00 ns, 2.8330 s/op
+WorkloadActual   2: 1 op, 2768864700.00 ns, 2.7689 s/op
+WorkloadActual   3: 1 op, 2789575000.00 ns, 2.7896 s/op
+WorkloadActual   4: 1 op, 2778686000.00 ns, 2.7787 s/op
+WorkloadActual   5: 1 op, 2820390100.00 ns, 2.8204 s/op
+WorkloadActual   6: 1 op, 2772608600.00 ns, 2.7726 s/op
+WorkloadActual   7: 1 op, 2780046500.00 ns, 2.7800 s/op
+WorkloadActual   8: 1 op, 2770284400.00 ns, 2.7703 s/op
+WorkloadActual   9: 1 op, 2830554600.00 ns, 2.8306 s/op
+WorkloadActual  10: 1 op, 2770981800.00 ns, 2.7710 s/op
+WorkloadActual  11: 1 op, 2777964100.00 ns, 2.7780 s/op
+WorkloadActual  12: 1 op, 2832698300.00 ns, 2.8327 s/op
+WorkloadActual  13: 1 op, 2828005600.00 ns, 2.8280 s/op
+WorkloadActual  14: 1 op, 2800960500.00 ns, 2.8010 s/op
+WorkloadActual  15: 1 op, 2927455100.00 ns, 2.9275 s/op
+
+// AfterActualRun
+WorkloadResult   1: 1 op, 2832983200.00 ns, 2.8330 s/op
+WorkloadResult   2: 1 op, 2768864700.00 ns, 2.7689 s/op
+WorkloadResult   3: 1 op, 2789575000.00 ns, 2.7896 s/op
+WorkloadResult   4: 1 op, 2778686000.00 ns, 2.7787 s/op
+WorkloadResult   5: 1 op, 2820390100.00 ns, 2.8204 s/op
+WorkloadResult   6: 1 op, 2772608600.00 ns, 2.7726 s/op
+WorkloadResult   7: 1 op, 2780046500.00 ns, 2.7800 s/op
+WorkloadResult   8: 1 op, 2770284400.00 ns, 2.7703 s/op
+WorkloadResult   9: 1 op, 2830554600.00 ns, 2.8306 s/op
+WorkloadResult  10: 1 op, 2770981800.00 ns, 2.7710 s/op
+WorkloadResult  11: 1 op, 2777964100.00 ns, 2.7780 s/op
+WorkloadResult  12: 1 op, 2832698300.00 ns, 2.8327 s/op
+WorkloadResult  13: 1 op, 2828005600.00 ns, 2.8280 s/op
+WorkloadResult  14: 1 op, 2800960500.00 ns, 2.8010 s/op
+GC:  0 0 0 0 1
+Threading:  2 0 1
+
+// AfterAll
+// Benchmark Process 12884 has exited with code 0
+
+Mean = 2.797 s, StdErr = 0.007 s (0.25%), N = 14, StdDev = 0.026 s
+Min = 2.769 s, Q1 = 2.774 s, Median = 2.785 s, Q3 = 2.826 s, Max = 2.833 s
+IQR = 0.052 s, LowerFence = 2.696 s, UpperFence = 2.904 s
+ConfidenceInterval = [2.767 s; 2.826 s] (CI 99.9%), Margin = 0.030 s (1.06% of Mean)
+Skewness = 0.34, Kurtosis = 1.21, MValue = 2
+
+// **************************
+// Benchmark: BitmapBenchmarks.SmallBitmap: DefaultJob
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet "cc4e9269-a815-4809-ab2d-cf1d82678f56.dll" --benchmarkName "LighthouseBenchmark.Models.BitmapBenchmarks.SmallBitmap" --job "Default" --benchmarkId 11 in C:\Users\Jesse\Dev\C#\Projects\Lighthouse\LighthouseBenchmark\bin\release\net5.0\cc4e9269-a815-4809-ab2d-cf1d82678f56\bin\Release\netcoreapp5.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET Core 5.0.1 (CoreCLR 5.0.120.57516, CoreFX 5.0.120.57516), X64 RyuJIT
+// GC=Concurrent Workstation
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 225600.00 ns, 225.6000 us/op
+WorkloadJitting  1: 1 op, 310655400.00 ns, 310.6554 ms/op
+
+WorkloadPilot    1: 2 op, 608170300.00 ns, 304.0851 ms/op
+
+WorkloadWarmup   1: 2 op, 609294900.00 ns, 304.6474 ms/op
+WorkloadWarmup   2: 2 op, 592520900.00 ns, 296.2604 ms/op
+WorkloadWarmup   3: 2 op, 598736900.00 ns, 299.3684 ms/op
+WorkloadWarmup   4: 2 op, 598410800.00 ns, 299.2054 ms/op
+WorkloadWarmup   5: 2 op, 612182400.00 ns, 306.0912 ms/op
+WorkloadWarmup   6: 2 op, 611030400.00 ns, 305.5152 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 2 op, 599318800.00 ns, 299.6594 ms/op
+WorkloadActual   2: 2 op, 600340700.00 ns, 300.1703 ms/op
+WorkloadActual   3: 2 op, 594434200.00 ns, 297.2171 ms/op
+WorkloadActual   4: 2 op, 598058900.00 ns, 299.0294 ms/op
+WorkloadActual   5: 2 op, 601997800.00 ns, 300.9989 ms/op
+WorkloadActual   6: 2 op, 600091500.00 ns, 300.0457 ms/op
+WorkloadActual   7: 2 op, 597201600.00 ns, 298.6008 ms/op
+WorkloadActual   8: 2 op, 591031600.00 ns, 295.5158 ms/op
+WorkloadActual   9: 2 op, 616331500.00 ns, 308.1658 ms/op
+WorkloadActual  10: 2 op, 603134000.00 ns, 301.5670 ms/op
+WorkloadActual  11: 2 op, 595748400.00 ns, 297.8742 ms/op
+WorkloadActual  12: 2 op, 609829900.00 ns, 304.9149 ms/op
+WorkloadActual  13: 2 op, 613824200.00 ns, 306.9121 ms/op
+WorkloadActual  14: 2 op, 608791500.00 ns, 304.3958 ms/op
+WorkloadActual  15: 2 op, 602564500.00 ns, 301.2822 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 2 op, 599318800.00 ns, 299.6594 ms/op
+WorkloadResult   2: 2 op, 600340700.00 ns, 300.1703 ms/op
+WorkloadResult   3: 2 op, 594434200.00 ns, 297.2171 ms/op
+WorkloadResult   4: 2 op, 598058900.00 ns, 299.0294 ms/op
+WorkloadResult   5: 2 op, 601997800.00 ns, 300.9989 ms/op
+WorkloadResult   6: 2 op, 600091500.00 ns, 300.0457 ms/op
+WorkloadResult   7: 2 op, 597201600.00 ns, 298.6008 ms/op
+WorkloadResult   8: 2 op, 591031600.00 ns, 295.5158 ms/op
+WorkloadResult   9: 2 op, 616331500.00 ns, 308.1658 ms/op
+WorkloadResult  10: 2 op, 603134000.00 ns, 301.5670 ms/op
+WorkloadResult  11: 2 op, 595748400.00 ns, 297.8742 ms/op
+WorkloadResult  12: 2 op, 609829900.00 ns, 304.9149 ms/op
+WorkloadResult  13: 2 op, 613824200.00 ns, 306.9121 ms/op
+WorkloadResult  14: 2 op, 608791500.00 ns, 304.3958 ms/op
+WorkloadResult  15: 2 op, 602564500.00 ns, 301.2822 ms/op
+GC:  0 0 0 1336 2
+Threading:  2 0 2
+
+// AfterAll
+// Benchmark Process 3124 has exited with code 0
+
+Mean = 301.090 ms, StdErr = 0.927 ms (0.31%), N = 15, StdDev = 3.592 ms
+Min = 295.516 ms, Q1 = 298.815 ms, Median = 300.170 ms, Q3 = 302.981 ms, Max = 308.166 ms
+IQR = 4.166 ms, LowerFence = 292.566 ms, UpperFence = 309.231 ms
+ConfidenceInterval = [297.250 ms; 304.930 ms] (CI 99.9%), Margin = 3.840 ms (1.28% of Mean)
+Skewness = 0.5, Kurtosis = 2.14, MValue = 2
+
+// **************************
+// Benchmark: BitmapBenchmarks.MediumBitmap: DefaultJob
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet "cc4e9269-a815-4809-ab2d-cf1d82678f56.dll" --benchmarkName "LighthouseBenchmark.Models.BitmapBenchmarks.MediumBitmap" --job "Default" --benchmarkId 12 in C:\Users\Jesse\Dev\C#\Projects\Lighthouse\LighthouseBenchmark\bin\release\net5.0\cc4e9269-a815-4809-ab2d-cf1d82678f56\bin\Release\netcoreapp5.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET Core 5.0.1 (CoreCLR 5.0.120.57516, CoreFX 5.0.120.57516), X64 RyuJIT
+// GC=Concurrent Workstation
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 332400.00 ns, 332.4000 us/op
+WorkloadJitting  1: 1 op, 2751727300.00 ns, 2.7517 s/op
+
+WorkloadWarmup   1: 1 op, 2745829800.00 ns, 2.7458 s/op
+WorkloadWarmup   2: 1 op, 2711090700.00 ns, 2.7111 s/op
+WorkloadWarmup   3: 1 op, 2722585000.00 ns, 2.7226 s/op
+WorkloadWarmup   4: 1 op, 2982922700.00 ns, 2.9829 s/op
+WorkloadWarmup   5: 1 op, 2719208600.00 ns, 2.7192 s/op
+WorkloadWarmup   6: 1 op, 2730842000.00 ns, 2.7308 s/op
+WorkloadWarmup   7: 1 op, 2731213300.00 ns, 2.7312 s/op
+WorkloadWarmup   8: 1 op, 2746772500.00 ns, 2.7468 s/op
+WorkloadWarmup   9: 1 op, 2870512100.00 ns, 2.8705 s/op
+WorkloadWarmup  10: 1 op, 2764255200.00 ns, 2.7643 s/op
+
+// BeforeActualRun
+WorkloadActual   1: 1 op, 2715172300.00 ns, 2.7152 s/op
+WorkloadActual   2: 1 op, 2721730800.00 ns, 2.7217 s/op
+WorkloadActual   3: 1 op, 3013661700.00 ns, 3.0137 s/op
+WorkloadActual   4: 1 op, 2740282000.00 ns, 2.7403 s/op
+WorkloadActual   5: 1 op, 2726562700.00 ns, 2.7266 s/op
+WorkloadActual   6: 1 op, 2727842600.00 ns, 2.7278 s/op
+WorkloadActual   7: 1 op, 2736799100.00 ns, 2.7368 s/op
+WorkloadActual   8: 1 op, 2752435700.00 ns, 2.7524 s/op
+WorkloadActual   9: 1 op, 2708977200.00 ns, 2.7090 s/op
+WorkloadActual  10: 1 op, 2725239700.00 ns, 2.7252 s/op
+WorkloadActual  11: 1 op, 2823579600.00 ns, 2.8236 s/op
+WorkloadActual  12: 1 op, 2768883100.00 ns, 2.7689 s/op
+WorkloadActual  13: 1 op, 2718652400.00 ns, 2.7187 s/op
+WorkloadActual  14: 1 op, 2735830300.00 ns, 2.7358 s/op
+WorkloadActual  15: 1 op, 2722722600.00 ns, 2.7227 s/op
+
+// AfterActualRun
+WorkloadResult   1: 1 op, 2715172300.00 ns, 2.7152 s/op
+WorkloadResult   2: 1 op, 2721730800.00 ns, 2.7217 s/op
+WorkloadResult   3: 1 op, 2740282000.00 ns, 2.7403 s/op
+WorkloadResult   4: 1 op, 2726562700.00 ns, 2.7266 s/op
+WorkloadResult   5: 1 op, 2727842600.00 ns, 2.7278 s/op
+WorkloadResult   6: 1 op, 2736799100.00 ns, 2.7368 s/op
+WorkloadResult   7: 1 op, 2752435700.00 ns, 2.7524 s/op
+WorkloadResult   8: 1 op, 2708977200.00 ns, 2.7090 s/op
+WorkloadResult   9: 1 op, 2725239700.00 ns, 2.7252 s/op
+WorkloadResult  10: 1 op, 2768883100.00 ns, 2.7689 s/op
+WorkloadResult  11: 1 op, 2718652400.00 ns, 2.7187 s/op
+WorkloadResult  12: 1 op, 2735830300.00 ns, 2.7358 s/op
+WorkloadResult  13: 1 op, 2722722600.00 ns, 2.7227 s/op
+GC:  0 0 0 1240 1
+Threading:  2 0 1
+
+// AfterAll
+// Benchmark Process 3120 has exited with code 0
+
+Mean = 2.731 s, StdErr = 0.004 s (0.16%), N = 13, StdDev = 0.016 s
+Min = 2.709 s, Q1 = 2.722 s, Median = 2.727 s, Q3 = 2.737 s, Max = 2.769 s
+IQR = 0.015 s, LowerFence = 2.699 s, UpperFence = 2.759 s
+ConfidenceInterval = [2.711 s; 2.750 s] (CI 99.9%), Margin = 0.019 s (0.71% of Mean)
+Skewness = 0.88, Kurtosis = 2.96, MValue = 2
+
+// **************************
+// Benchmark: BitmapBenchmarks.LargeBitmap: DefaultJob
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet "cc4e9269-a815-4809-ab2d-cf1d82678f56.dll" --benchmarkName "LighthouseBenchmark.Models.BitmapBenchmarks.LargeBitmap" --job "Default" --benchmarkId 13 in C:\Users\Jesse\Dev\C#\Projects\Lighthouse\LighthouseBenchmark\bin\release\net5.0\cc4e9269-a815-4809-ab2d-cf1d82678f56\bin\Release\netcoreapp5.0
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET Core 5.0.1 (CoreCLR 5.0.120.57516, CoreFX 5.0.120.57516), X64 RyuJIT
+// GC=Concurrent Workstation
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 267200.00 ns, 267.2000 us/op
+WorkloadJitting  1: 1 op, 4297673200.00 ns, 4.2977 s/op
+
+WorkloadWarmup   1: 1 op, 4275072700.00 ns, 4.2751 s/op
+WorkloadWarmup   2: 1 op, 4267273300.00 ns, 4.2673 s/op
+WorkloadWarmup   3: 1 op, 4264468200.00 ns, 4.2645 s/op
+WorkloadWarmup   4: 1 op, 4261242000.00 ns, 4.2612 s/op
+WorkloadWarmup   5: 1 op, 4328394000.00 ns, 4.3284 s/op
+WorkloadWarmup   6: 1 op, 4296170400.00 ns, 4.2962 s/op
+WorkloadWarmup   7: 1 op, 4300699600.00 ns, 4.3007 s/op
+WorkloadWarmup   8: 1 op, 4273704000.00 ns, 4.2737 s/op
+
+// BeforeActualRun
+WorkloadActual   1: 1 op, 4243230500.00 ns, 4.2432 s/op
+WorkloadActual   2: 1 op, 4501502100.00 ns, 4.5015 s/op
+WorkloadActual   3: 1 op, 4277229700.00 ns, 4.2772 s/op
+WorkloadActual   4: 1 op, 4238138400.00 ns, 4.2381 s/op
+WorkloadActual   5: 1 op, 4336476100.00 ns, 4.3365 s/op
+WorkloadActual   6: 1 op, 4266053100.00 ns, 4.2661 s/op
+WorkloadActual   7: 1 op, 4241888900.00 ns, 4.2419 s/op
+WorkloadActual   8: 1 op, 4263184200.00 ns, 4.2632 s/op
+WorkloadActual   9: 1 op, 4270660500.00 ns, 4.2707 s/op
+WorkloadActual  10: 1 op, 4248399400.00 ns, 4.2484 s/op
+WorkloadActual  11: 1 op, 4299156000.00 ns, 4.2992 s/op
+WorkloadActual  12: 1 op, 4255844600.00 ns, 4.2558 s/op
+WorkloadActual  13: 1 op, 4267097300.00 ns, 4.2671 s/op
+WorkloadActual  14: 1 op, 4253135300.00 ns, 4.2531 s/op
+WorkloadActual  15: 1 op, 4267992000.00 ns, 4.2680 s/op
+
+// AfterActualRun
+WorkloadResult   1: 1 op, 4243230500.00 ns, 4.2432 s/op
+WorkloadResult   2: 1 op, 4277229700.00 ns, 4.2772 s/op
+WorkloadResult   3: 1 op, 4238138400.00 ns, 4.2381 s/op
+WorkloadResult   4: 1 op, 4266053100.00 ns, 4.2661 s/op
+WorkloadResult   5: 1 op, 4241888900.00 ns, 4.2419 s/op
+WorkloadResult   6: 1 op, 4263184200.00 ns, 4.2632 s/op
+WorkloadResult   7: 1 op, 4270660500.00 ns, 4.2707 s/op
+WorkloadResult   8: 1 op, 4248399400.00 ns, 4.2484 s/op
+WorkloadResult   9: 1 op, 4299156000.00 ns, 4.2992 s/op
+WorkloadResult  10: 1 op, 4255844600.00 ns, 4.2558 s/op
+WorkloadResult  11: 1 op, 4267097300.00 ns, 4.2671 s/op
+WorkloadResult  12: 1 op, 4253135300.00 ns, 4.2531 s/op
+WorkloadResult  13: 1 op, 4267992000.00 ns, 4.2680 s/op
+GC:  0 0 0 5528 1
+Threading:  2 0 1
+
+// AfterAll
+// Benchmark Process 15492 has exited with code 0
+
+Mean = 4.261 s, StdErr = 0.005 s (0.11%), N = 13, StdDev = 0.017 s
+Min = 4.238 s, Q1 = 4.248 s, Median = 4.263 s, Q3 = 4.268 s, Max = 4.299 s
+IQR = 0.020 s, LowerFence = 4.219 s, UpperFence = 4.297 s
+ConfidenceInterval = [4.241 s; 4.281 s] (CI 99.9%), Margin = 0.020 s (0.47% of Mean)
+Skewness = 0.57, Kurtosis = 2.67, MValue = 2
+
+// ***** BenchmarkRunner: Finish  *****
+
+// * Export *
+  BenchmarkDotNet.Artifacts\results\LighthouseBenchmark.Models.BitmapBenchmarks-report.csv
+  BenchmarkDotNet.Artifacts\results\LighthouseBenchmark.Models.BitmapBenchmarks-report-github.md
+  BenchmarkDotNet.Artifacts\results\LighthouseBenchmark.Models.BitmapBenchmarks-report.html
+
+// * Detailed results *
+BitmapBenchmarks.SmallDirectBitmap: DefaultJob
+Runtime = .NET Core 5.0.1 (CoreCLR 5.0.120.57516, CoreFX 5.0.120.57516), X64 RyuJIT; GC = Concurrent Workstation
+Mean = 1.802 ms, StdErr = 0.017 ms (0.92%), N = 86, StdDev = 0.154 ms
+Min = 1.642 ms, Q1 = 1.697 ms, Median = 1.734 ms, Q3 = 1.878 ms, Max = 2.356 ms
+IQR = 0.181 ms, LowerFence = 1.425 ms, UpperFence = 2.149 ms
+ConfidenceInterval = [1.745 ms; 1.858 ms] (CI 99.9%), Margin = 0.057 ms (3.14% of Mean)
+Skewness = 1.42, Kurtosis = 4.49, MValue = 2.36
+-------------------- Histogram --------------------
+[1.596 ms ; 1.649 ms) | @
+[1.649 ms ; 1.741 ms) | @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+[1.741 ms ; 1.819 ms) | @@@@@@@@@@@
+[1.819 ms ; 1.910 ms) | @@@@@@@@@@@@@@
+[1.910 ms ; 2.003 ms) | @@@@@@
+[2.003 ms ; 2.111 ms) | @@@@@
+[2.111 ms ; 2.224 ms) | @@@@
+[2.224 ms ; 2.310 ms) | 
+[2.310 ms ; 2.402 ms) | @
+---------------------------------------------------
+
+BitmapBenchmarks.SmallFastBitmap: DefaultJob
+Runtime = .NET Core 5.0.1 (CoreCLR 5.0.120.57516, CoreFX 5.0.120.57516), X64 RyuJIT; GC = Concurrent Workstation
+Mean = 2.641 ms, StdErr = 0.007 ms (0.25%), N = 15, StdDev = 0.026 ms
+Min = 2.609 ms, Q1 = 2.621 ms, Median = 2.631 ms, Q3 = 2.657 ms, Max = 2.696 ms
+IQR = 0.036 ms, LowerFence = 2.567 ms, UpperFence = 2.710 ms
+ConfidenceInterval = [2.613 ms; 2.668 ms] (CI 99.9%), Margin = 0.027 ms (1.04% of Mean)
+Skewness = 0.56, Kurtosis = 2.16, MValue = 2
+-------------------- Histogram --------------------
+[2.596 ms ; 2.709 ms) | @@@@@@@@@@@@@@@
+---------------------------------------------------
+
+BitmapBenchmarks.MediumFastBitmap: DefaultJob
+Runtime = .NET Core 5.0.1 (CoreCLR 5.0.120.57516, CoreFX 5.0.120.57516), X64 RyuJIT; GC = Concurrent Workstation
+Mean = 30.958 ms, StdErr = 0.055 ms (0.18%), N = 15, StdDev = 0.214 ms
+Min = 30.619 ms, Q1 = 30.799 ms, Median = 30.952 ms, Q3 = 31.113 ms, Max = 31.398 ms
+IQR = 0.314 ms, LowerFence = 30.327 ms, UpperFence = 31.585 ms
+ConfidenceInterval = [30.729 ms; 31.187 ms] (CI 99.9%), Margin = 0.229 ms (0.74% of Mean)
+Skewness = 0.16, Kurtosis = 2.08, MValue = 2
+-------------------- Histogram --------------------
+[30.505 ms ; 31.513 ms) | @@@@@@@@@@@@@@@
+---------------------------------------------------
+
+BitmapBenchmarks.LargeFastBitmap: DefaultJob
+Runtime = .NET Core 5.0.1 (CoreCLR 5.0.120.57516, CoreFX 5.0.120.57516), X64 RyuJIT; GC = Concurrent Workstation
+Mean = 50.729 ms, StdErr = 0.141 ms (0.28%), N = 14, StdDev = 0.529 ms
+Min = 49.911 ms, Q1 = 50.522 ms, Median = 50.628 ms, Q3 = 50.996 ms, Max = 51.652 ms
+IQR = 0.474 ms, LowerFence = 49.812 ms, UpperFence = 51.707 ms
+ConfidenceInterval = [50.133 ms; 51.326 ms] (CI 99.9%), Margin = 0.597 ms (1.18% of Mean)
+Skewness = 0.25, Kurtosis = 2.04, MValue = 2
+-------------------- Histogram --------------------
+[49.623 ms ; 51.940 ms) | @@@@@@@@@@@@@@
+---------------------------------------------------
+
+BitmapBenchmarks.MediumDirectBitmap: DefaultJob
+Runtime = .NET Core 5.0.1 (CoreCLR 5.0.120.57516, CoreFX 5.0.120.57516), X64 RyuJIT; GC = Concurrent Workstation
+Mean = 56.284 ms, StdErr = 0.125 ms (0.22%), N = 15, StdDev = 0.483 ms
+Min = 55.232 ms, Q1 = 55.953 ms, Median = 56.428 ms, Q3 = 56.681 ms, Max = 56.857 ms
+IQR = 0.728 ms, LowerFence = 54.861 ms, UpperFence = 57.773 ms
+ConfidenceInterval = [55.768 ms; 56.801 ms] (CI 99.9%), Margin = 0.517 ms (0.92% of Mean)
+Skewness = -0.54, Kurtosis = 2.14, MValue = 2
+-------------------- Histogram --------------------
+[54.975 ms ; 57.115 ms) | @@@@@@@@@@@@@@@
+---------------------------------------------------
+
+BitmapBenchmarks.Simple2000X2000DirectBitmap: DefaultJob
+Runtime = .NET Core 5.0.1 (CoreCLR 5.0.120.57516, CoreFX 5.0.120.57516), X64 RyuJIT; GC = Concurrent Workstation
+Mean = 58.491 ms, StdErr = 0.255 ms (0.44%), N = 13, StdDev = 0.918 ms
+Min = 57.407 ms, Q1 = 57.603 ms, Median = 58.239 ms, Q3 = 59.007 ms, Max = 60.482 ms
+IQR = 1.405 ms, LowerFence = 55.496 ms, UpperFence = 61.114 ms
+ConfidenceInterval = [57.392 ms; 59.591 ms] (CI 99.9%), Margin = 1.099 ms (1.88% of Mean)
+Skewness = 0.52, Kurtosis = 2.24, MValue = 2
+-------------------- Histogram --------------------
+[57.245 ms ; 59.669 ms) | @@@@@@@@@@@@
+[59.669 ms ; 60.994 ms) | @
+---------------------------------------------------
+
+BitmapBenchmarks.Simple2000X2000FastBitmap: DefaultJob
+Runtime = .NET Core 5.0.1 (CoreCLR 5.0.120.57516, CoreFX 5.0.120.57516), X64 RyuJIT; GC = Concurrent Workstation
+Mean = 63.818 ms, StdErr = 0.214 ms (0.34%), N = 14, StdDev = 0.802 ms
+Min = 62.607 ms, Q1 = 63.210 ms, Median = 63.639 ms, Q3 = 64.201 ms, Max = 65.666 ms
+IQR = 0.991 ms, LowerFence = 61.723 ms, UpperFence = 65.687 ms
+ConfidenceInterval = [62.914 ms; 64.723 ms] (CI 99.9%), Margin = 0.905 ms (1.42% of Mean)
+Skewness = 0.67, Kurtosis = 2.71, MValue = 2
+-------------------- Histogram --------------------
+[62.171 ms ; 64.031 ms) | @@@@@@@@
+[64.031 ms ; 66.102 ms) | @@@@@@
+---------------------------------------------------
+
+BitmapBenchmarks.LargeDirectBitmap: DefaultJob
+Runtime = .NET Core 5.0.1 (CoreCLR 5.0.120.57516, CoreFX 5.0.120.57516), X64 RyuJIT; GC = Concurrent Workstation
+Mean = 64.509 ms, StdErr = 0.120 ms (0.19%), N = 14, StdDev = 0.447 ms
+Min = 64.023 ms, Q1 = 64.134 ms, Median = 64.421 ms, Q3 = 64.635 ms, Max = 65.526 ms
+IQR = 0.501 ms, LowerFence = 63.384 ms, UpperFence = 65.386 ms
+ConfidenceInterval = [64.004 ms; 65.013 ms] (CI 99.9%), Margin = 0.505 ms (0.78% of Mean)
+Skewness = 0.8, Kurtosis = 2.57, MValue = 2
+-------------------- Histogram --------------------
+[63.779 ms ; 65.770 ms) | @@@@@@@@@@@@@@
+---------------------------------------------------
+
+BitmapBenchmarks.SmallBitmap: DefaultJob
+Runtime = .NET Core 5.0.1 (CoreCLR 5.0.120.57516, CoreFX 5.0.120.57516), X64 RyuJIT; GC = Concurrent Workstation
+Mean = 301.090 ms, StdErr = 0.927 ms (0.31%), N = 15, StdDev = 3.592 ms
+Min = 295.516 ms, Q1 = 298.815 ms, Median = 300.170 ms, Q3 = 302.981 ms, Max = 308.166 ms
+IQR = 4.166 ms, LowerFence = 292.566 ms, UpperFence = 309.231 ms
+ConfidenceInterval = [297.250 ms; 304.930 ms] (CI 99.9%), Margin = 3.840 ms (1.28% of Mean)
+Skewness = 0.5, Kurtosis = 2.14, MValue = 2
+-------------------- Histogram --------------------
+[293.604 ms ; 302.718 ms) | @@@@@@@@@@@
+[302.718 ms ; 309.344 ms) | @@@@
+---------------------------------------------------
+
+BitmapBenchmarks.MaximumDirectBitmap: DefaultJob
+Runtime = .NET Core 5.0.1 (CoreCLR 5.0.120.57516, CoreFX 5.0.120.57516), X64 RyuJIT; GC = Concurrent Workstation
+Mean = 310.869 ms, StdErr = 1.664 ms (0.54%), N = 28, StdDev = 8.807 ms
+Min = 296.975 ms, Q1 = 304.104 ms, Median = 308.527 ms, Q3 = 317.170 ms, Max = 330.460 ms
+IQR = 13.067 ms, LowerFence = 284.504 ms, UpperFence = 336.770 ms
+ConfidenceInterval = [304.728 ms; 317.010 ms] (CI 99.9%), Margin = 6.141 ms (1.98% of Mean)
+Skewness = 0.7, Kurtosis = 2.62, MValue = 2
+-------------------- Histogram --------------------
+[293.168 ms ; 300.036 ms) | @
+[300.036 ms ; 307.649 ms) | @@@@@@@@@@@@@
+[307.649 ms ; 319.596 ms) | @@@@@@@@@@@
+[319.596 ms ; 332.438 ms) | @@@
+---------------------------------------------------
+
+BitmapBenchmarks.MaximumFastBitmap: DefaultJob
+Runtime = .NET Core 5.0.1 (CoreCLR 5.0.120.57516, CoreFX 5.0.120.57516), X64 RyuJIT; GC = Concurrent Workstation
+Mean = 379.236 ms, StdErr = 1.602 ms (0.42%), N = 40, StdDev = 10.131 ms
+Min = 364.300 ms, Q1 = 372.277 ms, Median = 378.522 ms, Q3 = 383.371 ms, Max = 406.944 ms
+IQR = 11.094 ms, LowerFence = 355.637 ms, UpperFence = 400.011 ms
+ConfidenceInterval = [373.537 ms; 384.935 ms] (CI 99.9%), Margin = 5.699 ms (1.50% of Mean)
+Skewness = 0.87, Kurtosis = 3.58, MValue = 2
+-------------------- Histogram --------------------
+[364.218 ms ; 371.994 ms) | @@@@@@@@@@
+[371.994 ms ; 382.116 ms) | @@@@@@@@@@@@@@@@@@@
+[382.116 ms ; 390.547 ms) | @@@@@@
+[390.547 ms ; 407.340 ms) | @@@@@
+---------------------------------------------------
+
+BitmapBenchmarks.MediumBitmap: DefaultJob
+Runtime = .NET Core 5.0.1 (CoreCLR 5.0.120.57516, CoreFX 5.0.120.57516), X64 RyuJIT; GC = Concurrent Workstation
+Mean = 2.731 s, StdErr = 0.004 s (0.16%), N = 13, StdDev = 0.016 s
+Min = 2.709 s, Q1 = 2.722 s, Median = 2.727 s, Q3 = 2.737 s, Max = 2.769 s
+IQR = 0.015 s, LowerFence = 2.699 s, UpperFence = 2.759 s
+ConfidenceInterval = [2.711 s; 2.750 s] (CI 99.9%), Margin = 0.019 s (0.71% of Mean)
+Skewness = 0.88, Kurtosis = 2.96, MValue = 2
+-------------------- Histogram --------------------
+[2.700 s ; 2.778 s) | @@@@@@@@@@@@@
+---------------------------------------------------
+
+BitmapBenchmarks.Simple2000X2000SBitmap: DefaultJob
+Runtime = .NET Core 5.0.1 (CoreCLR 5.0.120.57516, CoreFX 5.0.120.57516), X64 RyuJIT; GC = Concurrent Workstation
+Mean = 2.797 s, StdErr = 0.007 s (0.25%), N = 14, StdDev = 0.026 s
+Min = 2.769 s, Q1 = 2.774 s, Median = 2.785 s, Q3 = 2.826 s, Max = 2.833 s
+IQR = 0.052 s, LowerFence = 2.696 s, UpperFence = 2.904 s
+ConfidenceInterval = [2.767 s; 2.826 s] (CI 99.9%), Margin = 0.030 s (1.06% of Mean)
+Skewness = 0.34, Kurtosis = 1.21, MValue = 2
+-------------------- Histogram --------------------
+[2.755 s ; 2.847 s) | @@@@@@@@@@@@@@
+---------------------------------------------------
+
+BitmapBenchmarks.LargeBitmap: DefaultJob
+Runtime = .NET Core 5.0.1 (CoreCLR 5.0.120.57516, CoreFX 5.0.120.57516), X64 RyuJIT; GC = Concurrent Workstation
+Mean = 4.261 s, StdErr = 0.005 s (0.11%), N = 13, StdDev = 0.017 s
+Min = 4.238 s, Q1 = 4.248 s, Median = 4.263 s, Q3 = 4.268 s, Max = 4.299 s
+IQR = 0.020 s, LowerFence = 4.219 s, UpperFence = 4.297 s
+ConfidenceInterval = [4.241 s; 4.281 s] (CI 99.9%), Margin = 0.020 s (0.47% of Mean)
+Skewness = 0.57, Kurtosis = 2.67, MValue = 2
+-------------------- Histogram --------------------
+[4.229 s ; 4.309 s) | @@@@@@@@@@@@@
+---------------------------------------------------
+
+// * Summary *
+
+BenchmarkDotNet=v0.12.1, OS=Windows 10.0.19042
+Intel Core i5-7200U CPU 2.50GHz (Kaby Lake), 1 CPU, 4 logical and 2 physical cores
+.NET Core SDK=5.0.101
+  [Host]     : .NET Core 5.0.1 (CoreCLR 5.0.120.57516, CoreFX 5.0.120.57516), X64 RyuJIT
+  DefaultJob : .NET Core 5.0.1 (CoreCLR 5.0.120.57516, CoreFX 5.0.120.57516), X64 RyuJIT
+
+
+|                      Method |         Mean |      Error |     StdDev |       Median | Rank | Gen 0 | Gen 1 | Gen 2 | Allocated |
+|---------------------------- |-------------:|-----------:|-----------:|-------------:|-----:|------:|------:|------:|----------:|
+|           SmallDirectBitmap |     1.802 ms |  0.0566 ms |  0.1539 ms |     1.734 ms |    1 |     - |     - |     - |         - |
+|             SmallFastBitmap |     2.641 ms |  0.0275 ms |  0.0257 ms |     2.631 ms |    2 |     - |     - |     - |     112 B |
+|            MediumFastBitmap |    30.958 ms |  0.2292 ms |  0.2144 ms |    30.952 ms |    3 |     - |     - |     - |     112 B |
+|             LargeFastBitmap |    50.729 ms |  0.5966 ms |  0.5289 ms |    50.628 ms |    4 |     - |     - |     - |    1054 B |
+|          MediumDirectBitmap |    56.284 ms |  0.5165 ms |  0.4832 ms |    56.428 ms |    5 |     - |     - |     - |         - |
+| Simple2000X2000DirectBitmap |    58.491 ms |  1.0993 ms |  0.9180 ms |    58.239 ms |    6 |     - |     - |     - |      81 B |
+|   Simple2000X2000FastBitmap |    63.818 ms |  0.9047 ms |  0.8019 ms |    63.639 ms |    7 |     - |     - |     - |    1367 B |
+|           LargeDirectBitmap |    64.509 ms |  0.5045 ms |  0.4473 ms |    64.421 ms |    7 |     - |     - |     - |         - |
+|                 SmallBitmap |   301.090 ms |  3.8400 ms |  3.5920 ms |   300.170 ms |    8 |     - |     - |     - |     668 B |
+|         MaximumDirectBitmap |   310.869 ms |  6.1410 ms |  8.8072 ms |   308.527 ms |    9 |     - |     - |     - |     152 B |
+|           MaximumFastBitmap |   379.236 ms |  5.6993 ms | 10.1306 ms |   378.522 ms |   10 |     - |     - |     - |     112 B |
+|                MediumBitmap | 2,730.856 ms | 19.3799 ms | 16.1831 ms | 2,726.563 ms |   11 |     - |     - |     - |    1240 B |
+|      Simple2000X2000SBitmap | 2,796.757 ms | 29.7405 ms | 26.3642 ms | 2,784.811 ms |   12 |     - |     - |     - |         - |
+|                 LargeBitmap | 4,260.924 ms | 20.0975 ms | 16.7823 ms | 4,263.184 ms |   13 |     - |     - |     - |    5528 B |
+
+// * Hints *
+Outliers
+  BitmapBenchmarks.SmallDirectBitmap: Default           -> 14 outliers were removed (2.44 ms..3.74 ms)
+  BitmapBenchmarks.LargeFastBitmap: Default             -> 1 outlier  was  removed (52.62 ms)
+  BitmapBenchmarks.Simple2000X2000DirectBitmap: Default -> 2 outliers were removed (78.66 ms, 79.34 ms)
+  BitmapBenchmarks.Simple2000X2000FastBitmap: Default   -> 1 outlier  was  removed (66.06 ms)
+  BitmapBenchmarks.LargeDirectBitmap: Default           -> 1 outlier  was  removed (74.99 ms)
+  BitmapBenchmarks.MaximumDirectBitmap: Default         -> 4 outliers were removed (340.38 ms..350.38 ms)
+  BitmapBenchmarks.MaximumFastBitmap: Default           -> 9 outliers were removed (423.03 ms..500.29 ms)
+  BitmapBenchmarks.MediumBitmap: Default                -> 2 outliers were removed (2.82 s, 3.01 s)
+  BitmapBenchmarks.Simple2000X2000SBitmap: Default      -> 1 outlier  was  removed (2.93 s)
+  BitmapBenchmarks.LargeBitmap: Default                 -> 2 outliers were removed (4.34 s, 4.50 s)
+
+// * Legends *
+  Mean      : Arithmetic mean of all measurements
+  Error     : Half of 99.9% confidence interval
+  StdDev    : Standard deviation of all measurements
+  Median    : Value separating the higher half of all measurements (50th percentile)
+  Rank      : Relative position of current benchmark mean among all benchmarks (Arabic style)
+  Gen 0     : GC Generation 0 collects per 1000 operations
+  Gen 1     : GC Generation 1 collects per 1000 operations
+  Gen 2     : GC Generation 2 collects per 1000 operations
+  Allocated : Allocated memory per single operation (managed only, inclusive, 1KB = 1024B)
+  1 ms      : 1 Millisecond (0.001 sec)
+
+// * Diagnostic Output - MemoryDiagnoser *
+
+
+// ***** BenchmarkRunner: End *****
+// ** Remained 0 benchmark(s) to run **
+Run time: 00:12:50 (770.53 sec), executed benchmarks: 14
+
+Global total time: 00:13:08 (788.85 sec), executed benchmarks: 14
+// * Artifacts cleanup *

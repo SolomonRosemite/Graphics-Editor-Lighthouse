@@ -1,12 +1,11 @@
-﻿using System;
+﻿using LighthouseBenchmark.Models;
+using BenchmarkDotNet.Running;
 
 namespace LighthouseBenchmark
 {
-    class Program
+    public static class Program
     {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Hello World!");
-        }
+        // Used Image: https://unsplash.com/photos/zXQFq-KDNFs
+        private static void Main(string[] args) => BenchmarkRunner.Run<BitmapBenchmarks>();
     }
 }
