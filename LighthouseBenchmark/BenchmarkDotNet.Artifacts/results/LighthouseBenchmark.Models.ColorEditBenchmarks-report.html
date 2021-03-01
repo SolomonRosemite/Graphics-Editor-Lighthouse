@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>LighthouseBenchmark.Models.ColorEditBenchmarks-20210301-175707</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet=v0.12.1, OS=Windows 10.0.19042
+Intel Core i5-7200U CPU 2.50GHz (Kaby Lake), 1 CPU, 4 logical and 2 physical cores
+.NET Core SDK=5.0.101
+  [Host]     : .NET Core 5.0.1 (CoreCLR 5.0.120.57516, CoreFX 5.0.120.57516), X64 RyuJIT
+  DefaultJob : .NET Core 5.0.1 (CoreCLR 5.0.120.57516, CoreFX 5.0.120.57516), X64 RyuJIT
+</code></pre>
+<pre><code></code></pre>
+
+<table>
+<thead><tr><th>                 Method</th><th>Mean</th><th>Error</th><th>StdDev</th><th>Median</th><th>Rank</th><th>Gen 0</th><th>Gen 1</th><th>Gen 2</th><th>Allocated</th>
+</tr>
+</thead><tbody><tr><td>FilterBitmapInitializedMedium</td><td>21.86 ms</td><td>1.393 ms</td><td>4.109 ms</td><td>22.16 ms</td><td>1</td><td>-</td><td>-</td><td>-</td><td>96 B</td>
+</tr><tr><td>FilterBitmapInitializedLarge</td><td>27.83 ms</td><td>0.497 ms</td><td>1.336 ms</td><td>27.26 ms</td><td>2</td><td>-</td><td>-</td><td>-</td><td>96 B</td>
+</tr><tr><td>FastBitmapMedium</td><td>41.49 ms</td><td>3.197 ms</td><td>9.275 ms</td><td>36.97 ms</td><td>3</td><td>-</td><td>-</td><td>-</td><td>112 B</td>
+</tr><tr><td>FastBitmapLarge</td><td>54.47 ms</td><td>0.939 ms</td><td>0.832 ms</td><td>54.31 ms</td><td>4</td><td>-</td><td>-</td><td>-</td><td>960 B</td>
+</tr><tr><td>FilterBitmapMedium</td><td>63.25 ms</td><td>1.262 ms</td><td>1.119 ms</td><td>63.03 ms</td><td>5</td><td>-</td><td>-</td><td>-</td><td>248 B</td>
+</tr><tr><td>FilterBitmapLarge</td><td>123.97 ms</td><td>8.797 ms</td><td>25.239 ms</td><td>120.17 ms</td><td>6</td><td>-</td><td>-</td><td>-</td><td>248 B</td>
+</tr></tbody></table>
+</body>
+</html>
