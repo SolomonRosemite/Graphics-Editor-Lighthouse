@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Media.Imaging;
 
@@ -15,6 +16,7 @@ namespace Lighthouse.Helpers
             [return: MarshalAs(UnmanagedType.Bool)]
             internal static extern bool DeleteObject(IntPtr hObject);
         }
+        private static readonly Regex regex = new Regex(@"^\d+$");
 
         public static BitmapSource ToBitmapSource(Bitmap source)
         {
@@ -39,6 +41,22 @@ namespace Lighthouse.Helpers
             }
 
             return bitSrc;
+        }
+
+        public static bool IsNumbersOnly(string text, bool allowMinus = false)
+        {
+            string s = text.Trim();
+
+            if (allowMinus && s.StartsWith('-'))
+            {
+                string content = s.Substring(1).Trim();
+
+                if (content.Length == 0) return true;
+
+                return regex.IsMatch(content) && content.Trim().Length != 0;
+            }
+
+            return regex.IsMatch(text) && text.Trim().Length != 0;
         }
     }
 }

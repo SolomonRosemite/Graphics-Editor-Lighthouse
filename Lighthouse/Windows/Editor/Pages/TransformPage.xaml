@@ -55,14 +55,14 @@
                 <Grid HorizontalAlignment="Stretch" Margin="5, 0">
                     <Border HorizontalAlignment="Left" BorderBrush="White" BorderThickness="1" CornerRadius="10">
                         <Grid Width="150" Height="45">
-                            <TextBox Name="PositionXTextBox" PreviewTextInput="PreviewTextInput" TextChanged="OnPositionXChange" FontSize="20" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" BorderBrush="Transparent" Background="Transparent" Foreground="White" Text="X Value" />
+                            <TextBox Name="PositionXTextBox" PreviewTextInput="PreviewTextInputAllowMinus" TextChanged="OnPositionXChange" FontSize="20" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" BorderBrush="Transparent" Background="Transparent" Foreground="White" Text="X Value" />
                             <Label FontSize="20" Margin="0,0,10,0" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="White" Content="X"/>
                         </Grid>
                     </Border>
 
                     <Border HorizontalAlignment="Right" BorderBrush="White" BorderThickness="1" CornerRadius="10">
                         <Grid Width="150" Height="45">
-                            <TextBox Name="PositionYTextBox" PreviewTextInput="PreviewTextInput" TextChanged="OnPositionYChange" FontSize="20" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" BorderBrush="Transparent" Background="Transparent" Foreground="White" Text="Y Value" />
+                            <TextBox Name="PositionYTextBox" PreviewTextInput="PreviewTextInputAllowMinus" TextChanged="OnPositionYChange" FontSize="20" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" BorderBrush="Transparent" Background="Transparent" Foreground="White" Text="Y Value" />
                             <Label FontSize="20" Margin="0,0,10,0" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="White" Content="Y"/>
                         </Grid>
                     </Border>

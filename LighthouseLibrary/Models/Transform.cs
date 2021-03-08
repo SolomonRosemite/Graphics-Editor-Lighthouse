@@ -12,7 +12,7 @@ namespace LighthouseLibrary.Models
         private int yPosition;
         private double opacity;
 
-        public int Id { get; set; }
+        public int Id { get; }
 
         public int Width { get; private set; }
         public int Height { get; private set; }

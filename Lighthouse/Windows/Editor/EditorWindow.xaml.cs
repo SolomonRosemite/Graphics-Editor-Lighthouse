@@ -72,7 +72,7 @@ namespace Lighthouse.Windows.Editor
 
         private void InitializePages()
         {
-            pages.ColorGradingPage = new ColorGradingPage();
+            pages.ColorGradingPage = new ColorGradingPage(this);
             pages.BackgroundPage = new BackgroundPage();
             pages.FiltersPage = new FiltersPage();
             pages.ProjectSettings = new ProjectSettings();

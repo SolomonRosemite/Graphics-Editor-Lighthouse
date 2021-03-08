@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using Lighthouse.Helpers;
 using LighthouseLibrary.Models;
 using LighthouseLibrary.Models.Metadata;
 
@@ -25,7 +26,6 @@ namespace Lighthouse.Windows.Editor.Pages
     /// </summary>
     public partial class TransformPage : Page
     {
-        private readonly Regex regex = new Regex("^[0-9]+$");
         private readonly EditorWindow editorWindow;
         private readonly DispatcherTimer dispatcherTimer;
 
@@ -60,9 +60,9 @@ namespace Lighthouse.Windows.Editor.Pages
         }
 
         private bool skipNextChange;
+        private bool skipNextRender;
         private bool isInitialized;
         private bool isChained;
-        private bool skipNextRender;
 
         public TransformPage(EditorWindow editorWindow)
         {
@@ -138,7 +138,10 @@ namespace Lighthouse.Windows.Editor.Pages
         {
             if (!isInitialized || !(sender is TextBox item)) return;
 
-            if (item.Text.Trim().Length == 0) return;
+            if (item.Text.Trim().Length == 0
+                || item.Text.Trim().Contains(' ')
+                || (item.Text.Trim().Length == 1
+                    && item.Text.Trim().StartsWith('-'))) return;
 
             int value = int.Parse(item.Text);
 
@@ -213,12 +216,12 @@ namespace Lighthouse.Windows.Editor.Pages
 
         private new void PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            e.Handled = !IsNumbersOnly(e.Text);
+            e.Handled = !Helper.IsNumbersOnly(e.Text);
         }
 
-        private bool IsNumbersOnly(string text)
+        private void PreviewTextInputAllowMinus(object sender, TextCompositionEventArgs e)
         {
-            return regex.IsMatch(text) && text.Trim().Length != 0;
+            e.Handled = !Helper.IsNumbersOnly(e.Text, true);
         }
     }
 }
