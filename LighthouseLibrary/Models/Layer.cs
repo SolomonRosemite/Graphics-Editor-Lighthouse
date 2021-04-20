@@ -23,9 +23,13 @@ namespace LighthouseLibrary.Models
 
         public Bitmap RenderLayer()
         {
+
+            // Note: When adding Metadata to the LayerMetadata make sure to add the LayerState here...
             if (
                 LayerState == LayerState.Unchanged 
-                && Metadata.LayerState == LayerState.Unchanged && Metadata.Transform.LayerState == LayerState.Unchanged
+                && Metadata.LayerState == LayerState.Unchanged
+                && Metadata.Transform.LayerState == LayerState.Unchanged
+                && Metadata.Color.LayerState == LayerState.Unchanged
                )
                 return PreviousRenderedBitmap;
 

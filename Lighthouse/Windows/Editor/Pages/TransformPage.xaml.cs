@@ -140,10 +140,12 @@ namespace Lighthouse.Windows.Editor.Pages
 
             if (item.Text.Trim().Length == 0
                 || item.Text.Trim().Contains(' ')
-                || (item.Text.Trim().Length == 1
-                    && item.Text.Trim().StartsWith('-'))) return;
+                || item.Text.Trim().Length == 1 && item.Text.Trim().StartsWith('-')) return;
 
-            int value = int.Parse(item.Text);
+            int value = 0;
+            try
+            { value = int.Parse(item.Text); }
+            catch { return; }
 
             LastSelectedLayer.Metadata.Transform.XPosition = value;
 
@@ -154,9 +156,14 @@ namespace Lighthouse.Windows.Editor.Pages
         {
             if (!isInitialized || !(sender is TextBox item)) return;
 
-            if (item.Text.Trim().Length == 0) return;
+            if (item.Text.Trim().Length == 0
+                || item.Text.Trim().Contains(' ')
+                || item.Text.Trim().Length == 1 && item.Text.Trim().StartsWith('-')) return;
 
-            int value = int.Parse(item.Text);
+            int value = 0;
+            try
+            { value = int.Parse(item.Text); }
+            catch { return; }
 
             LastSelectedLayer.Metadata.Transform.YPosition = value;
 
@@ -175,7 +182,10 @@ namespace Lighthouse.Windows.Editor.Pages
                 return;
             }
 
-            int value = int.Parse(item.Text);
+            int value = 0;
+            try
+            { value = int.Parse(item.Text); }
+            catch { return; }
 
             if (value == 0) return;
 
@@ -201,7 +211,10 @@ namespace Lighthouse.Windows.Editor.Pages
                 return;
             }
 
-            int value = int.Parse(item.Text);
+            int value = 0;
+            try
+            { value = int.Parse(item.Text); }
+            catch { return; }
 
             if (value == 0) return;
 

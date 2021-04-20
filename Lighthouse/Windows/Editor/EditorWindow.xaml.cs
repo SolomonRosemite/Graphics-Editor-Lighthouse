@@ -350,7 +350,7 @@ namespace Lighthouse.Windows.Editor
             CurrentPage.Content = page;
         }
 
-        private void PlayAnimation(int milliseconds = 1000)
+        private void PlayAnimation(int milliseconds = 800)
         {
             AnimationRectangle.BeginAnimation(OpacityProperty, new DoubleAnimation(1, 0, new Duration(TimeSpan.FromMilliseconds(milliseconds))));
         }

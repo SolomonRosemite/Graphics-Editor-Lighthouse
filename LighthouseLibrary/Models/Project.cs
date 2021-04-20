@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
 
@@ -56,11 +57,7 @@ namespace LighthouseLibrary.Models
 
             // Merge Layers into One Bitmap
             Bitmap res = new Bitmap(Width, Height);
-
-            foreach (var t in Layers)
-                res = MergedBitmaps(res, t);
-
-            return res;
+            return Layers.Aggregate(res, MergedBitmaps);
         }
 
         private Bitmap MergedBitmaps(Bitmap bmp1, Layer layer)

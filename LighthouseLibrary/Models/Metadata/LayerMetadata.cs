@@ -3,6 +3,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Runtime.Serialization;
 using System.Xml;
 
@@ -33,7 +34,7 @@ namespace LighthouseLibrary.Models.Metadata
                 bitmap = Transform.ApplyTransform(bitmap);
 
             if (Color.LayerState == LayerState.Updated)
-                bitmap = Color.ApplyColor(bitmap);
+                bitmap = Color.ApplyColor(bitmap, this);
             
             foreach (var filter in Filters) filter.ApplyFilter(ref bitmap);
             bitmap.RotateFlip(RotationType);

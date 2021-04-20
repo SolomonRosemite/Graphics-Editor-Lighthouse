@@ -52,10 +52,8 @@ namespace LighthouseLibrary.Models
 
         public Bitmap ApplyTransform(Bitmap image)
         {
-            LayerState = LayerState.Updated;
-
-            Bitmap bmp = new Bitmap(Width, Height);
-            using Graphics gfx = Graphics.FromImage(bmp);
+            Bitmap bitmap = new Bitmap(Width, Height);
+            using Graphics gfx = Graphics.FromImage(bitmap);
 
             ColorMatrix matrix = new ColorMatrix {Matrix33 = (float)Opacity};
             ImageAttributes attributes = new ImageAttributes();
@@ -69,7 +67,8 @@ namespace LighthouseLibrary.Models
                 GraphicsUnit.Pixel,
                 attributes);
 
-            return bmp;
+            LayerState = LayerState.Unchanged;
+            return bitmap;
         }
 
         public ResizeResult SetWidth(int width, bool resizeEqually)

@@ -39,8 +39,8 @@ namespace Lighthouse.Windows.Editor.Pages
             }
         }
 
-        private double layerBrightness = 1;
-        private double LayerBrightness
+        private float layerBrightness = 1;
+        private float LayerBrightness
         {
             get => layerBrightness;
             set
@@ -85,7 +85,7 @@ namespace Lighthouse.Windows.Editor.Pages
             BrightnessSlider.Value = LayerBrightness * 100;
 
             if (InitialRun)
-                BrightnessSlider.ValueChanged += (o, args) => LayerBrightness = args.NewValue / 100;
+                BrightnessSlider.ValueChanged += (o, args) => LayerBrightness = (float) (args.NewValue / 100);
 
             isInitialized = true;
             InitialRun = false;
