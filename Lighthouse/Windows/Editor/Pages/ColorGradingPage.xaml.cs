@@ -24,6 +24,8 @@ namespace Lighthouse.Windows.Editor.Pages
     public partial class ColorGradingPage : Page
     {
         private readonly DispatcherTimer dispatcherTimerBrightness;
+        private readonly DispatcherTimer dispatcherTimerContrast;
+        private readonly DispatcherTimer dispatcherTimerSaturation;
         private readonly EditorWindow editorWindow;
 
         private bool initialRun = true;
@@ -53,6 +55,34 @@ namespace Lighthouse.Windows.Editor.Pages
             }
         }
 
+        private float layerContrast = 1;
+        private float LayerContrast
+        {
+            get => layerContrast;
+            set
+            {
+                LastSelectedLayer.Metadata.Color.Contrast = value;
+                layerContrast = value;
+
+                dispatcherTimerContrast.Stop();
+                dispatcherTimerContrast.Start();
+            }
+        }
+
+        private float layerSaturation = 1;
+        private float LayerSaturation
+        {
+            get => layerSaturation;
+            set
+            {
+                LastSelectedLayer.Metadata.Color.Saturation = value;
+                layerSaturation = value;
+
+                dispatcherTimerSaturation.Stop();
+                dispatcherTimerSaturation.Start();
+            }
+        }
+
         private Layer LastSelectedLayer { get; set; }
 
         private bool skipNextChange;
@@ -62,8 +92,13 @@ namespace Lighthouse.Windows.Editor.Pages
 
         public ColorGradingPage(EditorWindow editorWindow)
         {
-            dispatcherTimerBrightness = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(80) };
+            var timeSpan = TimeSpan.FromMilliseconds(80);
+            dispatcherTimerBrightness = new DispatcherTimer { Interval = timeSpan };
             dispatcherTimerBrightness.Tick += OnTickBrightness;
+            dispatcherTimerContrast = new DispatcherTimer { Interval = timeSpan };
+            dispatcherTimerContrast.Tick += OnTickContrast;
+            dispatcherTimerSaturation = new DispatcherTimer { Interval = timeSpan };
+            dispatcherTimerSaturation.Tick += OnTickSaturation;
 
             InitializeComponent();
 
@@ -80,12 +115,23 @@ namespace Lighthouse.Windows.Editor.Pages
             LastSelectedLayer = editorWindow.LastSelectedLayer;
 
             BrightnessTextBox.Text = (LastSelectedLayer.Metadata.Color.Brightness * 100).ToString();
+            ContrastTextBox.Text = (LastSelectedLayer.Metadata.Color.Contrast * 100).ToString();
+            SaturationTextBox.Text = (LastSelectedLayer.Metadata.Color.Saturation * 100).ToString();
 
             LayerBrightness = LastSelectedLayer.Metadata.Color.Brightness;
+            LayerContrast = LastSelectedLayer.Metadata.Color.Contrast;
+            LayerSaturation = LastSelectedLayer.Metadata.Color.Saturation;
+
             BrightnessSlider.Value = LayerBrightness * 100;
+            ContrastSlider.Value = LayerContrast * 100;
+            SaturationSlider.Value = LayerSaturation * 100;
 
             if (InitialRun)
+            {
                 BrightnessSlider.ValueChanged += (o, args) => LayerBrightness = (float) (args.NewValue / 100);
+                ContrastSlider.ValueChanged += (o, args) => LayerContrast = (float) (args.NewValue / 100);
+                SaturationSlider.ValueChanged += (o, args) => LayerSaturation = (float) (args.NewValue / 100);
+            }
 
             isInitialized = true;
             InitialRun = false;
@@ -99,6 +145,26 @@ namespace Lighthouse.Windows.Editor.Pages
                 editorWindow.Render();
 
             dispatcherTimerBrightness.Stop();
+        }
+
+        private void OnTickContrast(object _, EventArgs e)
+        {
+            if (skipNextRender)
+                skipNextRender = false;
+            else if (isInitialized)
+                editorWindow.Render();
+
+            dispatcherTimerContrast.Stop();
+        }
+
+        private void OnTickSaturation(object _, EventArgs e)
+        {
+            if (skipNextRender)
+                skipNextRender = false;
+            else if (isInitialized)
+                editorWindow.Render();
+
+            dispatcherTimerSaturation.Stop();
         }
 
         private new void PreviewTextInput(object sender, TextCompositionEventArgs e)

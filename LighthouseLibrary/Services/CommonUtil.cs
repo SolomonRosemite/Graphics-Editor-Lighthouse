@@ -36,6 +36,16 @@ namespace LighthouseLibrary.Services
             return SetImageOpacity(bmp, Math.Abs(brightness));
         }
 
+        public static Bitmap AdjustContrast(Bitmap image, int width, int height, float value)
+        {
+            return image;
+        }
+
+        // public static Bitmap AdjustContrast(Bitmap image, int width, int height, float value)
+        // {
+        //     return image;
+        // }
+
         /// <summary>
         /// Method for changing the opacity of an image
         /// </summary>
@@ -79,7 +89,7 @@ namespace LighthouseLibrary.Services
         private static Bitmap SetupPixelFormat(Bitmap bitmap)
         {
             Bitmap clone = new Bitmap(bitmap.Width, bitmap.Height,
-                System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
+                PixelFormat.Format32bppPArgb);
 
             using (Graphics gr = Graphics.FromImage(clone)) {
                 gr.DrawImage(bitmap, new Rectangle(0, 0, clone.Width, clone.Height));

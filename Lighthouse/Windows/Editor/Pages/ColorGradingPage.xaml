@@ -51,11 +51,11 @@
                             <Image Source="\assets\icons\contrast.png" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
                         </Grid>
                         <Grid Margin="-40,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Slider Minimum="-100" Maximum="100" Value="0" Width="200" />
+                            <Slider Name="ContrastSlider" Minimum="0" Maximum="200" Value="100" Width="200" IsSnapToTickEnabled="True" TickFrequency="1" />
                         </Grid>
                         <Border HorizontalAlignment="Right" BorderBrush="White" BorderThickness="1" CornerRadius="10">
                             <Grid Width="75" Height="45">
-                                <TextBox FontSize="20" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="55" BorderBrush="Transparent" Background="Transparent" Foreground="White" Text="0%" />
+                                <TextBox Name="ContrastTextBox" PreviewTextInput="PreviewTextInput" FontSize="20" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="55" BorderBrush="Transparent" Background="Transparent" Foreground="White" Text="{Binding ElementName=ContrastSlider, Path=Value}" />
                             </Grid>
                         </Border>
                     </Grid>
@@ -73,11 +73,11 @@
                             <Image Source="\assets\icons\saturation.png" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
                         </Grid>
                         <Grid Margin="-40,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Slider Minimum="-100" Maximum="100" Value="0" Width="200" />
+                            <Slider Name="SaturationSlider" Minimum="-0" Maximum="200" Value="100" Width="200" IsSnapToTickEnabled="True" TickFrequency="1" />
                         </Grid>
                         <Border HorizontalAlignment="Right" BorderBrush="White" BorderThickness="1" CornerRadius="10">
                             <Grid Width="75" Height="45">
-                                <TextBox FontSize="20" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="55" BorderBrush="Transparent" Background="Transparent" Foreground="White" Text="0%" />
+                                <TextBox Name="SaturationTextBox" PreviewTextInput="PreviewTextInput" FontSize="20" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="55" BorderBrush="Transparent" Background="Transparent" Foreground="White" Text="{Binding ElementName=SaturationSlider, Path=Value}" />
                             </Grid>
                         </Border>
                     </Grid>
